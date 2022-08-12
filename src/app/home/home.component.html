@@ -1,0 +1,133 @@
+<head>
+    <title>Bibliotecapp</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+  
+  <body>
+    <div id="divPrincipal">
+      <div id="header">
+        <div id="idiomas">
+          <div class="idioma" id="idiomaVal" (click)="valenciaClick()">
+            <img alt="valencià" src="../assets/images/flags/valencia.png">
+            <p>Val</p>
+          </div>
+
+          <div class="idioma" id="idiomaEsp" (click)="espanolClick()">
+            <img alt="español" src="../assets/images/flags/espana.png">
+            <p>Esp</p>
+          </div>
+
+          <div class="idioma" id="idiomaEn" (click)="englishClick()">
+            <img alt="english" src="../assets/images/flags/uk.png">
+            <p>Eng</p>
+          </div>
+        </div>
+
+        <div id="perfil" (click)="perfilClick()">
+          <mat-icon *ngIf="!user"> account_circle </mat-icon>
+          <img id="iconoPerfil" *ngIf="user" alt="foto del usuario"  src="{{user.photoURL}}">
+        </div>
+      </div>  
+
+      <h1>Bibliotecapp</h1>
+
+      <div id="buscador" tabindex="0">
+        <mat-icon> search </mat-icon>
+        <input type="text" placeholder="Buscar" id="input" (keyup.enter)="onEnter()">
+      </div>
+
+      <div id="filtro" >
+        <div id="divFiltro" tabindex="0">
+          <mat-icon> filter_alt </mat-icon>
+          <p>Filtrar</p>
+        </div>
+      </div>
+
+      <div class="tabla">
+        <div *ngFor="let libro of lista | async" class="card" (click)="libroClick()">
+
+          <div class="divImgLibro">
+            <!-- Tiene o no imagen de portada? -->
+            <img *ngIf="!libro.portadaImgPath" class="imgLibro" alt="libro" src="../assets/images/principales/portadanodisp.png" height="230px" width="153px"> <!-- por defecto -->
+            <img *ngIf="libro.portadaImgPath" class="imgLibro" alt="libro" src="{{libro.portadaImgPath}}" height="230px" width="153px">
+          </div>
+
+          <p class="tituloLibro">{{libro.titulo}}</p>
+          <p class="autorLibro">{{libro.autor}}</p>
+
+          <div class="libroNoDisponible" *ngIf="!libro.disponible">
+            <div class="divNoDisponible">
+              <mat-icon> warning </mat-icon>
+              <p>Libro no disponible</p>
+            </div>
+            <div class="divBotonReservar"><button class="botonReservar" (click)="reservarClick()">Reservar</button></div>
+          </div>
+
+          <div class="divBotonPedir"><button class="botonPedir" (click)="pedirClick()" *ngIf="libro.disponible">Pedir</button></div>
+
+        </div>
+
+      </div>
+
+      <div id="divBotonCargarMas">
+        <button id="botonCargarMas" (click)="cargarMas()">Cargar Más...</button>
+      </div>  
+
+      <!-- Testeo -->
+      <!-- <button (click)="addLibro()">Holaa</button> -->
+      <!-- <button (click)="addEvento()">Añadir evento</button> -->
+
+    </div>
+    
+    <div id="divEventos">
+
+      <h2>Eventos</h2>
+
+      <div id="tablaEventos">
+        <div *ngFor="let evento of listaEventos | async" class="evento" (click)="libroClick()">
+          <img class="imgEvento" alt={{evento.nombre}} src="../assets/images/principales/newevent.png" height="250px" width="180px">
+          <p class="nombreEvento">{{evento.nombre}}</p>
+          <p class="descripcionEvento">{{evento.descripcion}}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="fooder">
+      <div id="primeraCol">
+        <p class="tituloHorario">Horario:</p>
+        <div id="divHorario">
+          <p> <span> Lunes a Viernes </span> 9:00 a 21:00</p>
+          <p> <span>Sábado </span> 9:00 a 14:00</p>
+          <p> <span>Domingo </span> Cerrado</p>
+        </div>
+
+        <div id="divCalendario">
+          <p-calendar id="calendario" [(ngModel)]="value" dateFormat="dd.mm.yy" [firstDayOfWeek]="monday" [inline]="true" ></p-calendar>
+          <div></div>
+        </div>
+
+      </div>
+
+      <div id="segundaCol">
+        <p><span>Biblioteca 33</span></p>
+        <p><span>C/</span>Carrer la Palmera, 7, 03320 Torre del Pla, Alicante</p>
+        <p><span>Teléfono: </span>666 666 666</p>
+        <img class="imgBiblio" alt="Imagen Biblioteca" src="../assets/images/principales/biblio.jpg" height="150px" width="300px">
+      </div>
+    </div>
+
+    <div id="postfooder">
+      <div class="sigue">
+        <p>Síguenos: </p>
+      </div>
+
+      <div class="redes"> 
+        <img alt="facebook" src="../assets/images/social/facebook.png" width="5%" (click)="redClick('f')">
+        <img alt="instagram" src="../assets/images/social/instagram.png" width="5%" (click)="redClick('i')">
+        <img alt="twitter" src="../assets/images/social/twitter.png" width="5%" (click)="redClick('t')">
+        <img alt="youtube" src="../assets/images/social/youtube.png" width="5%" (click)="redClick('y')">
+      </div>
+    </div>
+
+  </body>

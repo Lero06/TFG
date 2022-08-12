@@ -1,0 +1,335 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+button{
+    cursor: pointer;
+}
+
+#divPrincipal{
+    background-color: #edf2f4;
+    padding-bottom: 30px;
+}
+
+h1{
+    color: #d90429;
+    text-align: center;
+    font-size: 40px;
+}
+
+#header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-icon{
+    cursor: pointer;
+}
+
+#idiomas{
+    margin: 10px 0px 0px 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.idioma{
+    display: flex;
+    flex-direction: column;
+}
+
+.idioma:hover{
+    background-color: gray;
+}
+
+.divImgLibro{
+    display: flex;
+    justify-content: center;
+}
+
+.idioma > img {
+    cursor: pointer;
+    height: 15px;
+    width: 20px;
+}
+
+.idioma > p{
+    font-size: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#idiomaEsp{
+    background-color: lightgray;
+}
+
+#perfil > mat-icon{
+    margin-top: 10px;
+    margin-right: 10px;
+    transform: scale(1.5);
+}
+
+#perfil > #iconoPerfil{
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 40%;
+    border-radius: 20px;
+    float: right;
+}
+
+/* ---------------  BUSCADOR ----------------------- */
+
+input{
+    border: 0px;
+    width: 90%;
+    height: 30px;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+#buscador{
+    border-radius: 10px;
+    background-color: white;
+    margin: 20px 20px 0px 20px;
+}
+
+#buscador, #filtro{
+    display: flex;
+    align-items: center;
+}
+
+#buscador:focus-within{
+    border: 2px solid black;
+}
+
+#filtro{
+    margin-top: 5px;
+    justify-content: right;
+}
+
+#divFiltro:focus-within{
+    border: 2px solid black;
+}
+
+#divFiltro{
+    margin-right: 5px;
+    margin-bottom: 20px;
+    display:flex;
+    align-items: center;
+}
+
+/* ---------------  CARDS ----------------------- */
+
+.tabla{
+    justify-content: center;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.card{
+    border-radius: 5px;
+}
+
+.card:hover{
+    background-color: #8d9db8;
+    cursor: pointer;
+}
+
+.imgLibro{
+    border-radius: 5px;
+}
+
+.card:hover > .divImgLibro > .imgLibro{
+    padding: 10px;
+    height: 220px;
+    width: 143px;
+}
+
+.tituloLibro{
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.autorLibro{
+    margin-left: 5px;
+}
+
+.divNoDisponible{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.divNoDisponible > mat-icon{
+    color: #d90429;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.divBotonPedir, .divBotonReservar{
+    display: flex;
+    justify-content: center;
+}
+
+.botonPedir{
+    margin-top: 5px;
+    background-color: #ef233c;
+}
+
+.divBotonReservar{
+    margin-bottom: 10px;
+}
+
+.botonReservar{
+    background-color: #e88490;
+}
+
+.botonPedir, .botonReservar{
+    padding: 7px 15px 7px 15px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.botonPedir:hover{
+    background-color: #db2c49;
+}
+
+.botonReservar:hover{
+    background-color: #e83f54;
+}
+
+/* ---------------  STUFF ----------------------- */
+#botonCargarMas{
+    background-color: #2b2d42;
+    border: none;
+    padding: 10px 20px 10px 20px;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+#botonCargarMas:hover{
+    color: #686da1;
+}
+
+#divBotonCargarMas{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* ---------------  EVENTOS ----------------------- */
+
+#divEventos{
+    background-color: #8d99ae;
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+
+#tablaEventos{
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    gap:60px;
+    overflow: auto;
+}
+
+h2{
+    text-align: center;
+    color: black;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.nombreEvento{
+    font-weight: 600;
+}
+
+.descripcionEvento{
+    margin-bottom: 10px;
+}
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* ---------------  FOODER ----------------------- */
+
+#fooder, #postfooder{
+    padding-top: 20px;
+    display: flex;
+    background-color: #2b2d42;
+}
+
+#primeraCol{
+    flex: 50%;
+    justify-items: right;
+    margin-left: 10px;
+}
+
+#segundaCol{
+    flex: 50%;
+}
+
+#divHorario{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+#divHorario > p, #segundaCol > p, #postfooder > div > p{
+    color: white;
+}
+
+#divHorario > p > span, #segundaCol > p > span{
+    font-weight: 600;
+}
+
+.tituloHorario{
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 3px;
+}
+
+#divCalendario{
+    display: flex;
+}
+
+#divCalendario > p-calendar{
+    background-color: white;
+}
+
+#divCalendario > div{
+    flex: 30%;
+}   
+
+#postfooder > div > p{
+    text-align: right;
+    justify-content: right;
+}
+
+#postfooder > .sigue{
+    flex: 48%;
+    align-items: right;
+}
+
+#postfooder > .redes{
+    flex: 50%;
+    display: flex;
+    gap: 10px;
+    margin-left: 2%;
+}
+
+#postfooder > div > img{
+    cursor: pointer;
+}
+
+#postfooder{
+    padding-bottom: 10px;
+}
