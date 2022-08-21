@@ -1,7 +1,17 @@
+@font-face {
+	font-family: mrdafoe;
+	src: url(src\assets\fonts\MrDafoe-Regular.ttf);
+}
+
+
 *{
     margin: 0px;
     padding: 0px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+p{
+    margin:0px
 }
 
 button{
@@ -9,39 +19,26 @@ button{
 }
 
 #divPrincipal{
-    background-color: #edf2f4;
+    background-color: white;
     padding-bottom: 30px;
-}
-
-h1{
-    color: #d90429;
-    text-align: center;
-    font-size: 40px;
 }
 
 #header{
     width: 100%;
     display: flex;
     justify-content: space-between;
+
+    background-color: #708c77;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    position: sticky;
+    top: 0px;
+    border-bottom: 2px solid black;
 }
 
 mat-icon{
     cursor: pointer;
-}
-
-#idiomas{
-    margin: 10px 0px 0px 10px;
-    display: flex;
-    gap: 5px;
-}
-
-.idioma{
-    display: flex;
-    flex-direction: column;
-}
-
-.idioma:hover{
-    background-color: gray;
 }
 
 .divImgLibro{
@@ -49,34 +46,56 @@ mat-icon{
     justify-content: center;
 }
 
-.idioma > img {
-    cursor: pointer;
-    height: 15px;
-    width: 20px;
+#navBar{
+    flex: 60%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: right;
 }
 
-.idioma > p{
-    font-size: 10px;
-    text-align: center;
+#navBar > p{
+    font-size: 16px;
+    text-decoration: underline;
     cursor: pointer;
 }
 
-#idiomaEsp{
-    background-color: lightgray;
+#navBar > p:hover{
+    font-weight: 600;
 }
 
 #perfil > mat-icon{
-    margin-top: 10px;
-    margin-right: 10px;
-    transform: scale(1.5);
+    margin-left: 10px;
+    margin-right: 15px;
+    transform: scale(2);
 }
 
 #perfil > #iconoPerfil{
-    margin-top: 10px;
-    margin-right: 10px;
-    width: 40%;
-    border-radius: 20px;
-    float: right;
+    margin-left: 10px;
+    width: 60%;
+    border-radius: 30px;
+}
+
+/* ----------- NEW HEADER -----------*/
+#logo{
+    flex: 40%;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+}
+
+#logo > img{
+    width: 7%;
+    background-color: black;
+    border-radius: 30px;
+    padding: 5px;
+}
+
+#logo > p{
+    font-family: mrdafoe;
+    font-size: 34px;
+    margin-bottom: 0px;
+    margin-left: 5px;
 }
 
 /* ---------------  BUSCADOR ----------------------- */
@@ -90,6 +109,30 @@ input{
 textarea:focus, input:focus{
     outline: none;
 }
+
+#buscadoryfiltro{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+    background-image: url('src\assets\images\principales\fondomirrror.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+#buscadoryfiltro > p{
+    text-align: center;
+    font-size: 30px;
+
+    text-shadow: 0 0 2px #fff; /* horizontal-offset vertical-offset 'blur' colour */
+    -moz-text-shadow: 0 0 2px #fff;
+    -webkit-text-shadow: 0 0 2px #fff;
+}
+
+#buscadoryfiltro > p > span::before{
+    content: "\A";
+	white-space: pre;
+}
+
 #buscador{
     border-radius: 10px;
     background-color: white;
@@ -119,6 +162,12 @@ textarea:focus, input:focus{
     margin-bottom: 20px;
     display:flex;
     align-items: center;
+
+    background-color: white;
+    border-radius: 5px;
+
+    cursor: pointer;
+    padding: 2px;
 }
 
 /* ---------------  CARDS ----------------------- */

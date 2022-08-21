@@ -6,41 +6,44 @@
   <body>
     <div id="divPrincipal">
       <div id="header">
-        <div id="idiomas">
-          <div class="idioma" id="idiomaVal" (click)="valenciaClick()">
-            <img alt="valencià" src="../assets/images/flags/valencia.png">
-            <p>Val</p>
-          </div>
-
-          <div class="idioma" id="idiomaEsp" (click)="espanolClick()">
-            <img alt="español" src="../assets/images/flags/espana.png">
-            <p>Esp</p>
-          </div>
-
-          <div class="idioma" id="idiomaEn" (click)="englishClick()">
-            <img alt="english" src="../assets/images/flags/uk.png">
-            <p>Eng</p>
-          </div>
+        <div id="logo">
+          <img src="../assets/images/principales/logo.png" alt="logo">
+          <p>Bibliotecapp</p>
         </div>
 
-        <div id="perfil" (click)="perfilClick()">
-          <mat-icon *ngIf="!user"> account_circle </mat-icon>
-          <img id="iconoPerfil" *ngIf="user" alt="foto del usuario"  src="{{user.photoURL}}">
+        <div id="navBar">
+
+          <p>Conócenos</p>
+          <p (click)="clickEventos()">Eventos</p>
+          <p>Mis reservas</p>
+          <p>Reportar Error</p>
+          <p>ES</p>
+
+          <div id="perfil" (click)="perfilClick()">
+            <mat-icon *ngIf="!user"> account_circle </mat-icon>         
+            <img id="iconoPerfil" *ngIf="user" alt="foto del usuario"  src="{{user.photoURL}}">
+          </div>
+
         </div>
-      </div>  
-
-      <h1>Bibliotecapp</h1>
-
-      <div id="buscador" tabindex="0">
-        <mat-icon> search </mat-icon>
-        <input type="text" placeholder="Buscar" id="input" (keyup.enter)="onEnter()">
       </div>
 
-      <div id="filtro" >
-        <div id="divFiltro" tabindex="0">
-          <mat-icon> filter_alt </mat-icon>
-          <p>Filtrar</p>
+
+      <div id="buscadoryfiltro">
+
+        <p>Busca y pide entre nuestros <span>más de {{contadorLibros}} espectaculares libros</span><p>
+
+        <div id="buscador" tabindex="0">
+          <mat-icon> search </mat-icon>
+          <input type="text" placeholder="Buscar" id="input" (keyup.enter)="onEnter()">
         </div>
+
+        <div id="filtro" >
+          <div id="divFiltro" tabindex="0">
+            <mat-icon> filter_alt </mat-icon>
+            <p>Filtrar</p>
+          </div>
+        </div>
+
       </div>
 
       <div class="tabla">
@@ -52,8 +55,8 @@
             <img *ngIf="libro.portadaImgPath" class="imgLibro" alt="libro" src="{{libro.portadaImgPath}}" height="230px" width="153px">
           </div>
 
-          <p class="tituloLibro">{{libro.titulo}}</p>
-          <p class="autorLibro">{{libro.autor}}</p>
+          <p class="tituloLibro">{{aplicarNombreEstetico(libro.titulo)}}</p>
+          <p class="autorLibro">{{aplicarNombreEstetico(libro.autor)}}</p>
 
           <div class="libroNoDisponible" *ngIf="!libro.disponible">
             <div class="divNoDisponible">

@@ -31,6 +31,8 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 
 import { NgxFileDropModule } from 'ngx-file-drop';
+import {MatCardModule} from '@angular/material/card';
+
 
 
 @NgModule({
@@ -55,7 +57,8 @@ import { NgxFileDropModule } from 'ngx-file-drop';
     CalendarModule,
     MatFormFieldModule, MatSelectModule, MatSliderModule, MatInputModule,
     ButtonModule, RippleModule,
-    NgxFileDropModule
+    NgxFileDropModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

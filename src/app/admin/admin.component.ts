@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Libro } from '../object/Libro';
 import { LibrosService } from '../services/libros.service';
-import { getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes, uploadString } from "firebase/storage";
 import { NgxFileDropEntry } from 'ngx-file-drop';
 
 const categorias = ['acción','autobiográficos','autoayuda',
@@ -78,8 +78,6 @@ export class AdminComponent implements OnInit {
 
     const editorial = (<HTMLInputElement>document.getElementById("inputEditorial")).value.toLowerCase();
 
-    const edicion = (<HTMLInputElement>document.getElementById("inputEdicion")).value.toLowerCase();
-
     const paginas = (<HTMLInputElement>document.getElementById("inputPaginas")).value;
     // Conversion a number
     const paginasNum : number = +paginas;
@@ -98,11 +96,13 @@ export class AdminComponent implements OnInit {
     const storageRef = ref(storage, 'images/'+titulo);
 
     // Esperamos a obtener respuesta
-    /*const res = await uploadString(storageRef, this.fileCambiado).then(() => {
+    const res = await uploadBytes(storageRef, this.fileSeleccionado).then(() => {
       console.log('Uploaded a fileee!');
-    });*/
+    });
 
     const date = new Date();
+
+    let portadaImgPath = await getDownloadURL(storageRef);
 
     const libro : Libro = {
       id:date.toISOString(),
@@ -110,15 +110,32 @@ export class AdminComponent implements OnInit {
       autor:autor,
       isbn:isbn,
       editorial:editorial,
-      edicion:edicion,
       paginas:paginasNum,
       categoria:categoria,
       tipo:tipo,
       idioma:idioma,
       disponible:true,
-      //portadaImgPath:portada+""
+      portadaImgPath:portadaImgPath
     }
+
     this.libroService.addLibro(libro);
+
+    // Libro Subido
+    alert('Se ha subido el libro con éxito');
+
+    // Borrar inputs
+    (<HTMLInputElement>document.getElementById("inputTitulo")).value = '';
+    (<HTMLInputElement>document.getElementById("inputAutor")).value = '';
+    (<HTMLInputElement>document.getElementById("inputISBN")).value = '';
+    (<HTMLInputElement>document.getElementById("inputEditorial")).value = '';
+    (<HTMLInputElement>document.getElementById("inputPaginas")).value = '';
+
+    this.categoriaSeleccionada = '';
+    this.tipoSeleccionado = '';
+    this.idiomaSeleccionado= '';
+    this.fileSeleccionado= '';
+
+    this.files = [];
   }
 
   categoriaCambiada(categoria:any){
@@ -143,30 +160,14 @@ export class AdminComponent implements OnInit {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
 
-          // Here you can access the real file
-          console.log(droppedFile.relativePath, file);
-
-          /**
-          // You could upload it like this:
-          const formData = new FormData()
-          formData.append('logo', file, relativePath)
-
-          // Headers
-          const headers = new HttpHeaders({
-            'security-token': 'mytoken'
-          })
-
-          this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
-          .subscribe(data => {
-            // Sanitized logo returned from backend
-          })
-          **/
+          this.fileSeleccionado = file;
 
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(droppedFile.relativePath, fileEntry);
+
+        this.fileSeleccionado = fileEntry;
       }
     }
   }

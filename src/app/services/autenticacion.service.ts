@@ -62,11 +62,8 @@ export class AutenticacionService {
     const auth = getAuth();
 
     const res = await signInWithPopup(auth, provider);
-    console.log('RES BIEN');
-    console.log(res);
+
     const res2 = await this.getAutenticacion2Facebook(res);
-    console.log('RES2 BIEN');
-    console.log(res2);
 
     return res2;
   }

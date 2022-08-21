@@ -10,6 +10,8 @@ import { AutenticacionService } from '../services/autenticacion.service';
 })
 export class PerfilComponent implements OnInit {
 
+  currentUser:User;
+
   constructor(private autenticacionService:AutenticacionService, private router: Router, private zone: NgZone) { 
   }
 
@@ -19,12 +21,14 @@ export class PerfilComponent implements OnInit {
 
   async onClickGoogle(){
     const user = await this.autenticacionService.getAutenticacion();
+    this.currentUser = user;
 
     this.comprobarAutenticacion(user);
   }
 
   async onClickFacebook(){
     const user = await this.autenticacionService.getAutenticacionFacebook();
+    this.currentUser = user;
 
     this.comprobarAutenticacion(user);
   }
