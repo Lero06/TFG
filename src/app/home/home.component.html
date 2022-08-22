@@ -20,8 +20,14 @@
           <p>ES</p>
 
           <div id="perfil" (click)="perfilClick()">
-            <mat-icon *ngIf="!user"> account_circle </mat-icon>         
-            <img id="iconoPerfil" *ngIf="user" alt="foto del usuario"  src="{{user.photoURL}}">
+
+            <mat-icon *ngIf="!user && !name"> account_circle </mat-icon>  
+
+            <img id="iconoPerfil" *ngIf="user && !name" alt="foto del usuario" src="{{user.photoURL}}">
+            <!-- Si el usuario no se ha registrado hoy, miramos en el storage a ver si lo está -->
+            <img id="iconoPerfil" *ngIf="!user && name" alt="foto del usuario" src="{{photo}}">
+
+
           </div>
 
         </div>
@@ -38,7 +44,7 @@
         </div>
 
         <div id="filtro" >
-          <div id="divFiltro" tabindex="0">
+          <div (click)="filtroClick()" id="divFiltro" tabindex="0">
             <mat-icon> filter_alt </mat-icon>
             <p>Filtrar</p>
           </div>
@@ -46,8 +52,8 @@
 
       </div>
 
-      <div class="tabla">
-        <div *ngFor="let libro of lista | async" class="card" (click)="libroClick()">
+      <div *ngIf="!esOrdenZA" class="tabla">
+        <div *ngFor="let libro of (lista | async)?.reverse()" class="card" (click)="libroClick()">
 
           <div class="divImgLibro">
             <!-- Tiene o no imagen de portada? -->
@@ -71,6 +77,36 @@
         </div>
 
       </div>
+
+      <!----------------------------------------------------------------------------------------------------------------->
+            <!-- Si el orden es A-Z hay que hacer reverse() a la lista, por tanto se debe duplicar-->
+      <div *ngIf="esOrdenZA" class="tabla">
+        <div *ngFor="let libro of lista | async reverse" class="card" (click)="libroClick()">
+
+          <div class="divImgLibro">
+            <!-- Tiene o no imagen de portada? -->
+            <img *ngIf="!libro.portadaImgPath" class="imgLibro" alt="libro" src="../assets/images/principales/portadanodisp.png" height="230px" width="153px"> <!-- por defecto -->
+            <img *ngIf="libro.portadaImgPath" class="imgLibro" alt="libro" src="{{libro.portadaImgPath}}" height="230px" width="153px">
+          </div>
+
+          <p class="tituloLibro">{{aplicarNombreEstetico(libro.titulo)}}</p>
+          <p class="autorLibro">{{aplicarNombreEstetico(libro.autor)}}</p>
+
+          <div class="libroNoDisponible" *ngIf="!libro.disponible">
+            <div class="divNoDisponible">
+              <mat-icon> warning </mat-icon>
+              <p>Libro no disponible</p>
+            </div>
+            <div class="divBotonReservar"><button class="botonReservar" (click)="reservarClick()">Reservar</button></div>
+          </div>
+
+          <div class="divBotonPedir"><button class="botonPedir" (click)="pedirClick()" *ngIf="libro.disponible">Pedir</button></div>
+
+        </div>
+
+      </div>
+
+      <!----------------------------------------------------------------------------------------------------------------->
 
       <div id="divBotonCargarMas">
         <button id="botonCargarMas" (click)="cargarMas()">Cargar Más...</button>

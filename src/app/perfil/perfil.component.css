@@ -10,8 +10,38 @@ div{
 .example-card {
     max-width: 400px;
 }
+
+#tituloHeader{
+    justify-content: center;
+}
+
+#titulo{
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 25px;
+}
   
 .example-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
+}
+
+#divImg{
+    display: flex;
+    justify-content: center;
+}
+
+#mat-card-image{
+    width: 50%;
+}
+
+#registrado{
+    background-color: darkseagreen;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+mat-card-content > p > span{
+    font-weight: 600;
 }

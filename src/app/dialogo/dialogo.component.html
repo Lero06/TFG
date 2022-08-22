@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Delete file</h1>
+<div mat-dialog-content>
+  Filtrar Por
+</div>
+<div mat-dialog-actions>
+  <mat-form-field appearance="fill">
+    <mat-label>Seleccione Orden</mat-label>
+        <mat-select (selectionChange)="ordenCambiado($event.value)">
+            <mat-option *ngFor="let elemento of orden" [value]="elemento.value">
+                {{elemento.viewValue}}
+            </mat-option>
+        </mat-select>
+</mat-form-field>
+
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button mat-dialog-close cdkFocusInitial>Aplicar Cambios</button>
+</div>

@@ -1,27 +1,45 @@
-<div *ngIf="currentUser" id="registrado">
+<div *ngIf="currentUser || name" id="registrado">
     <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        <mat-card-header id="tituloHeader">
+
+          <!-- Si no se acaba de registrar miramos si está en el storage -->
+          <mat-card-title *ngIf="currentUser" id="titulo">{{currentUser.displayName}}</mat-card-title>
+          <mat-card-title *ngIf="!currentUser && name" id="titulo">{{name}}</mat-card-title>
+
         </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+
+        <div id="divImg">
+            <!-- Si no se acaba de registrar miramos si está en el storage -->
+            <img *ngIf="currentUser" id="mat-card-image" src="{{currentUser.photoURL}}" alt="Foto de {{currentUser.displayName}}">
+            <img *ngIf="!currentUser && name" id="mat-card-image" src="{{photo}}" alt="Foto de {{name}}">
+        </div>
+
         <mat-card-content>
-          <p>
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-            bred for hunting.
-          </p>
+
+          <!-- Si no se acaba de registrar miramos si está en el storage -->
+          <p *ngIf="currentUser"><span>Nombre: </span>{{currentUser.displayName}}</p>
+          <p *ngIf="!currentUser && name"><span>Nombre: </span>{{name}}</p>
+
+          <p *ngIf="currentUser"><span>Correo: </span>{{currentUser.email}}</p>
+          <p *ngIf="!currentUser && name"><span>Correo: </span>{{email}}</p>
+
+          <p *ngIf="currentUser"><span>Teléfono: </span>{{currentUser.phoneNumber}}</p>
+          <p *ngIf="!currentUser && name"><span>Teléfono: </span>{{phone}}</p>
+
+          <p><span>Biblioteca Fav.: </span>?</p>
+          <p><span>Segunda Biblioteca Fav.: </span>?</p>
+          <p><span>Caducidad Carnet: </span>?</p>
+
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
+          <button mat-button>MIS RESERVAS</button>
+          <button mat-button>RENOVAR CARNET</button>
         </mat-card-actions>
       </mat-card>
 </div>
 
 
-<div *ngIf="!currentUser" id="noRegistrado">
+<div *ngIf="!currentUser && !name" id="noRegistrado">
     <h1>Parece que no estás registrado</h1>
     <p>Si no tienes una cuenta puedes registrarte aquí</p>
     <!-- <button (click)="onClickGoogle()">ENTRAR CON GOOGLE</button>

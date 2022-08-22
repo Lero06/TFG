@@ -10,9 +10,24 @@ import { AutenticacionService } from '../services/autenticacion.service';
 })
 export class PerfilComponent implements OnInit {
 
-  currentUser:User;
+  currentUser?:User;
+
+  // Localstorage
+  name?:string;
+  email?:string;
+  phone?:string;
+  photo?:any;
 
   constructor(private autenticacionService:AutenticacionService, private router: Router, private zone: NgZone) { 
+    this.currentUser = this.autenticacionService.getUser();
+
+    // Local Storage
+    if(!this.currentUser){
+      this.name = localStorage.getItem('userName')!;
+      this.email = localStorage.getItem('userEmail')!;
+      this.phone = localStorage.getItem('userPhone')!;
+      this.photo = localStorage.getItem('userPhoto')!;
+    }
   }
 
   ngOnInit(): void {

@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 export class LibrosService {
 
   private librosDB: AngularFireList<Libro>;
+  private librosDBOrdenadosAZ: AngularFireList<Libro>;
 
   constructor(private db: AngularFireDatabase,private dbFire: Database) {
 
@@ -42,6 +43,33 @@ export class LibrosService {
       ...payload.val(),
     };
   }
+
+  // -------------------------------------------------------------------------------------------
+
+  getLibrosOrdenadosAZ(){
+    this.librosDBOrdenadosAZ = this.db.list('/libros', (ref) =>
+      ref.orderByChild('titulo'));
+
+    return this.librosDBOrdenadosAZ.snapshotChanges().pipe(
+      map((changes) =>
+        changes.map((c) => this.getUserFromPayload(c.payload))
+      )
+    );
+  }
+
+  getLibrosNuevos(){
+    this.librosDBOrdenadosAZ = this.db.list('/libros', (ref) =>
+      ref.orderByChild('categoria')
+      .startAt('nuevo-15')
+      .endAt('nuevo-15'));
+
+    return this.librosDBOrdenadosAZ.snapshotChanges().pipe(
+      map((changes) =>
+        changes.map((c) => this.getUserFromPayload(c.payload))
+      )
+    );
+  }
+
 
   // -------------------------------------------------------------------------------------------
   buscarLibros(aBuscar:string){

@@ -23,6 +23,10 @@ button{
     padding-bottom: 30px;
 }
 
+#tituloHeader{
+    justify-content: center;
+}
+
 #header{
     width: 100%;
     display: flex;
@@ -72,8 +76,9 @@ mat-icon{
 
 #perfil > #iconoPerfil{
     margin-left: 10px;
-    width: 60%;
+    width: 50%;
     border-radius: 30px;
+    cursor: pointer;
 }
 
 /* ----------- NEW HEADER -----------*/

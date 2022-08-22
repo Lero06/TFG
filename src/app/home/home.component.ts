@@ -1,13 +1,14 @@
-import { Component, Input, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { stringLength } from '@firebase/util';
-import { User } from 'firebase/auth';
 import { Observable } from 'rxjs';
 import { Evento } from '../object/Evento';
 import { Libro } from '../object/Libro';
 import { AutenticacionService } from '../services/autenticacion.service';
 import { EventosService } from '../services/eventos.service';
 import { LibrosService } from '../services/libros.service';
+import { DialogoComponent } from '../dialogo/dialogo.component';
+import { stringLength } from '@firebase/util';
 
 @Component({
   selector: 'app-home',
@@ -33,9 +34,17 @@ export class HomeComponent implements OnInit {
   contadorLibros:number;
   totalLibros:number;
 
+  // Localstorage
+  name?:string;
+  email?:string;
+  phone?:string;
+  photo?:any;
+
+  // Orden
+  esOrdenZA:boolean;
 
   constructor(private libroService: LibrosService, private eventoService:EventosService, private router: Router, private zone: NgZone,
-     private autenticacionService:AutenticacionService) { 
+     private autenticacionService:AutenticacionService, public dialog: MatDialog) { 
 
     this.lista = this.libroService.getLibros();
     this.listaEventos = this.eventoService.getEventos();
@@ -44,8 +53,18 @@ export class HomeComponent implements OnInit {
 
     this.user = this.autenticacionService.getUser();
 
+    // Local Storage
+    if(!this.user){
+      this.name = localStorage.getItem('userName')!;
+      this.email = localStorage.getItem('userEmail')!;
+      this.phone = localStorage.getItem('userPhone')!;
+      this.photo = localStorage.getItem('userPhoto')!;
+    }
+
     this.contadorLibros = 0;
     this.totalLibros = 69;
+
+    this.esOrdenZA = false;
 
   }
 
@@ -125,15 +144,32 @@ export class HomeComponent implements OnInit {
     this.zone.run(() => {
       this.router.navigate(['/perfil']);
     });
-
-
   }
 
   filtroClick(){
-    
+    const dialogo =this.dialog.open(DialogoComponent, {
+      width: '250px'
+    });
+
+    // Vaciar lista
+    this.lista.forEach((e) => e.pop());
+
+    dialogo.afterClosed().subscribe(() => {
+      let orden = dialogo.componentInstance.getOrden();
+
+      if(orden.includes('0')){
+        this.lista = this.libroService.getLibrosOrdenadosAZ();
+      }else if(orden.includes('1')){
+        // Solo cambia el boolean y por tanto el HTML asociado
+        this.lista = this.libroService.getLibrosOrdenadosAZ();
+        this.esOrdenZA = false;
+      }else if(orden.includes('2')){
+        this.lista = this.libroService.getLibrosNuevos();
+      }
+    });
   }
 
-  buscar(){}
+  buscar(){} 
 
   pedirClick(){}
   reservarClick(){}

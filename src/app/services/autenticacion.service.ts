@@ -50,6 +50,12 @@ export class AutenticacionService {
 
       console.log(user);
 
+      // Local Storage
+      localStorage.setItem('userName', user.displayName!);
+      localStorage.setItem('userEmail', user.email!);
+      localStorage.setItem('userPhone', user.phoneNumber!);
+      localStorage.setItem('userPhoto', user.photoURL!);
+
       return user;
 
   }
@@ -79,6 +85,12 @@ export class AutenticacionService {
       const accessToken = credential!.accessToken;
 
       console.log(user);
+
+      // Local Storage
+      localStorage.setItem('userName', user.displayName!);
+      localStorage.setItem('userEmail', user.email!);
+      localStorage.setItem('userPhone', user.phoneNumber!);
+      localStorage.setItem('userPhoto', user.photoURL!);
 
       return user;
   }

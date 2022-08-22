@@ -22,16 +22,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfilComponent } from './perfil/perfil.component';
 import { InfoLibroComponent } from './info-libro/info-libro.component';
+import { DialogoComponent } from './dialogo/dialogo.component';
 
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatInputModule } from '@angular/material/input';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-
 import { NgxFileDropModule } from 'ngx-file-drop';
 import {MatCardModule} from '@angular/material/card';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -42,6 +43,7 @@ import {MatCardModule} from '@angular/material/card';
     AdminComponent,
     PerfilComponent,
     InfoLibroComponent,
+    DialogoComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,8 @@ import {MatCardModule} from '@angular/material/card';
     MatFormFieldModule, MatSelectModule, MatSliderModule, MatInputModule,
     ButtonModule, RippleModule,
     NgxFileDropModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
