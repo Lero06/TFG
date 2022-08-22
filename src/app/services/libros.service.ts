@@ -15,6 +15,8 @@ export class LibrosService {
   private librosDB: AngularFireList<Libro>;
   private librosDBOrdenadosAZ: AngularFireList<Libro>;
 
+  private libroSeleccionado:Libro;
+
   constructor(private db: AngularFireDatabase,private dbFire: Database) {
 
     this.librosDB = this.db.list('/libros', (ref) =>
@@ -83,7 +85,14 @@ export class LibrosService {
    console.log(this.librosDB);
 
     return this.getLibros();
-
   }
 
+  // -------------------------------------------------------------------------------------------
+  setLibroSeleccionado(libro:Libro){
+    this.libroSeleccionado = libro;
+  }
+
+  getLibroSeleccionado(){
+    return this.libroSeleccionado;
+  }
 }

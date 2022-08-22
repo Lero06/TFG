@@ -6,14 +6,14 @@
   <body>
     <div id="divPrincipal">
       <div id="header">
-        <div id="logo">
+        <div id="logo" (click)="clickLogo()">
           <img src="../assets/images/principales/logo.png" alt="logo">
           <p>Bibliotecapp</p>
         </div>
 
         <div id="navBar">
 
-          <p>Conócenos</p>
+          <p (click)="clickConocenos()">Conócenos</p>
           <p (click)="clickEventos()">Eventos</p>
           <p>Mis reservas</p>
           <p>Reportar Error</p>
@@ -53,7 +53,7 @@
       </div>
 
       <div *ngIf="!esOrdenZA" class="tabla">
-        <div *ngFor="let libro of (lista | async)?.reverse()" class="card" (click)="libroClick()">
+        <div *ngFor="let libro of (lista | async)?.reverse()" class="card" (click)="libroClick(libro)">
 
           <div class="divImgLibro">
             <!-- Tiene o no imagen de portada? -->
@@ -81,7 +81,7 @@
       <!----------------------------------------------------------------------------------------------------------------->
             <!-- Si el orden es A-Z hay que hacer reverse() a la lista, por tanto se debe duplicar-->
       <div *ngIf="esOrdenZA" class="tabla">
-        <div *ngFor="let libro of lista | async reverse" class="card" (click)="libroClick()">
+        <div *ngFor="let libro of lista | async reverse" class="card" (click)="libroClick(libro)">
 
           <div class="divImgLibro">
             <!-- Tiene o no imagen de portada? -->
@@ -123,7 +123,7 @@
       <h2>Eventos</h2>
 
       <div id="tablaEventos">
-        <div *ngFor="let evento of listaEventos | async" class="evento" (click)="libroClick()">
+        <div *ngFor="let evento of listaEventos | async" class="evento">
           <img class="imgEvento" alt={{evento.nombre}} src="../assets/images/principales/newevent.png" height="250px" width="180px">
           <p class="nombreEvento">{{evento.nombre}}</p>
           <p class="descripcionEvento">{{evento.descripcion}}</p>

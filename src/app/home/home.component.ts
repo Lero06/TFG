@@ -8,7 +8,6 @@ import { AutenticacionService } from '../services/autenticacion.service';
 import { EventosService } from '../services/eventos.service';
 import { LibrosService } from '../services/libros.service';
 import { DialogoComponent } from '../dialogo/dialogo.component';
-import { stringLength } from '@firebase/util';
 
 @Component({
   selector: 'app-home',
@@ -42,6 +41,9 @@ export class HomeComponent implements OnInit {
 
   // Orden
   esOrdenZA:boolean;
+
+  // Libro info
+  libroSeleccionado:Libro;
 
   constructor(private libroService: LibrosService, private eventoService:EventosService, private router: Router, private zone: NgZone,
      private autenticacionService:AutenticacionService, public dialog: MatDialog) { 
@@ -94,23 +96,7 @@ export class HomeComponent implements OnInit {
   }
 
   // Metodo de prueba, eliminar mas tarde
-  // hay que ponerlos en minuscula
-  addLibro(){
-    let libro = {
-      id:'2',
-      titulo:'El',
-      autor:'Yo',
-      isbn:'asdfasdf',
-      editorial:'asdfasdf',
-      edicion:'23423',
-      categoria:'sdfgsdfg',
-      tipo:'sdfgsdf',
-      idioma:'sdfgsdf',
-      ubicacion:'sdfgsdf',
-      disponible:false
-    };
-    this.libroService.addLibro(libro);
-  }
+
 
   // Metodo de prueba, eliminar mas tarde
   addEvento(){
@@ -138,6 +124,14 @@ export class HomeComponent implements OnInit {
   // Clicks
   clickEventos(){
     window.location.hash = "#divEventos";
+  }
+
+  clickConocenos(){
+    window.location.hash = "#fooder";
+  }
+
+  clickLogo(){
+    window.location.reload();
   }
 
   perfilClick(){
@@ -174,7 +168,9 @@ export class HomeComponent implements OnInit {
   pedirClick(){}
   reservarClick(){}
 
-  libroClick(){
+  libroClick(libro:any){
+    this.libroSeleccionado = libro;
+    this.libroService.setLibroSeleccionado(libro);
     this.zone.run(() => {
       this.router.navigate(['/infoLibro']);
     });

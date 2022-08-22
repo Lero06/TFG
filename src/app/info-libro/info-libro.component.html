@@ -1,1 +1,24 @@
-<p>info-libro works!</p>
+<div id="main">
+    <mat-card class="example-card">
+        <mat-card-header id="tituloHeader">
+
+          <mat-card-title id="titulo">{{libroSeleccionado.titulo}}</mat-card-title>
+
+        </mat-card-header>
+
+        <div id="divImg">
+            <img id="mat-card-image" src="{{libroSeleccionado.portadaImgPath}}" alt="Foto de {{libroSeleccionado.titulo}}">
+        </div>
+
+        <mat-card-content>
+
+          <p>{{libroSeleccionado.titulo}}</p>
+          <p>{{libroSeleccionado.autor}}</p>
+
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>MIS RESERVAS</button>
+          <button mat-button>RENOVAR CARNET</button>
+        </mat-card-actions>
+      </mat-card>
+</div>

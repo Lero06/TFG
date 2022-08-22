@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Libro } from '../object/Libro';
+import { LibrosService } from '../services/libros.service';
+
 
 @Component({
   selector: 'app-info-libro',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoLibroComponent implements OnInit {
 
-  constructor() { }
+  libroSeleccionado:Libro;
 
-  ngOnInit(): void {
+  constructor(private libroService: LibrosService) { 
+    this.libroSeleccionado = this.libroService.getLibroSeleccionado();
   }
+
+  ngOnInit(): void {}
 
 }

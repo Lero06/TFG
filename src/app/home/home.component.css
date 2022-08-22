@@ -87,6 +87,7 @@ mat-icon{
     display: flex;
     align-items: center;
     margin-left: 5px;
+    cursor: pointer;
 }
 
 #logo > img{
