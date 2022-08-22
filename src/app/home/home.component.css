@@ -32,9 +32,11 @@ button{
     display: flex;
     justify-content: space-between;
 
-    background-color: #708c77;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    /*background-color: #708c77;*/
+    background-color: #006d77;
+
+    padding-top: 5px;
+    padding-bottom: 5px;
 
     position: sticky;
     top: 0px;
@@ -62,6 +64,7 @@ mat-icon{
     font-size: 16px;
     text-decoration: underline;
     cursor: pointer;
+    color: black;
 }
 
 #navBar > p:hover{
@@ -76,7 +79,7 @@ mat-icon{
 
 #perfil > #iconoPerfil{
     margin-left: 10px;
-    width: 50%;
+    width: 40%;
     border-radius: 30px;
     cursor: pointer;
 }
@@ -102,6 +105,7 @@ mat-icon{
     font-size: 34px;
     margin-bottom: 0px;
     margin-left: 5px;
+    color: aliceblue;
 }
 
 /* ---------------  BUSCADOR ----------------------- */
@@ -115,6 +119,7 @@ input{
 textarea:focus, input:focus{
     outline: none;
 }
+
 
 #buscadoryfiltro{
     padding-top: 30px;
@@ -232,7 +237,7 @@ textarea:focus, input:focus{
 
 .botonPedir{
     margin-top: 5px;
-    background-color: #ef233c;
+    background-color: #006d77;
 }
 
 .divBotonReservar{
@@ -240,7 +245,7 @@ textarea:focus, input:focus{
 }
 
 .botonReservar{
-    background-color: #e88490;
+    background-color: #83c5be;
 }
 
 .botonPedir, .botonReservar{
@@ -251,11 +256,11 @@ textarea:focus, input:focus{
 }
 
 .botonPedir:hover{
-    background-color: #db2c49;
+    background-color: #4c989f;
 }
 
 .botonReservar:hover{
-    background-color: #e83f54;
+    background-color: #b4dcd8;
 }
 
 /* ---------------  STUFF ----------------------- */
@@ -283,7 +288,7 @@ textarea:focus, input:focus{
 /* ---------------  EVENTOS ----------------------- */
 
 #divEventos{
-    background-color: #8d99ae;
+    background-color: #ffddd2;
     padding-top: 30px;
     padding-bottom: 10px;
 }

@@ -17,6 +17,8 @@ export class PerfilComponent implements OnInit {
   email?:string;
   phone?:string;
   photo?:any;
+  bibliotecaFav?:string;
+  segBibliotecaFav?:string;
 
   constructor(private autenticacionService:AutenticacionService, private router: Router, private zone: NgZone) { 
     this.currentUser = this.autenticacionService.getUser();
@@ -27,6 +29,8 @@ export class PerfilComponent implements OnInit {
       this.email = localStorage.getItem('userEmail')!;
       this.phone = localStorage.getItem('userPhone')!;
       this.photo = localStorage.getItem('userPhoto')!;
+      this.bibliotecaFav = localStorage.getItem('userBibio')!;
+      this.segBibliotecaFav = localStorage.getItem('userBiblioFav')!;
     }
   }
 
@@ -68,6 +72,26 @@ export class PerfilComponent implements OnInit {
       this.zone.run(() => {
         this.router.navigate(['/perfil']);
       });
+    }
+  }
+
+  // HTML
+  obtenerTelefono(){
+    if(this.currentUser?.phoneNumber != undefined){
+      return this.currentUser.phoneNumber;
+    }else if(this.phone != 'null'){
+      console.log('phone');
+      return this.phone;
+    }else{
+      return '?';
+    }
+  }
+
+  obtenerBibliotecaFav(){
+    if(this.bibliotecaFav != 'null'){
+      return this.bibliotecaFav;
+    }else{
+      return '?';
     }
   }
 

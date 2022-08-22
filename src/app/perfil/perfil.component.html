@@ -23,10 +23,9 @@
           <p *ngIf="currentUser"><span>Correo: </span>{{currentUser.email}}</p>
           <p *ngIf="!currentUser && name"><span>Correo: </span>{{email}}</p>
 
-          <p *ngIf="currentUser"><span>Teléfono: </span>{{currentUser.phoneNumber}}</p>
-          <p *ngIf="!currentUser && name"><span>Teléfono: </span>{{phone}}</p>
+          <p><span>Teléfono: </span>{{obtenerTelefono()}}</p>
 
-          <p><span>Biblioteca Fav.: </span>?</p>
+          <p><span>Biblioteca Fav.: </span>{{obtenerBibliotecaFav()}}</p>
           <p><span>Segunda Biblioteca Fav.: </span>?</p>
           <p><span>Caducidad Carnet: </span>?</p>
 

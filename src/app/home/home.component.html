@@ -33,24 +33,22 @@
         </div>
       </div>
 
+        <div id="buscadoryfiltro">
+          
+          <p>Busca y pide entre nuestros <span>más de {{contadorLibros}} espectaculares libros</span><p>
 
-      <div id="buscadoryfiltro">
+          <div id="buscador" tabindex="0">
+            <mat-icon> search </mat-icon>
+            <input type="text" placeholder="Buscar" id="input" (keyup.enter)="onEnter()">
+          </div>
 
-        <p>Busca y pide entre nuestros <span>más de {{contadorLibros}} espectaculares libros</span><p>
-
-        <div id="buscador" tabindex="0">
-          <mat-icon> search </mat-icon>
-          <input type="text" placeholder="Buscar" id="input" (keyup.enter)="onEnter()">
-        </div>
-
-        <div id="filtro" >
-          <div (click)="filtroClick()" id="divFiltro" tabindex="0">
-            <mat-icon> filter_alt </mat-icon>
-            <p>Filtrar</p>
+          <div id="filtro" >
+            <div (click)="filtroClick()" id="divFiltro" tabindex="0">
+              <mat-icon> filter_alt </mat-icon>
+              <p>Filtrar</p>
+            </div>
           </div>
         </div>
-
-      </div>
 
       <div *ngIf="!esOrdenZA" class="tabla">
         <div *ngFor="let libro of (lista | async)?.reverse()" class="card" (click)="libroClick(libro)">
