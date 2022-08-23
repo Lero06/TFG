@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
     }
 
     this.contadorLibros = 0;
-    this.totalLibros = 69;
+    this.totalLibros = 60;
 
     this.esOrdenZA = false;
 
@@ -95,20 +95,6 @@ export class HomeComponent implements OnInit {
     }, duracion);
   }
 
-  // Metodo de prueba, eliminar mas tarde
-
-
-  // Metodo de prueba, eliminar mas tarde
-  addEvento(){
-    let evento = {
-      id:'2',
-      nombre:'Primer Evento ',
-      descripcion:'Este es el primer evento de la página web'
-    };
-
-    this.eventoService.addEvento(evento);
-  }
-
   cargarMas(){
 
   }
@@ -122,6 +108,12 @@ export class HomeComponent implements OnInit {
 
 
   // Clicks
+  clickMisReservas(){
+    this.zone.run(() => {
+      this.router.navigate(['/mis-reservas']);
+    });
+  }
+
   clickEventos(){
     window.location.hash = "#divEventos";
   }
@@ -223,13 +215,15 @@ export class HomeComponent implements OnInit {
   }
 
   aplicarNombreEsteticoSimplificado(s:string){
-    let res:string;
-    res = s;
-    // Poner ... si el nombre es muy largo
-    if(s.length > 23){
-      res = s.slice(0,23).concat('...');
+    // Hacer las primeras letras MAYUS
+    var splitStr = s.toLowerCase().split(' ');
+    for (var i = 0; i < splitStr.length; i++) {
+        // You do not need to check if i is larger than splitStr length, as your for does that for you
+        // Assign it back to the array
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
     }
-    return res;
+    // Directly return the joined string
+    return splitStr.join(' '); 
   }
 
 }

@@ -33,6 +33,7 @@ import { RippleModule } from 'primeng/ripple';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MisReservasComponent } from './mis-reservas/mis-reservas.component';
 
 
 
@@ -44,6 +45,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     PerfilComponent,
     InfoLibroComponent,
     DialogoComponent,
+    MisReservasComponent,
   ],
   imports: [
     BrowserModule,

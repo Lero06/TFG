@@ -1,7 +1,7 @@
 <!-- ------ GENERAL ------ -->
 <div *ngIf="!subirLibroActivado && !borrarLibroActivado &&
             !subirEventoActivado && !borrarEventoActivado
-            && !gestionActivado"
+            && !gestionActivado && !erroresActivado"
              id="main">
 
     <button id="botoSubirLibro" (click)="activarSubirLibro()"></button>
@@ -153,4 +153,10 @@
 <div *ngIf="gestionActivado" id="gestion">
     <button (click)="atrasDesdeGestion()">Atrás</button>
     <p>GESTION</p>
+</div>
+
+<!-- ------ GESTION ERRORES ------ -->
+<div *ngIf="erroresActivado" id="gestionErrores">
+    <button (click)="atrasDesdeErrores()">Atrás</button>
+    <p>GESTION ERRORES</p>
 </div>
