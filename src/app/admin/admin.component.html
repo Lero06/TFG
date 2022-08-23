@@ -1,4 +1,23 @@
-<div id="main">
+<!-- ------ GENERAL ------ -->
+<div *ngIf="!subirLibroActivado && !borrarLibroActivado &&
+            !subirEventoActivado && !borrarEventoActivado
+            && !gestionActivado"
+             id="main">
+
+    <button id="botoSubirLibro" (click)="activarSubirLibro()"></button>
+    <button id="botoBajarLibro" (click)="activarBorrarLibro()"></button>
+
+    <button id="botoSubirEvento" (click)="activarSubirEvento()"></button>
+    <button id="botoBajarEvento"  (click)="activarBorrarEvento()"></button>
+
+    <button id="botoErrores" (click)="activarGestionErrores()"></button>
+    <button id="botoGestion" (click)="activarGestion()"></button>
+
+</div>
+
+<!-- ------ SUBIR LIBRO ------ -->
+<div *ngIf="subirLibroActivado" id="subirLibro">
+    <button (click)="atrasDesdeSubir()">Atrás</button>
     <p>Subir Libro</p>
 
     <mat-form-field appearance="fill">
@@ -79,4 +98,59 @@
     </div>
 
       <button id="botonSubir" pButton pRipple type="button" label="Subir Libro" (click)="clickSubirLibro()"></button>
+</div>
+
+<!-- ------ BORRAR LIBRO ------ -->
+<div *ngIf="borrarLibroActivado" id="borrarLibro">
+    <button (click)="atrasDesdeBorrar()">Atrás</button>
+</div>
+
+
+<!-- ------ SUBIR EVENTO ------ -->
+<div *ngIf="subirEventoActivado" id="subirEvento">
+    <button (click)="atrasDesdeSubirEv()">Atrás</button>
+    <p>Subir Evento</p>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Título del evento</mat-label>
+        <input matInput id="inputTituloEv">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Descripción del evento</mat-label>
+        <input matInput id="inputDescrip">
+      </mat-form-field>
+
+      <div class="center" id="drop">
+        <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+        (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+            <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+              Arrastra aquí la imagen del evento o 
+              <button type="button" (click)="openFileSelector()">Selecciona desde Archivos</button>
+            </ng-template>
+        </ngx-file-drop>
+        <div class="upload-table">
+            <table class="table">
+                <tbody class="upload-name-style">
+                    <tr *ngFor="let item of files; let i=index">
+                        <td><strong>{{ item.relativePath }}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+       </div>
+
+        <button id="botonSubirEv" pButton pRipple type="button" label="Subir Evento" (click)="clickSubirEvento()"></button>
+</div>
+
+<!-- ------ BORRAR EVENTO ------ -->
+<div *ngIf="borrarEventoActivado" id="borrarEvento">
+    <button (click)="atrasDesdeBorrarEv()">Atrás</button>
+    <p>BORRAR EVENTO</p>
+</div>
+
+<!-- ------ GESTION ------ -->
+<div *ngIf="gestionActivado" id="gestion">
+    <button (click)="atrasDesdeGestion()">Atrás</button>
+    <p>GESTION</p>
 </div>

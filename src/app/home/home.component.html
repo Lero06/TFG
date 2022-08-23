@@ -122,9 +122,12 @@
 
       <div id="tablaEventos">
         <div *ngFor="let evento of listaEventos | async" class="evento">
-          <img class="imgEvento" alt={{evento.nombre}} src="../assets/images/principales/newevent.png" height="250px" width="180px">
-          <p class="nombreEvento">{{evento.nombre}}</p>
-          <p class="descripcionEvento">{{evento.descripcion}}</p>
+
+          <img *ngIf="!evento.portadaImgPath" class="imgEvento" alt={{evento.nombre}} src="../assets/images/principales/newevent.png" height="250px" width="180px">
+          <img *ngIf="evento.portadaImgPath" class="imgEvento" alt={{evento.nombre}} src="{{evento.portadaImgPath}}" height="250px" width="180px">
+
+          <p class="nombreEvento">{{aplicarNombreEsteticoSimplificado(evento.nombre)}}</p>
+          <div id="divDescripcionEvento"><p class="descripcionEvento">{{evento.descripcion}}</p></div>
         </div>
       </div>
 

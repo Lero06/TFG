@@ -220,7 +220,16 @@ export class HomeComponent implements OnInit {
     }
     // Directly return the joined string
     return splitStr.join(' '); 
+  }
 
+  aplicarNombreEsteticoSimplificado(s:string){
+    let res:string;
+    res = s;
+    // Poner ... si el nombre es muy largo
+    if(s.length > 23){
+      res = s.slice(0,23).concat('...');
+    }
+    return res;
   }
 
 }

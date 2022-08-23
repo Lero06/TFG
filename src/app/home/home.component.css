@@ -315,6 +315,11 @@ h2{
 
 .descripcionEvento{
     margin-bottom: 10px;
+    word-break: break-all;
+}
+
+#divDescripcionEvento{
+    overflow-wrap: break-word;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */

@@ -3,11 +3,8 @@ import { Libro } from '../object/Libro';
 import { LibrosService } from '../services/libros.service';
 import { getDownloadURL, getStorage, ref, uploadBytes, uploadString } from "firebase/storage";
 import { NgxFileDropEntry } from 'ngx-file-drop';
-
-const categorias = ['acción','autobiográficos','autoayuda',
-'científicos','ciencia ficción','comic','cuento','de viaje','deporte',
-'erótico','ficción','historia','humor','juveniles','literatura','nuevo',
-'poéticos','religión','romance','suspense'];
+import { Evento } from '../object/Evento';
+import { EventosService } from '../services/eventos.service';
 
 @Component({
   selector: 'app-admin',
@@ -16,7 +13,18 @@ const categorias = ['acción','autobiográficos','autoayuda',
 })
 
 export class AdminComponent implements OnInit {
+  // General
+  subirLibroActivado:boolean;
+  borrarLibroActivado:boolean;
 
+  subirEventoActivado:boolean;
+  borrarEventoActivado:boolean;
+
+  gestionActivado:boolean;
+  erroresActivado:boolean;
+
+
+  // Subir Libro
   categoriaSeleccionada:any;
   tipoSeleccionado:any;
   idiomaSeleccionado:any;
@@ -24,8 +32,7 @@ export class AdminComponent implements OnInit {
 
   public files: NgxFileDropEntry[] = [];
 
-
-
+  // Material dropdown
   categorias: any[] = [
     {value: 'acción-0', viewValue: 'Acción'},
     {value: 'autobiográficos-1', viewValue: 'Autobiográficos'},
@@ -65,10 +72,45 @@ export class AdminComponent implements OnInit {
   ];
   
 
-  constructor(private libroService: LibrosService) { }
+  constructor(private libroService: LibrosService, private eventoServicio: EventosService) { 
+    this.subirLibroActivado = false;
+    this.borrarLibroActivado = false;
+
+    this.subirEventoActivado = false;
+    this.borrarEventoActivado = false;
+
+    this.gestionActivado = false;
+    this.erroresActivado = false;
+  }
 
   ngOnInit(): void {}
 
+  /* --------------- GENERAL ---------------*/
+  activarSubirLibro(){
+    this.subirLibroActivado = true;
+  }
+
+  activarBorrarLibro(){
+    this.borrarLibroActivado = true;
+  }
+
+  activarSubirEvento(){
+    this.subirEventoActivado = true;
+  }
+
+  activarBorrarEvento(){
+    this.borrarEventoActivado = true;
+  }
+
+  activarGestion(){
+    this.gestionActivado = true;
+  }
+
+  activarGestionErrores(){
+    this.erroresActivado = true;
+  }
+
+  /* --------------- SUBIR LIBRO ---------------*/
   async clickSubirLibro(){
     const titulo = (<HTMLInputElement>document.getElementById("inputTitulo")).value.toLowerCase();
 
@@ -178,6 +220,88 @@ export class AdminComponent implements OnInit {
 
   public fileLeave(event: any){
     console.log(event);
+  }
+
+  atrasDesdeSubir(){
+    this.subirLibroActivado = false;
+  }
+
+
+  /* --------------- BORRAR LIBRO ---------------*/
+  async clickBorrarLibro(){
+
+  }
+
+  atrasDesdeBorrar(){
+    this.borrarLibroActivado = false;
+  }
+
+  /* --------------- SUBIR EVENTO ---------------*/
+  async clickSubirEvento(){
+
+    const titulo = (<HTMLInputElement>document.getElementById("inputTituloEv")).value.toLowerCase();
+    const descripcion = (<HTMLInputElement>document.getElementById("inputDescrip")).value;
+
+    // Imagen
+    const input = (<HTMLInputElement>document.getElementById("inputFile"));
+
+    // Referencias a storage
+    const storage = getStorage();
+    const storageRef = ref(storage, 'images/'+titulo);
+
+    // Esperamos a obtener respuesta
+    const res = await uploadBytes(storageRef, this.fileSeleccionado).then(() => {
+      console.log('Uploaded a fileee!');
+    });
+
+    const date = new Date();
+
+    let portadaImgPath = await getDownloadURL(storageRef);
+
+    const evento : Evento = {
+      id:date.toISOString(),
+      nombre:titulo,
+      descripcion:descripcion,
+      fecha:date,
+      portadaImgPath:portadaImgPath
+    }
+
+    this.eventoServicio.addEvento(evento);
+
+    // Libro Subido
+    alert('Se ha subido el evento con éxito');
+
+     // Borrar inputs
+     (<HTMLInputElement>document.getElementById("inputTituloEv")).value = '';
+     (<HTMLInputElement>document.getElementById("inputDescrip")).value = '';
+     this.fileSeleccionado= '';
+     this.files = [];
+  }
+
+  atrasDesdeSubirEv(){
+    this.subirEventoActivado = false;
+  }
+
+  /* --------------- BORRAR EVENTO ---------------*/
+  async clickBorrarEvento(){
+
+  }
+
+  atrasDesdeBorrarEv(){
+    this.borrarEventoActivado = false;
+  }
+
+   /* --------------- GESTION ERRORES ---------------*/
+   
+  atrasDesdeErrores(){
+    this.erroresActivado = false;
+  }
+
+
+  /* --------------- GESTION ---------------*/
+
+  atrasDesdeGestion(){
+    this.gestionActivado = false;
   }
 
 }
