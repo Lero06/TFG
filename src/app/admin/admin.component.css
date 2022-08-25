@@ -1,4 +1,4 @@
-#subirLibro, #subirEvento, #borrarLibro, #borrarEvento, #gestion{
+#subirLibro, #subirEvento, #borrarLibro, #borrarEvento, #gestion, #gestionErrores{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,30 +39,39 @@ button:enabled:hover {
     align-items: center;
 }
 
+#main{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
 /* Botones */
+
+.botoIconos{
+    border: none;
+    width: 200px;
+    height: 200px;
+    font-size: 15%;
+    border: 1px black solid;
+}
 
 #botoSubirLibro{
     background: url('src\assets\images\button\subirLibro.png');
     background-repeat: no-repeat;
     background-size: cover;
-    width: 50px;
-    height: 50px;
 }
 
 #botoBajarLibro{
     background: url('src\assets\images\button\bajarLibro.png');
     background-repeat: no-repeat;
     background-size: cover;
-    width: 50px;
-    height: 50px;
 }
 
 #botoSubirEvento{
     background: url('src\assets\images\button\subirEv.png');
     background-repeat: no-repeat;
     background-size: cover;
-    width: 50px;
-    height: 50px;
 }
 
 
@@ -70,22 +79,16 @@ button:enabled:hover {
     background: url('src\assets\images\button\bajarEv.png');
     background-repeat: no-repeat;
     background-size: cover;
-    width: 50px;
-    height: 50px;
 }
 
 #botoGestion{
     background: url('src\assets\images\button\gestion.png');
     background-repeat: no-repeat;
     background-size: cover;
-    width: 50px;
-    height: 50px;
 }
 
 #botoErrores{
     background: url('src\assets\images\button\ojo.png');
     background-repeat: no-repeat;
     background-size: cover;
-    width: 50px;
-    height: 50px;
 }
