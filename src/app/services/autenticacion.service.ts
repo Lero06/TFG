@@ -114,16 +114,20 @@ export class AutenticacionService {
 
   /* -----------------------  OTHER STUFF  ---------------------------------- */
 
-  // Se llaman asi pq no hay sobrecarga 
-  esAdmin(){
-    const localUID = localStorage.getItem('userUID');
-    if(localUID || localUID != 'null'){
-      return true;
+  esAdminLocalStorage(uid:any){
+    const adminObs = this.httpClient.get<Admin>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/admins/'+uid+'.json').subscribe((a) => {this.adminGlobal = a;});
+
+    if(uid || uid != 'null'){
+      if(this.adminGlobal){
+        if(this.adminGlobal!.uID == uid){
+          return true;
+        }
+      }
     }
     return false;
   }
 
-  esAdmin2(uid:string){
+  esAdminCurrent(uid:string){
     const adminObs = this.httpClient.get<Admin>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/admins/'+uid).subscribe((a) => {this.adminGlobal = a;});
 
 

@@ -66,9 +66,10 @@ export class HomeComponent implements OnInit {
     this.currentUser = this.autorizacionService.getUser();
 
     if(this.currentUser){
-      this.isAdmin = this.autorizacionService.esAdmin2(this.currentUser!.uid);
+      this.isAdmin = this.autorizacionService.esAdminCurrent(this.currentUser!.uid);
     }else{
-      this.isAdmin = this.autorizacionService.esAdmin();
+      const localUID = localStorage.getItem('userUID');
+      this.isAdmin = this.autorizacionService.esAdminLocalStorage(localUID);
     }
 
   }
