@@ -1,0 +1,27 @@
+<div id="header">
+    <div id="logo" (click)="clickLogo()">
+      <img src="../assets/images/principales/logo.png" alt="logo">
+      <p>Bibliotecapp</p>
+    </div>
+
+    <div id="navBar">
+
+      <p (click)="clickConocenos()">Conócenos</p>
+      <p (click)="clickEventos()">Eventos</p>
+      <p (click)="clickMisReservas()">Mis reservas</p>
+      <p>Reportar Error</p>
+      <p>ES</p>
+
+      <div id="perfil" (click)="perfilClick()">
+
+        <mat-icon *ngIf="!user && !photo"> account_circle </mat-icon>  
+
+        <img id="iconoPerfil" *ngIf="user && !photo" alt="foto del usuario" src="{{user.photoURL}}">
+        <!-- Si el usuario no se ha registrado hoy, miramos en el storage a ver si lo está -->
+        <img id="iconoPerfil" *ngIf="!user && photo" alt="foto del usuario" src="{{photo}}">
+
+
+      </div>
+
+    </div>
+  </div>

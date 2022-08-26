@@ -2,36 +2,16 @@
     <title>Bibliotecapp</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-  
+
+  <app-header></app-header>
+
+  <div *ngIf="isAdmin" id="divAdmin">
+    <p>Visualizando vista del usuario... </p>
+    <button (click)="adminClick()">Acceder a Administración</button>
+  </div>
+
   <body>
     <div id="divPrincipal">
-      <div id="header">
-        <div id="logo" (click)="clickLogo()">
-          <img src="../assets/images/principales/logo.png" alt="logo">
-          <p>Bibliotecapp</p>
-        </div>
-
-        <div id="navBar">
-
-          <p (click)="clickConocenos()">Conócenos</p>
-          <p (click)="clickEventos()">Eventos</p>
-          <p (click)="clickMisReservas()">Mis reservas</p>
-          <p>Reportar Error</p>
-          <p>ES</p>
-
-          <div id="perfil" (click)="perfilClick()">
-
-            <mat-icon *ngIf="!user && !name"> account_circle </mat-icon>  
-
-            <img id="iconoPerfil" *ngIf="user && !name" alt="foto del usuario" src="{{user.photoURL}}">
-            <!-- Si el usuario no se ha registrado hoy, miramos en el storage a ver si lo está -->
-            <img id="iconoPerfil" *ngIf="!user && name" alt="foto del usuario" src="{{photo}}">
-
-
-          </div>
-
-        </div>
-      </div>
 
         <div id="buscadoryfiltro">
           

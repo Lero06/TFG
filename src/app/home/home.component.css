@@ -399,3 +399,22 @@ h2{
 #postfooder{
     padding-bottom: 10px;
 }
+
+#divAdmin{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: yellow;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: sticky;
+    top:50px;
+    justify-content: center;
+}
+
+#divAdmin > p{
+    font-size: 20px;
+}
+#divAdmin > button{
+    padding: 5px;
+}

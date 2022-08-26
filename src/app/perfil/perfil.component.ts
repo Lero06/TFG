@@ -95,4 +95,28 @@ export class PerfilComponent implements OnInit {
     }
   }
 
+  cerrarSesion(){
+    if(this.currentUser){
+      this.autenticacionService.hacerSignOut();
+    }else{
+      // Borrar los valores 
+      this.name = '';
+      this.email = '';
+      this.phone = '';
+      this.photo = '';
+      this.bibliotecaFav = '';
+      this.segBibliotecaFav = '';
+
+      localStorage.setItem('userName','null');
+      localStorage.setItem('userEmail','null');
+      localStorage.setItem('userPhone','null');
+      localStorage.setItem('userPhoto','null');
+      localStorage.setItem('userBibio','null');
+      localStorage.setItem('userBiblioFav','null');
+
+    }
+
+    // Ir a home
+  }
+
 }

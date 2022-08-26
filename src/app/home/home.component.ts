@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Evento } from '../object/Evento';
 import { Libro } from '../object/Libro';
-import { AutenticacionService } from '../services/autenticacion.service';
 import { EventosService } from '../services/eventos.service';
 import { LibrosService } from '../services/libros.service';
 import { DialogoComponent } from '../dialogo/dialogo.component';
+import { AutenticacionService } from '../services/autenticacion.service';
+import { User } from 'firebase/auth';
 
 @Component({
   selector: 'app-home',
@@ -16,8 +17,9 @@ import { DialogoComponent } from '../dialogo/dialogo.component';
 })
 export class HomeComponent implements OnInit {
 
-  // Autorizacion
-  user:any;
+  // Administracion
+  currentUser?:User;
+  isAdmin:boolean;
 
   // Listas
   lista: Observable<Array<Libro>>;
@@ -38,6 +40,7 @@ export class HomeComponent implements OnInit {
   email?:string;
   phone?:string;
   photo?:any;
+  uid?:string;
 
   // Orden
   esOrdenZA:boolean;
@@ -46,27 +49,27 @@ export class HomeComponent implements OnInit {
   libroSeleccionado:Libro;
 
   constructor(private libroService: LibrosService, private eventoService:EventosService, private router: Router, private zone: NgZone,
-     private autenticacionService:AutenticacionService, public dialog: MatDialog) { 
+     public dialog: MatDialog, private autorizacionService:AutenticacionService) { 
 
     this.lista = this.libroService.getLibros();
     this.listaEventos = this.eventoService.getEventos();
 
+    // Calendario
     this.monday = 1;
 
-    this.user = this.autenticacionService.getUser();
-
-    // Local Storage
-    if(!this.user){
-      this.name = localStorage.getItem('userName')!;
-      this.email = localStorage.getItem('userEmail')!;
-      this.phone = localStorage.getItem('userPhone')!;
-      this.photo = localStorage.getItem('userPhoto')!;
-    }
-
+    // HTML
     this.contadorLibros = 0;
     this.totalLibros = 60;
-
     this.esOrdenZA = false;
+
+    // Autenticacion
+    this.currentUser = this.autorizacionService.getUser();
+
+    if(this.currentUser){
+      this.isAdmin = this.autorizacionService.esAdmin2(this.currentUser!.uid);
+    }else{
+      this.isAdmin = this.autorizacionService.esAdmin();
+    }
 
   }
 
@@ -83,6 +86,14 @@ export class HomeComponent implements OnInit {
     }
 
     this.funcionContadorLibros();
+  }
+
+  adminClick(){
+    if(this.isAdmin){
+      this.zone.run(() => {
+        this.router.navigate(['/admin']);
+      });
+    }
   }
 
   funcionContadorLibros(){
@@ -106,31 +117,6 @@ export class HomeComponent implements OnInit {
     this.lista = this.libroService.buscarLibros(aBuscar);
   }
 
-
-  // Clicks
-  clickMisReservas(){
-    this.zone.run(() => {
-      this.router.navigate(['/mis-reservas']);
-    });
-  }
-
-  clickEventos(){
-    window.location.hash = "#divEventos";
-  }
-
-  clickConocenos(){
-    window.location.hash = "#fooder";
-  }
-
-  clickLogo(){
-    window.location.reload();
-  }
-
-  perfilClick(){
-    this.zone.run(() => {
-      this.router.navigate(['/perfil']);
-    });
-  }
 
   filtroClick(){
     const dialogo =this.dialog.open(DialogoComponent, {

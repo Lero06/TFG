@@ -5,6 +5,8 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, User, signOut, UserCreden
 import { environment } from 'src/environments/environment';
 
 import { FacebookAuthProvider } from "firebase/auth";
+import { HttpClient } from '@angular/common/http';
+import { Admin } from '../object/Admin';
 
 
 @Injectable({
@@ -14,7 +16,9 @@ export class AutenticacionService {
 
   userData?: User;
 
-  constructor() {}
+  adminGlobal:Admin;
+
+  constructor(private httpClient: HttpClient) { }
 
   getUser(){
     return this.userData;
@@ -53,6 +57,7 @@ export class AutenticacionService {
       // Local Storage
       localStorage.setItem('userName', user.displayName!);
       localStorage.setItem('userEmail', user.email!);
+      localStorage.setItem('userUID', user.uid!);
       localStorage.setItem('userPhone', user.phoneNumber!);
       localStorage.setItem('userPhoto', user.photoURL!);
 
@@ -89,9 +94,46 @@ export class AutenticacionService {
       // Local Storage
       localStorage.setItem('userName', user.displayName!);
       localStorage.setItem('userEmail', user.email!);
+      localStorage.setItem('userUID', user.uid!);
       localStorage.setItem('userPhone', user.phoneNumber!);
       localStorage.setItem('userPhoto', user.photoURL!);
 
       return user;
   }
+
+  /* -----------------------  LOGOUT (Arreglar)  ---------------------------------- */
+
+  hacerSignOut(){
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      // Sign-out successful.
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
+
+  /* -----------------------  OTHER STUFF  ---------------------------------- */
+
+  // Se llaman asi pq no hay sobrecarga 
+  esAdmin(){
+    const localUID = localStorage.getItem('userUID');
+    if(localUID || localUID != 'null'){
+      return true;
+    }
+    return false;
+  }
+
+  esAdmin2(uid:string){
+    const adminObs = this.httpClient.get<Admin>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/admins/'+uid).subscribe((a) => {this.adminGlobal = a;});
+
+
+    const localUID = localStorage.getItem('userUID');
+    if(this.adminGlobal){
+      if(this.adminGlobal!.uID == uid){
+        return true;
+      }
+    }
+    return false;
+  }
+
 }

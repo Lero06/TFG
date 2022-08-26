@@ -1,0 +1,94 @@
+@font-face {
+	font-family: mrdafoe;
+	src: url(src\assets\fonts\MrDafoe-Regular.ttf);
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+p{
+    margin:0px
+}
+
+#logo{
+    flex: 40%;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+#logo > img{
+    width: 7%;
+    background-color: black;
+    border-radius: 30px;
+    padding: 5px;
+}
+
+#logo > p{
+    font-family: mrdafoe;
+    font-size: 34px;
+    margin-bottom: 0px;
+    margin-left: 5px;
+    color: aliceblue;
+}
+
+#tituloHeader{
+    justify-content: center;
+}
+
+#header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    /*background-color: #708c77;*/
+    background-color: #006d77;
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    position: sticky;
+    height: auto;
+    top: 0px;
+    border-bottom: 2px solid black;
+}
+
+mat-icon{
+    cursor: pointer;
+}
+
+#navBar{
+    flex: 60%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: right;
+}
+
+#navBar > p{
+    font-size: 18px;
+    cursor: pointer;
+    color: aliceblue;
+}
+
+#navBar > p:hover{
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+#perfil > mat-icon{
+    margin-left: 10px;
+    margin-right: 15px;
+    transform: scale(2);
+}
+
+#perfil > #iconoPerfil{
+    margin-left: 10px;
+    width: 40%;
+    border-radius: 30px;
+    cursor: pointer;
+}

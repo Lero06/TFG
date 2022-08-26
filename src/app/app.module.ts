@@ -34,6 +34,7 @@ import { NgxFileDropModule } from 'ngx-file-drop';
 import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MisReservasComponent } from './mis-reservas/mis-reservas.component';
+import { HeaderComponent } from './header/header.component';
 
 
 
@@ -46,6 +47,7 @@ import { MisReservasComponent } from './mis-reservas/mis-reservas.component';
     InfoLibroComponent,
     DialogoComponent,
     MisReservasComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
