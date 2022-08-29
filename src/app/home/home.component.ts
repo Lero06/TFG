@@ -9,6 +9,7 @@ import { LibrosService } from '../services/libros.service';
 import { DialogoComponent } from '../dialogo/dialogo.component';
 import { AutenticacionService } from '../services/autenticacion.service';
 import { User } from 'firebase/auth';
+import { Admin } from '../object/Admin';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ export class HomeComponent implements OnInit {
 
   // Administracion
   currentUser?:User;
-  isAdmin:boolean;
+  observer:Observable<Admin>;
+  isAdmin?:boolean;
 
   // Listas
   lista: Observable<Array<Libro>>;
@@ -62,16 +64,6 @@ export class HomeComponent implements OnInit {
     this.totalLibros = 60;
     this.esOrdenZA = false;
 
-    // Autenticacion
-    this.currentUser = this.autorizacionService.getUser();
-
-    if(this.currentUser){
-      this.isAdmin = this.autorizacionService.esAdminCurrent(this.currentUser!.uid);
-    }else{
-      const localUID = localStorage.getItem('userUID');
-      this.isAdmin = this.autorizacionService.esAdminLocalStorage(localUID);
-    }
-
   }
 
   ngOnInit(): void { 
@@ -87,6 +79,29 @@ export class HomeComponent implements OnInit {
     }
 
     this.funcionContadorLibros();
+
+    // Autenticacion
+    this.currentUser = this.autorizacionService.getUser();
+    let localUID = localStorage.getItem('userUID');
+
+    if(this.currentUser){
+      this.getEsAdmin(this.currentUser!.uid);
+    }else if(localUID){
+      this.getEsAdmin(localUID);
+    }
+  }
+
+  // ADMIN
+   async getEsAdmin(localUID: string | null):Promise<boolean>{
+    let res = await this.autorizacionService.esAdminLocalStorage(localUID);
+    res.subscribe((r) => {
+      if(r == null){
+        this.isAdmin = false;
+      }else{
+        this.isAdmin = true;
+      }
+    });
+    return false;
   }
 
   adminClick(){
@@ -107,9 +122,7 @@ export class HomeComponent implements OnInit {
     }, duracion);
   }
 
-  cargarMas(){
-
-  }
+  cargarMas(){}
 
   // Eventos
   onEnter(){
@@ -120,6 +133,7 @@ export class HomeComponent implements OnInit {
 
 
   filtroClick(){
+    console.log(this.isAdmin);
     const dialogo =this.dialog.open(DialogoComponent, {
       width: '250px'
     });

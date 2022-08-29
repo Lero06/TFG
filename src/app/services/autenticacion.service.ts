@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { FacebookAuthProvider } from "firebase/auth";
 import { HttpClient } from '@angular/common/http';
 import { Admin } from '../object/Admin';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -16,7 +17,7 @@ export class AutenticacionService {
 
   userData?: User;
 
-  adminGlobal:Admin;
+  adminGlobal:any;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -115,29 +116,7 @@ export class AutenticacionService {
   /* -----------------------  OTHER STUFF  ---------------------------------- */
 
   esAdminLocalStorage(uid:any){
-    const adminObs = this.httpClient.get<Admin>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/admins/'+uid+'.json').subscribe((a) => {this.adminGlobal = a;});
-
-    if(uid || uid != 'null'){
-      if(this.adminGlobal){
-        if(this.adminGlobal!.uID == uid){
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
-  esAdminCurrent(uid:string){
-    const adminObs = this.httpClient.get<Admin>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/admins/'+uid).subscribe((a) => {this.adminGlobal = a;});
-
-
-    const localUID = localStorage.getItem('userUID');
-    if(this.adminGlobal){
-      if(this.adminGlobal!.uID == uid){
-        return true;
-      }
-    }
-    return false;
+    return this.httpClient.get<Admin>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/admins/'+uid+'.json');
   }
 
 }

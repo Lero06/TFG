@@ -80,7 +80,6 @@ export class PerfilComponent implements OnInit {
     if(this.currentUser?.phoneNumber != undefined){
       return this.currentUser.phoneNumber;
     }else if(this.phone != 'null'){
-      console.log('phone');
       return this.phone;
     }else{
       return '?';

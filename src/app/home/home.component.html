@@ -5,7 +5,7 @@
 
   <app-header></app-header>
 
-  <div *ngIf="isAdmin" id="divAdmin">
+  <div *ngIf="isAdmin == true" id="divAdmin">
     <p>Visualizando vista del usuario... </p>
     <button (click)="adminClick()">Acceder a Administración</button>
   </div>
