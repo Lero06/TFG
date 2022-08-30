@@ -67,7 +67,6 @@ button:enabled:hover {
     width: 200px;
     height: 200px;
     font-size: 15%;
-    border: 1px black solid;
 }
 
 .botoIconos:hover{
@@ -111,14 +110,14 @@ button:enabled:hover {
 }
 
 #botoGestion{
-    background: url('src\assets\images\button\gestion.png');
+    background: url('src\assets\images\button\reservasalt.png');
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: white;
+    background-color: #0a0908;
 }
 
 #botoErrores{
-    background: url('src\assets\images\button\ojo.png');
+    background: url('src\assets\images\button\mensajesalt.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-color: white;
@@ -126,4 +125,22 @@ button:enabled:hover {
 
 #mat-table{
     width: 100%;
+}
+
+#inputNewReserva{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#inputNewReserva > button{
+    margin-right: 20%;
+    margin-bottom: 1.34375em;
+    display: flex;
+    justify-content: center;
+}
+
+#inputNewReserva > mat-form-field{
+    margin-left: 20%;
 }

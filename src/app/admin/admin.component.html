@@ -13,8 +13,8 @@
         <button id="botoSubirEvento" title="Subir Evento" class="botoIconos" (click)="activarSubirEvento()"></button>
         <button id="botoBajarEvento" title="Borrar Evento" class="botoIconos"  (click)="activarBorrarEvento()"></button>
 
-        <button id="botoErrores" title="Estionar Errores" class="botoIconos" (click)="activarGestionErrores()"></button>
-        <button id="botoGestion" title="Gestión" class="botoIconos" (click)="activarGestion()"></button>
+        <button id="botoErrores" title="Gestión Errores" class="botoIconos" (click)="activarGestionErrores()"></button>
+        <button id="botoGestion" title="Gestión Reservas" class="botoIconos" (click)="activarGestion()"></button>
     </div>
 
 </div>
@@ -112,7 +112,7 @@
 
     <mat-form-field appearance="standard">
       <mat-label>Filtrar por ISBN</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 9788408061052" #input>
+      <input matInput type="number" (keyup)="applyFilter($event)" placeholder="Ex. 9788408061052" #input>
     </mat-form-field>
     <table mat-table id="mat-table" [dataSource]="libros" class="mat-elevation-z8">
 
@@ -194,10 +194,28 @@
     <p>BORRAR EVENTO</p>
 </div>
 
-<!-- ------ GESTION ------ -->
+<!-- ------ GESTION RESERVAS------ -->
 <div *ngIf="gestionActivado" id="gestion">
     <button (click)="atrasDesdeGestion()">Atrás</button>
-    <p>GESTION</p>
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre del usuario</mat-label>
+      <input matInput id="inputNombreUser">
+    </mat-form-field>
+
+    <!-- TABLA AQUI -->
+
+    <!-- SUBIR RESERVA -->
+    <p>NUEVA RESERVA</p>
+
+    <div id="inputNewReserva">
+      <mat-form-field appearance="fill">
+        <mat-label>ISBN del libro</mat-label>
+        <input matInput type="nunmber" id="inputISBNReserva">
+      </mat-form-field>
+      <button>Buscar</button>
+    </div>
+
 </div>
 
 <!-- ------ GESTION ERRORES ------ -->

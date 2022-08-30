@@ -10,6 +10,7 @@ export interface Reserva {
         - pedido(enTransporte) -> se ha pedido el libro, estaba en otra biblioteca, está viniendo a la presente
         - pedido(listoParaRecoger) -> se ha pedido el libro, está en la biblioteca, listo para recoger
     */
+   
     estado:string;
     localizacion:string;
 

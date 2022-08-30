@@ -37,6 +37,7 @@ import { MisReservasComponent } from './mis-reservas/mis-reservas.component';
 import { HeaderComponent } from './header/header.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatListModule} from '@angular/material/list';
 
 
 
@@ -69,7 +70,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     NgxFileDropModule,
     MatCardModule,
     MatDialogModule,
-    MatTableModule, MatProgressSpinnerModule
+    MatTableModule, MatProgressSpinnerModule, MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

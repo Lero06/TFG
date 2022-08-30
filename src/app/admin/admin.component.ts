@@ -5,8 +5,9 @@ import { getDownloadURL, getStorage, ref, uploadBytes, uploadString } from "fire
 import { NgxFileDropEntry } from 'ngx-file-drop';
 import { Evento } from '../object/Evento';
 import { EventosService } from '../services/eventos.service';
-import { filter, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { _isNumberValue } from '@angular/cdk/coercion';
+import { Reserva } from '../object/Reserva';
 
 @Component({
   selector: 'app-admin',
@@ -19,13 +20,10 @@ export class AdminComponent implements OnInit {
   // General
   subirLibroActivado:boolean;
   borrarLibroActivado:boolean;
-
   subirEventoActivado:boolean;
   borrarEventoActivado:boolean;
-
   gestionActivado:boolean;
   erroresActivado:boolean;
-
 
   // Subir Libro
   categoriaSeleccionada:any;
@@ -39,6 +37,9 @@ export class AdminComponent implements OnInit {
   displayedColumns: string[] = ['título', 'autor', 'isbn', 'editorial'];
   cargado:boolean;
 
+  // Gestión de Reservas
+  subirReservaActivo:boolean;
+  reservas:Observable<Reserva[]>;
 
   public files: NgxFileDropEntry[] = [];
 
@@ -85,12 +86,11 @@ export class AdminComponent implements OnInit {
   constructor(private libroService: LibrosService, private eventoServicio: EventosService) { 
     this.subirLibroActivado = false;
     this.borrarLibroActivado = false;
-
     this.subirEventoActivado = false;
     this.borrarEventoActivado = false;
-
     this.gestionActivado = false;
     this.erroresActivado = false;
+
   }
 
   ngOnInit(): void {
@@ -101,6 +101,8 @@ export class AdminComponent implements OnInit {
     }
     // Guardamos la lista en AUX
     this.librosAUX = this.libros;
+
+
   }
 
   /* --------------- GENERAL ---------------*/
@@ -341,10 +343,11 @@ export class AdminComponent implements OnInit {
   }
 
 
-  /* --------------- GESTION ---------------*/
-
+  /* --------------- GESTION DE RESERVAS---------------*/
   atrasDesdeGestion(){
     this.gestionActivado = false;
   }
+
+
 
 }
