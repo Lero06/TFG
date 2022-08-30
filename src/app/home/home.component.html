@@ -59,7 +59,7 @@
       <!----------------------------------------------------------------------------------------------------------------->
             <!-- Si el orden es A-Z hay que hacer reverse() a la lista, por tanto se debe duplicar-->
       <div *ngIf="esOrdenZA" class="tabla">
-        <div *ngFor="let libro of lista | async reverse" class="card" (click)="libroClick(libro)">
+        <div *ngFor="let libro of lista | async" class="card" (click)="libroClick(libro)">
 
           <div class="divImgLibro">
             <!-- Tiene o no imagen de portada? -->
@@ -101,7 +101,7 @@
       <h2>Eventos</h2>
 
       <div id="tablaEventos">
-        <div *ngFor="let evento of listaEventos | async" class="evento">
+        <div *ngFor="let evento of (listaEventos | async)?.reverse()" class="evento">
 
           <img *ngIf="!evento.portadaImgPath" class="imgEvento" alt={{evento.nombre}} src="../assets/images/principales/newevent.png" height="250px" width="180px">
           <img *ngIf="evento.portadaImgPath" class="imgEvento" alt={{evento.nombre}} src="{{evento.portadaImgPath}}" height="250px" width="180px">

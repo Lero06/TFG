@@ -5,6 +5,8 @@ import { getDownloadURL, getStorage, ref, uploadBytes, uploadString } from "fire
 import { NgxFileDropEntry } from 'ngx-file-drop';
 import { Evento } from '../object/Evento';
 import { EventosService } from '../services/eventos.service';
+import { filter, map, Observable } from 'rxjs';
+import { _isNumberValue } from '@angular/cdk/coercion';
 
 @Component({
   selector: 'app-admin',
@@ -13,6 +15,7 @@ import { EventosService } from '../services/eventos.service';
 })
 
 export class AdminComponent implements OnInit {
+
   // General
   subirLibroActivado:boolean;
   borrarLibroActivado:boolean;
@@ -29,6 +32,13 @@ export class AdminComponent implements OnInit {
   tipoSeleccionado:any;
   idiomaSeleccionado:any;
   fileSeleccionado:any;
+
+  // Borrar Libro
+  libros:Observable<Libro[]>;
+  librosAUX:Observable<Libro[]>;
+  displayedColumns: string[] = ['título', 'autor', 'isbn', 'editorial'];
+  cargado:boolean;
+
 
   public files: NgxFileDropEntry[] = [];
 
@@ -83,7 +93,15 @@ export class AdminComponent implements OnInit {
     this.erroresActivado = false;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Instanciar tabla libros
+    this.libros = this.libroService.getLibros();
+    if(this.libros){
+      this.cargado = true;
+    }
+    // Guardamos la lista en AUX
+    this.librosAUX = this.libros;
+  }
 
   /* --------------- GENERAL ---------------*/
   activarSubirLibro(){
@@ -236,6 +254,18 @@ export class AdminComponent implements OnInit {
     this.borrarLibroActivado = false;
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    if(filterValue == ''){
+      this.libros = this.librosAUX;
+    }else{
+    this.libros = this.libros.pipe(map(
+      libros => libros.filter(libro => libro.isbn.includes(filterValue)
+    ))); //= filterValue.trim().toLowerCase();
+    }
+  }
+
+
   /* --------------- SUBIR EVENTO ---------------*/
   async clickSubirEvento(){
 
@@ -283,6 +313,19 @@ export class AdminComponent implements OnInit {
   }
 
   /* --------------- BORRAR EVENTO ---------------*/
+  // la casa de maria -> La Casa De Maria
+  nombreAMayus(s:string){
+    // Hacer las primeras letras MAYUS
+    var splitStr = s.toLowerCase().split(' ');
+    for (var i = 0; i < splitStr.length; i++) {
+        // You do not need to check if i is larger than splitStr length, as your for does that for you
+        // Assign it back to the array
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+    }
+    // Directly return the joined string
+    return splitStr.join(' '); 
+  }
+
   async clickBorrarEvento(){
 
   }

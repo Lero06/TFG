@@ -40,10 +40,24 @@ button:enabled:hover {
 }
 
 #main{
+    background-color: #0d89ec;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+#divButtons{
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+}
+
+#main > p{
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
 }
 
 /* Botones */
@@ -56,22 +70,36 @@ button:enabled:hover {
     border: 1px black solid;
 }
 
+.botoIconos:hover{
+    width: 190px;
+    height: 190px;
+    padding: 10px;
+}
+
+#botoSubirLibro:hover, #botoBajarLibro:hover, #botoSubirEvento:hover,
+#botoBajarEvento:hover, #botoGestion:hover, #botoErrores:hover{
+    background-color: #fbff12;
+}
+
 #botoSubirLibro{
     background: url('src\assets\images\button\subirLibro.png');
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: white;
 }
 
 #botoBajarLibro{
     background: url('src\assets\images\button\bajarLibro.png');
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: white;
 }
 
 #botoSubirEvento{
     background: url('src\assets\images\button\subirEv.png');
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: white;
 }
 
 
@@ -79,16 +107,23 @@ button:enabled:hover {
     background: url('src\assets\images\button\bajarEv.png');
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: white;
 }
 
 #botoGestion{
     background: url('src\assets\images\button\gestion.png');
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: white;
 }
 
 #botoErrores{
     background: url('src\assets\images\button\ojo.png');
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: white;
+}
+
+#mat-table{
+    width: 100%;
 }

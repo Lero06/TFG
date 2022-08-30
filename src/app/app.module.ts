@@ -35,6 +35,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MisReservasComponent } from './mis-reservas/mis-reservas.component';
 import { HeaderComponent } from './header/header.component';
+import { MatTableModule } from '@angular/material/table';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 
 
@@ -65,7 +68,8 @@ import { HeaderComponent } from './header/header.component';
     ButtonModule, RippleModule,
     NgxFileDropModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule, MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
