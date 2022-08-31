@@ -8,6 +8,7 @@ import { EventosService } from '../services/eventos.service';
 import { map, Observable } from 'rxjs';
 import { _isNumberValue } from '@angular/cdk/coercion';
 import { Reserva } from '../object/Reserva';
+import { ReservasService } from '../services/reservas.service';
 
 @Component({
   selector: 'app-admin',
@@ -40,6 +41,13 @@ export class AdminComponent implements OnInit {
   // Gestión de Reservas
   subirReservaActivo:boolean;
   reservas:Observable<Reserva[]>;
+  valorInputGR:string;
+  valorInputUser:string;
+  libroDisponible:boolean;
+  resDisponibilidad:any;
+
+  // Botones gestion reservas
+  sePuedePedir:boolean;
 
   public files: NgxFileDropEntry[] = [];
 
@@ -83,14 +91,13 @@ export class AdminComponent implements OnInit {
   ];
   
 
-  constructor(private libroService: LibrosService, private eventoServicio: EventosService) { 
+  constructor(private libroService: LibrosService, private eventoServicio: EventosService, private reservasService:ReservasService) { 
     this.subirLibroActivado = false;
     this.borrarLibroActivado = false;
     this.subirEventoActivado = false;
     this.borrarEventoActivado = false;
     this.gestionActivado = false;
     this.erroresActivado = false;
-
   }
 
   ngOnInit(): void {
@@ -348,6 +355,37 @@ export class AdminComponent implements OnInit {
     this.gestionActivado = false;
   }
 
+  async buscarUsuario(){
+    // Checkear Inputs
+    console.log(this.valorInputUser);
+    const user = await this.reservasService.buscarUsuariosPorID(this.valorInputUser);
+    user.subscribe((r) => {
+      console.log(r);
+    });
+  }
 
+  async buscarDisponibilidadLibro(){
+    //  isbn = this.valorInputGR;
+    // Controlar errores
+
+    const disponibilidad = await this.reservasService.buscarDisponibilidad(this.valorInputGR);
+    disponibilidad.subscribe((r) => {
+      console.log(r);
+      if(r == null){
+        this.libroDisponible = false;
+      }else{
+        this.libroDisponible = true;
+        this.resDisponibilidad = r;
+      }
+
+      if(r.estado.toLowerCase() == 'disponible'){
+        if(r.localizacion.toLowerCase() == 'en biblioteca'){
+          this.sePuedePedir = true;
+          // TODO avisar de 3 dias para recogerlo
+        }
+      }
+    });
+
+  } 
 
 }

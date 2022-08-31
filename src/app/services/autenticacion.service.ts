@@ -7,7 +7,6 @@ import { environment } from 'src/environments/environment';
 import { FacebookAuthProvider } from "firebase/auth";
 import { HttpClient } from '@angular/common/http';
 import { Admin } from '../object/Admin';
-import { Observable } from 'rxjs';
 
 
 @Injectable({

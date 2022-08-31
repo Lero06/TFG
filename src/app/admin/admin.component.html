@@ -21,8 +21,10 @@
 
 <!-- ------ SUBIR LIBRO ------ -->
 <div *ngIf="subirLibroActivado" id="subirLibro">
-    <button (click)="atrasDesdeSubir()">Atrás</button>
-    <p>Subir Libro</p>
+
+    <div id="imgSubirLibro">
+      <button (click)="atrasDesdeSubir()">Atrás</button>
+    </div>
 
     <mat-form-field appearance="fill">
         <mat-label>Título del libro</mat-label>
@@ -106,7 +108,9 @@
 
 <!-- ------ BORRAR LIBRO ------ -->
 <div *ngIf="borrarLibroActivado" id="borrarLibro">
-    <button (click)="atrasDesdeBorrar()">Atrás</button>
+    <div id="imgBajarLibro">
+      <button (click)="atrasDesdeBorrar()">Atrás</button>
+    </div>
 
     <mat-spinner *ngIf="!cargado"></mat-spinner>
 
@@ -153,8 +157,10 @@
 
 <!-- ------ SUBIR EVENTO ------ -->
 <div *ngIf="subirEventoActivado" id="subirEvento">
-    <button (click)="atrasDesdeSubirEv()">Atrás</button>
-    <p>Subir Evento</p>
+
+  <div id="imgSubirEv">
+      <button (click)="atrasDesdeSubirEv()">Atrás</button>
+  </div>
 
     <mat-form-field appearance="fill">
         <mat-label>Título del evento</mat-label>
@@ -190,20 +196,29 @@
 
 <!-- ------ BORRAR EVENTO ------ -->
 <div *ngIf="borrarEventoActivado" id="borrarEvento">
-    <button (click)="atrasDesdeBorrarEv()">Atrás</button>
-    <p>BORRAR EVENTO</p>
+
+    <div id="imgBajarEv">
+      <button (click)="atrasDesdeBorrarEv()">Atrás</button>
+    </div>
+    
 </div>
 
 <!-- ------ GESTION RESERVAS------ -->
 <div *ngIf="gestionActivado" id="gestion">
-    <button (click)="atrasDesdeGestion()">Atrás</button>
-    
-    <mat-form-field appearance="fill">
-      <mat-label>Nombre del usuario</mat-label>
-      <input matInput id="inputNombreUser">
-    </mat-form-field>
 
-    <!-- TABLA AQUI -->
+    <div id="imgGestionRes">
+      <button (click)="atrasDesdeGestion()">Atrás</button>
+    </div>
+    
+    <div id="inputNewUser">
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre del usuario</mat-label>
+        <input matInput [(ngModel)]="valorInputUser" id="inputNombreUser">
+      </mat-form-field>
+      <button ngDefaultControl  (click)="buscarUsuario()">Buscar</button>
+    </div>
+
+    <!-- No se ha encontrado? -->
 
     <!-- SUBIR RESERVA -->
     <p>NUEVA RESERVA</p>
@@ -211,9 +226,18 @@
     <div id="inputNewReserva">
       <mat-form-field appearance="fill">
         <mat-label>ISBN del libro</mat-label>
-        <input matInput type="nunmber" id="inputISBNReserva">
+        <input matInput type="nunmber" [(ngModel)]="valorInputGR" id="inputISBNReserva">
       </mat-form-field>
-      <button>Buscar</button>
+      <button (click)="buscarDisponibilidadLibro()">Buscar</button>
+    </div>
+
+    <div *ngIf="libroDisponible == false">
+      <p>No está disponible</p>
+    </div>
+
+    <div *ngIf="libroDisponible == true">
+      <p>{{resDisponibilidad.estado}}</p>
+      <p>{{resDisponibilidad.localizacion}}</p>
     </div>
 
 </div>
