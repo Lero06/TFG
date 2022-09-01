@@ -9,6 +9,7 @@ import { map, Observable } from 'rxjs';
 import { _isNumberValue } from '@angular/cdk/coercion';
 import { Reserva } from '../object/Reserva';
 import { ReservasService } from '../services/reservas.service';
+import { AutenticacionService } from '../services/autenticacion.service';
 
 @Component({
   selector: 'app-admin',
@@ -45,9 +46,8 @@ export class AdminComponent implements OnInit {
   valorInputUser:string;
   libroDisponible:boolean;
   resDisponibilidad:any;
-
-  // Botones gestion reservas
-  sePuedePedir:boolean;
+  usuarioEncontrado:boolean;
+  resUsuario:any;
 
   public files: NgxFileDropEntry[] = [];
 
@@ -91,7 +91,8 @@ export class AdminComponent implements OnInit {
   ];
   
 
-  constructor(private libroService: LibrosService, private eventoServicio: EventosService, private reservasService:ReservasService) { 
+  constructor(private libroService: LibrosService, private eventoServicio: EventosService,
+     private reservasService:ReservasService, private autenticacionService:AutenticacionService) { 
     this.subirLibroActivado = false;
     this.borrarLibroActivado = false;
     this.subirEventoActivado = false;
@@ -357,10 +358,15 @@ export class AdminComponent implements OnInit {
 
   async buscarUsuario(){
     // Checkear Inputs
-    console.log(this.valorInputUser);
-    const user = await this.reservasService.buscarUsuariosPorID(this.valorInputUser);
+    const user = await this.autenticacionService.buscarUsuariosPorID(this.valorInputUser);
     user.subscribe((r) => {
       console.log(r);
+      if(r == null){
+        this.usuarioEncontrado = false;
+      }else{
+        this.usuarioEncontrado = true;
+        this.resUsuario = r;
+      }
     });
   }
 
@@ -377,15 +383,11 @@ export class AdminComponent implements OnInit {
         this.libroDisponible = true;
         this.resDisponibilidad = r;
       }
-
-      if(r.estado.toLowerCase() == 'disponible'){
-        if(r.localizacion.toLowerCase() == 'en biblioteca'){
-          this.sePuedePedir = true;
-          // TODO avisar de 3 dias para recogerlo
-        }
-      }
     });
-
   } 
+
+  pedirLibro(isbnAPedir:string){
+    this.reservasService.cambiarEstadoaND(isbnAPedir, this.valorInputUser);
+  }
 
 }

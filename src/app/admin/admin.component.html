@@ -209,19 +209,19 @@
     <div id="imgGestionRes">
       <button (click)="atrasDesdeGestion()">Atrás</button>
     </div>
-    
+
     <div id="inputNewUser">
       <mat-form-field appearance="fill">
-        <mat-label>Nombre del usuario</mat-label>
+        <mat-label>ID del usuario</mat-label>
         <input matInput [(ngModel)]="valorInputUser" id="inputNombreUser">
       </mat-form-field>
       <button ngDefaultControl  (click)="buscarUsuario()">Buscar</button>
     </div>
 
-    <!-- No se ha encontrado? -->
+    <p *ngIf="usuarioEncontrado == false">Usuario no encontrado</p>
+    <p *ngIf="usuarioEncontrado == true" >Usuario encontrado ({{resUsuario.email}}) </p>
 
-    <!-- SUBIR RESERVA -->
-    <p>NUEVA RESERVA</p>
+    <p>Consultar Disponibilidad:</p>
 
     <div id="inputNewReserva">
       <mat-form-field appearance="fill">
@@ -239,6 +239,14 @@
       <p>{{resDisponibilidad.estado}}</p>
       <p>{{resDisponibilidad.localizacion}}</p>
     </div>
+
+    <div id="hayResDisponibilidad" *ngIf="resDisponibilidad"> 
+      <!-- Disponibilidad -->
+      <button *ngIf="resDisponibilidad.estado == 'Disponible' && resDisponibilidad.localizacion == 'En Biblioteca' "
+              (click)="pedirLibro(valorInputGR)">
+        Pedir
+      </button>
+    <div>
 
 </div>
 

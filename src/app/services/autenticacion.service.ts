@@ -118,4 +118,8 @@ export class AutenticacionService {
     return this.httpClient.get<Admin>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/admins/'+uid+'.json');
   }
 
+  buscarUsuariosPorID(id:string){
+    return this.httpClient.get<any>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/users/'+id+'.json');
+  }
+
 }
