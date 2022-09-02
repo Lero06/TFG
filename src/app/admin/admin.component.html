@@ -242,10 +242,16 @@
 
     <div id="hayResDisponibilidad" *ngIf="resDisponibilidad"> 
       <!-- Disponibilidad -->
+      <!-- PEDIR LIBRO -->
       <button *ngIf="resDisponibilidad.estado == 'Disponible' && resDisponibilidad.localizacion == 'En Biblioteca' "
               (click)="pedirLibro(valorInputGR)">
         Pedir
       </button>
+
+      <!-- RESERVAR LIBRO -->
+
+      <!-- PEDIR TRANSPORTE LIBRO -->
+
     <div>
 
 </div>

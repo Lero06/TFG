@@ -4,7 +4,7 @@ import { Libro } from '../object/Libro';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { Database, push, ref } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class LibrosService {
 
   private libroSeleccionado:Libro;
 
-  constructor(private db: AngularFireDatabase,private dbFire: Database) {
+  constructor(private db: AngularFireDatabase,private dbFire: Database, private httpClient:HttpClient) {
 
     this.librosDB = this.db.list('/libros', (ref) =>
       ref.orderByChild('id'));
@@ -28,6 +28,15 @@ export class LibrosService {
   addLibro(libro: Libro){
     const doc = ref(this.dbFire, 'libros'); // Doc = referencia a la BD + test = path
     push(doc,libro).then( (r) => console.log('libro posteado'));
+  }
+
+  addLibroHTTP(libro:Libro){
+    // Hacemos un post y un put para eliminar la key por defecto
+    this.httpClient.post('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/libros/'+libro.isbn+'.json', libro)
+      .subscribe(() => {
+        this.httpClient.put('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/libros/'+libro.isbn+'.json', libro)
+        .subscribe((r) => console.log(r));
+      });
   }
 
 

@@ -188,7 +188,7 @@ export class AdminComponent implements OnInit {
       portadaImgPath:portadaImgPath
     }
 
-    this.libroService.addLibro(libro);
+    this.libroService.addLibroHTTP(libro);
 
     // Libro Subido
     alert('Se ha subido el libro con éxito');
