@@ -125,7 +125,7 @@ button:enabled:hover {
     background-color: white;
 }
 
-#mat-table{
+#mat-table, #mat-table2{
     width: 100%;
 }
 
@@ -229,3 +229,7 @@ button:enabled:hover {
     margin-top: 10px;
 }
 
+.filaSeleccionada, .filaEvSeleccionada{
+    background-color: red;
+    color: white;
+}

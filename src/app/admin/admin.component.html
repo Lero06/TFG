@@ -118,6 +118,9 @@
       <mat-label>Filtrar por ISBN</mat-label>
       <input matInput type="number" (keyup)="applyFilter($event)" placeholder="Ex. 9788408061052" #input>
     </mat-form-field>
+
+    <button (click)="clickBorrarLibro()">Borrar {{aplicarNombreEstetico(filaABorrar?.titulo)}}</button>
+
     <table mat-table id="mat-table" [dataSource]="libros" class="mat-elevation-z8">
 
         <!--- Note that these columns can be defined in any order.
@@ -148,10 +151,8 @@
         </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row (click)="filaClick(row)" [ngClass]="{'filaSeleccionada': filaABorrar == row}" *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      
-      
 </div>
 
 
@@ -200,6 +201,29 @@
     <div id="imgBajarEv">
       <button (click)="atrasDesdeBorrarEv()">Atrás</button>
     </div>
+
+    <button (click)="clickBorrarEvento()">Borrar {{aplicarNombreEstetico(idABorrar)}}</button>
+
+    <table mat-table id="mat-table2" [dataSource]="eventos" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{nombreAMayus(element.nombre)}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+          <td mat-cell *matCellDef="let element"> {{nombreAMayus(element.descripcion)}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsEv"></tr>
+        <tr mat-row (click)="filaEvClick(row)" [ngClass]="{'filaEvSeleccionada': filaEvABorrar == row}" *matRowDef="let row; columns: displayedColumnsEv;"></tr>
+      </table>
     
 </div>
 
@@ -231,11 +255,11 @@
       <button (click)="buscarDisponibilidadLibro()">Buscar</button>
     </div>
 
-    <div *ngIf="libroDisponible == false">
+    <div *ngIf="existeLibro == false">
       <p>No está disponible</p>
     </div>
 
-    <div *ngIf="libroDisponible == true">
+    <div *ngIf="existeLibro == true">
       <p>{{resDisponibilidad.estado}}</p>
       <p>{{resDisponibilidad.localizacion}}</p>
     </div>
@@ -248,10 +272,14 @@
         Pedir
       </button>
 
+      <button *ngIf="resDisponibilidad.estado == 'No Disponible' && resDisponibilidad.localizacion == 'En Biblioteca' "
+              (click)="seHaDevuelto(valorInputGR)">
+        Se ha Devuelto
+      </button>
+
       <!-- RESERVAR LIBRO -->
 
       <!-- PEDIR TRANSPORTE LIBRO -->
-
     <div>
 
 </div>

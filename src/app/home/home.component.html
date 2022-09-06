@@ -30,7 +30,7 @@
           </div>
         </div>
 
-      <div *ngIf="!esOrdenZA" class="tabla">
+      <div *ngIf="!esOrdenAZ" class="tabla">
         <div *ngFor="let libro of (lista | async)?.reverse()" class="card" (click)="libroClick(libro)">
 
           <div class="divImgLibro">
@@ -58,7 +58,7 @@
 
       <!----------------------------------------------------------------------------------------------------------------->
             <!-- Si el orden es A-Z hay que hacer reverse() a la lista, por tanto se debe duplicar-->
-      <div *ngIf="esOrdenZA" class="tabla">
+      <div *ngIf="esOrdenAZ" class="tabla">
         <div *ngFor="let libro of lista | async" class="card" (click)="libroClick(libro)">
 
           <div class="divImgLibro">

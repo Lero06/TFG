@@ -55,6 +55,14 @@ export class LibrosService {
     };
   }
 
+  borrarLibro(isbn:string){
+    this.httpClient.delete('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/libros/'+isbn+'.json')
+      .subscribe((r) => {console.log(r)});
+    // Borrar tmb disponibilidad del mismo
+    this.httpClient.delete('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/disponibilidad/'+isbn+'.json')
+      .subscribe((r) => {console.log(r)});
+  }
+
   // -------------------------------------------------------------------------------------------
 
   getLibrosOrdenadosAZ(){

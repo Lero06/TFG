@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Libro } from '../object/Libro';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,6 @@ export class ReservasService {
 
   buscarDisponibilidad(id:string){
     return this.httpClient.get<any>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/disponibilidad/'+id+'.json');
-  }
-
-  buscarLibroPorISBN(id:string){
-    return this.httpClient.get<any>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/reservas/'+id+'.json');
   }
 
   /* CAMBIO DE ESTADO */
@@ -38,7 +35,35 @@ export class ReservasService {
     };
 
     this.httpClient.put<any>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/disponibilidad/'+isbnAPedir+'.json',objeto).subscribe((r) => console.log(r));
+    // Cambiar estado en el atributo 'disponible' a 'no disponible' de libro
+    this.httpClient.put<any>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/libros/'+isbnAPedir+'/disponible.json',false).subscribe((r)=>console.log(r));
     console.log('cambiado');
   }
 
+  cambiarEstadoaD(isbnAPedir:string){
+    // Construir objeto JSON a actualizar
+      const objeto = {
+        estado: 'Disponible',
+        isbn: isbnAPedir,
+        localizacion:'En Biblioteca'
+    };
+
+    this.httpClient.put<any>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/disponibilidad/'+isbnAPedir+'.json',objeto).subscribe((r) => console.log(r));
+    console.log('cambiado');
+  }
+
+  addNuevaDisponibilidad(libro: Libro){
+  const objeto = {
+    estado: 'Disponible',
+    isbn: libro.isbn,
+    localizacion:'En Biblioteca'
+  };
+
+  this.httpClient.post<any>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/disponibilidad/'+libro.isbn+'.json',objeto)
+  .subscribe(() => {
+    this.httpClient.put('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/disponibilidad/'+libro.isbn+'.json',objeto)
+    .subscribe((r) => console.log(r));
+  });
+
+  }
 }

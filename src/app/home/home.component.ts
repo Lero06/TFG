@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
   uid?:string;
 
   // Orden
-  esOrdenZA:boolean;
+  esOrdenAZ:boolean;
 
   // Libro info
   libroSeleccionado:Libro;
@@ -62,8 +62,6 @@ export class HomeComponent implements OnInit {
     // HTML
     this.contadorLibros = 0;
     this.totalLibros = 60;
-    this.esOrdenZA = false;
-
   }
 
   ngOnInit(): void { 
@@ -146,10 +144,11 @@ export class HomeComponent implements OnInit {
 
       if(orden.includes('0')){
         this.lista = this.libroService.getLibrosOrdenadosAZ();
+        this.esOrdenAZ = true;
       }else if(orden.includes('1')){
         // Solo cambia el boolean y por tanto el HTML asociado
         this.lista = this.libroService.getLibrosOrdenadosAZ();
-        this.esOrdenZA = false;
+        this.esOrdenAZ = false;
       }else if(orden.includes('2')){
         this.lista = this.libroService.getLibrosNuevos();
       }

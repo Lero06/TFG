@@ -38,13 +38,22 @@ export class AdminComponent implements OnInit {
   librosAUX:Observable<Libro[]>;
   displayedColumns: string[] = ['título', 'autor', 'isbn', 'editorial'];
   cargado:boolean;
+  filaABorrar:any;
+  isbnABorrar:any;
+
+  // Borrar Evento
+  eventos:Observable<Evento[]>;
+  displayedColumnsEv: string[] = ['nombre', 'descripcion'];
+  filaEvABorrar:any;
+  idABorrar:string;
+
 
   // Gestión de Reservas
   subirReservaActivo:boolean;
   reservas:Observable<Reserva[]>;
   valorInputGR:string;
   valorInputUser:string;
-  libroDisponible:boolean;
+  existeLibro:boolean;
   resDisponibilidad:any;
   usuarioEncontrado:boolean;
   resUsuario:any;
@@ -110,7 +119,8 @@ export class AdminComponent implements OnInit {
     // Guardamos la lista en AUX
     this.librosAUX = this.libros;
 
-
+     // Instanciar tabla eventos
+     this.eventos = this.eventoServicio.getEventos();
   }
 
   /* --------------- GENERAL ---------------*/
@@ -190,6 +200,9 @@ export class AdminComponent implements OnInit {
 
     this.libroService.addLibroHTTP(libro);
 
+    // Cambiar añadir estado de libro nuevo a disponibilidad
+    this.reservasService.addNuevaDisponibilidad(libro);
+
     // Libro Subido
     alert('Se ha subido el libro con éxito');
 
@@ -257,7 +270,16 @@ export class AdminComponent implements OnInit {
 
   /* --------------- BORRAR LIBRO ---------------*/
   async clickBorrarLibro(){
+    // TODO BORRARLO DE LA BD
+    this.libros = this.libros.pipe(map(
+      libros => libros.filter(libro => libro.isbn != (this.isbnABorrar)
+    )));
+    this.libroService.borrarLibro(this.isbnABorrar);
 
+    alert('Se ha borrado el libro con éxito');
+
+    // Borrar Valor Boton
+    this.filaABorrar = '';
   }
 
   atrasDesdeBorrar(){
@@ -273,6 +295,15 @@ export class AdminComponent implements OnInit {
       libros => libros.filter(libro => libro.isbn.includes(filterValue)
     ))); //= filterValue.trim().toLowerCase();
     }
+  }
+
+  filaClick(row:any){
+    console.log(row.isbn);
+    this.filaABorrar = row;
+    this.isbnABorrar = row.isbn;
+    //this.libros = this.libros.pipe(map(
+      //libros => libros.filter(libro => libro.isbn.includes(filterValue)
+    //)));
   }
 
 
@@ -323,25 +354,24 @@ export class AdminComponent implements OnInit {
   }
 
   /* --------------- BORRAR EVENTO ---------------*/
-  // la casa de maria -> La Casa De Maria
-  nombreAMayus(s:string){
-    // Hacer las primeras letras MAYUS
-    var splitStr = s.toLowerCase().split(' ');
-    for (var i = 0; i < splitStr.length; i++) {
-        // You do not need to check if i is larger than splitStr length, as your for does that for you
-        // Assign it back to the array
-        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
-    }
-    // Directly return the joined string
-    return splitStr.join(' '); 
-  }
+
 
   async clickBorrarEvento(){
+    this.eventoServicio.borrarEvento(this.idABorrar);
 
+    alert('Se ha borrado el evento con éxito');
+
+    // Borrar Valor Boton
+    this.filaEvABorrar = '';
   }
 
   atrasDesdeBorrarEv(){
     this.borrarEventoActivado = false;
+  }
+
+  filaEvClick(row:any){
+    this.filaEvABorrar = row;
+    this.idABorrar = row.nombre;
   }
 
    /* --------------- GESTION ERRORES ---------------*/
@@ -378,9 +408,9 @@ export class AdminComponent implements OnInit {
     disponibilidad.subscribe((r) => {
       console.log(r);
       if(r == null){
-        this.libroDisponible = false;
+        this.existeLibro = false;
       }else{
-        this.libroDisponible = true;
+        this.existeLibro = true;
         this.resDisponibilidad = r;
       }
     });
@@ -388,6 +418,45 @@ export class AdminComponent implements OnInit {
 
   pedirLibro(isbnAPedir:string){
     this.reservasService.cambiarEstadoaND(isbnAPedir, this.valorInputUser);
+    this.resDisponibilidad.estado = 'No Disponible';
   }
 
+  seHaDevuelto(isbnADevolver:string){
+    this.reservasService.cambiarEstadoaD(isbnADevolver);
+    this.resDisponibilidad.estado = 'Disponible';
+  }
+
+  /* OTROS */
+    // la casa de maria -> La Casa De Maria
+    nombreAMayus(s:string){
+      // Hacer las primeras letras MAYUS
+      var splitStr = s.toLowerCase().split(' ');
+      for (var i = 0; i < splitStr.length; i++) {
+          // You do not need to check if i is larger than splitStr length, as your for does that for you
+          // Assign it back to the array
+          splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+      }
+      // Directly return the joined string
+      return splitStr.join(' '); 
+    }
+  
+    aplicarNombreEstetico(s:string){
+      if(!s){return '';}
+      let res:string;
+      res = s;
+      // Poner ... si el nombre es muy largo
+      if(s.length > 23){
+        res = s.slice(0,23).concat('...');
+      }
+  
+      // Hacer las primeras letras MAYUS
+      var splitStr = res.toLowerCase().split(' ');
+      for (var i = 0; i < splitStr.length; i++) {
+          // You do not need to check if i is larger than splitStr length, as your for does that for you
+          // Assign it back to the array
+          splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+      }
+      // Directly return the joined string
+      return splitStr.join(' '); 
+    }
 }
