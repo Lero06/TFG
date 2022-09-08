@@ -1,5 +1,4 @@
 export interface Reserva {
-    id:string,
     isbn:string;
 
     /* Los estados pueden ser: 
@@ -11,12 +10,11 @@ export interface Reserva {
         - pedido(listoParaRecoger) -> se ha pedido el libro, está en la biblioteca, listo para recoger
     */
    
-    estado:string;
-    localizacion:string;
-
-    fechaIni?:Date;
-    fechaFin?:Date;
-    vecesRenovado?:number;
-    lector?:string;
+    //estado:string;
+    //localizacion:string; // Estan en disponibilidad
+ 
+    fechaIni:string;
+    fechaFin:string;
+    lector:string;
 
 }

@@ -10,6 +10,7 @@ import { DialogoComponent } from '../dialogo/dialogo.component';
 import { AutenticacionService } from '../services/autenticacion.service';
 import { User } from 'firebase/auth';
 import { Admin } from '../object/Admin';
+import { ReservasService } from '../services/reservas.service';
 
 @Component({
   selector: 'app-home',
@@ -51,7 +52,7 @@ export class HomeComponent implements OnInit {
   libroSeleccionado:Libro;
 
   constructor(private libroService: LibrosService, private eventoService:EventosService, private router: Router, private zone: NgZone,
-     public dialog: MatDialog, private autorizacionService:AutenticacionService) { 
+     public dialog: MatDialog, private autorizacionService:AutenticacionService, private reservasService:ReservasService) { 
 
     this.lista = this.libroService.getLibros();
     this.listaEventos = this.eventoService.getEventos();
@@ -157,14 +158,33 @@ export class HomeComponent implements OnInit {
 
   buscar(){} 
 
-  pedirClick(){}
-  reservarClick(){}
+  pedirClick(libro:Libro){
+    console.log('Pedir click');
+    let lector;
+    let localUID = localStorage.getItem('userUID');
+    if(this.currentUser){
+      lector = this.currentUser.uid;
+    }else if(localUID){
+      lector = localUID;
+    }
+
+    if(lector){
+      this.reservasService.addNuevaReserva(libro.isbn, lector);
+      this.reservasService.cambiarEstadoaND(libro.isbn, lector);
+    }else{
+      alert('No se ha podido completar la operación, no se detecta el usuario');
+    }
+  }
+
+  reservarClick(){
+
+  }
 
   libroClick(libro:any){
     this.libroSeleccionado = libro;
     this.libroService.setLibroSeleccionado(libro);
     this.zone.run(() => {
-      this.router.navigate(['/infoLibro']);
+      this.router.navigate(['/detalles-libro']);
     });
   }
 

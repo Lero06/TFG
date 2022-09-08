@@ -9,7 +9,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'perfil', component:PerfilComponent},
-  { path: 'infoLibro', component:InfoLibroComponent},
+  { path: 'detalles-libro', component:InfoLibroComponent},
   { path: 'admin', component:AdminComponent},
   { path: 'mis-reservas', component:MisReservasComponent}
 ];

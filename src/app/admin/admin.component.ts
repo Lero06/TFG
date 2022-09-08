@@ -203,6 +203,7 @@ export class AdminComponent implements OnInit {
     // Cambiar añadir estado de libro nuevo a disponibilidad
     this.reservasService.addNuevaDisponibilidad(libro);
 
+
     // Libro Subido
     alert('Se ha subido el libro con éxito');
 
@@ -419,6 +420,7 @@ export class AdminComponent implements OnInit {
   pedirLibro(isbnAPedir:string){
     this.reservasService.cambiarEstadoaND(isbnAPedir, this.valorInputUser);
     this.resDisponibilidad.estado = 'No Disponible';
+    this.reservasService.addNuevaReserva(isbnAPedir, this.valorInputUser);
   }
 
   seHaDevuelto(isbnADevolver:string){

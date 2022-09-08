@@ -31,26 +31,26 @@
         </div>
 
       <div *ngIf="!esOrdenAZ" class="tabla">
-        <div *ngFor="let libro of (lista | async)?.reverse()" class="card" (click)="libroClick(libro)">
+        <div *ngFor="let libro of (lista | async)?.reverse()" class="card">
 
-          <div class="divImgLibro">
+          <div class="divImgLibro" (click)="libroClick(libro)">
             <!-- Tiene o no imagen de portada? -->
             <img *ngIf="!libro.portadaImgPath" class="imgLibro" alt="libro" src="../assets/images/principales/portadanodisp.png" height="230px" width="153px"> <!-- por defecto -->
             <img *ngIf="libro.portadaImgPath" class="imgLibro" alt="libro" src="{{libro.portadaImgPath}}" height="230px" width="153px">
           </div>
 
-          <p class="tituloLibro">{{aplicarNombreEstetico(libro.titulo)}}</p>
-          <p class="autorLibro">{{aplicarNombreEstetico(libro.autor)}}</p>
+          <p class="tituloLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.titulo)}}</p>
+          <p class="autorLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.autor)}}</p>
 
           <div class="libroNoDisponible" *ngIf="!libro.disponible">
-            <div class="divNoDisponible">
+            <div class="divNoDisponible" (click)="libroClick(libro)">
               <mat-icon> warning </mat-icon>
               <p>Libro no disponible</p>
             </div>
             <div class="divBotonReservar"><button class="botonReservar" (click)="reservarClick()">Reservar</button></div>
           </div>
 
-          <div class="divBotonPedir"><button class="botonPedir" (click)="pedirClick()" *ngIf="libro.disponible">Pedir</button></div>
+          <div class="divBotonPedir"><button class="botonPedir" (click)="pedirClick(libro)" *ngIf="libro.disponible">Pedir</button></div>
 
         </div>
 
@@ -59,16 +59,16 @@
       <!----------------------------------------------------------------------------------------------------------------->
             <!-- Si el orden es A-Z hay que hacer reverse() a la lista, por tanto se debe duplicar-->
       <div *ngIf="esOrdenAZ" class="tabla">
-        <div *ngFor="let libro of lista | async" class="card" (click)="libroClick(libro)">
+        <div *ngFor="let libro of lista | async" class="card">
 
-          <div class="divImgLibro">
+          <div class="divImgLibro" (click)="libroClick(libro)">
             <!-- Tiene o no imagen de portada? -->
             <img *ngIf="!libro.portadaImgPath" class="imgLibro" alt="libro" src="../assets/images/principales/portadanodisp.png" height="230px" width="153px"> <!-- por defecto -->
             <img *ngIf="libro.portadaImgPath" class="imgLibro" alt="libro" src="{{libro.portadaImgPath}}" height="230px" width="153px">
           </div>
 
-          <p class="tituloLibro">{{aplicarNombreEstetico(libro.titulo)}}</p>
-          <p class="autorLibro">{{aplicarNombreEstetico(libro.autor)}}</p>
+          <p class="tituloLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.titulo)}}</p>
+          <p class="autorLibro" (click)="libroClick(libro)">{{aplicarNombreEstetico(libro.autor)}}</p>
 
           <div class="libroNoDisponible" *ngIf="!libro.disponible">
             <div class="divNoDisponible">
@@ -78,7 +78,7 @@
             <div class="divBotonReservar"><button class="botonReservar" (click)="reservarClick()">Reservar</button></div>
           </div>
 
-          <div class="divBotonPedir"><button class="botonPedir" (click)="pedirClick()" *ngIf="libro.disponible">Pedir</button></div>
+          <div class="divBotonPedir"><button class="botonPedir" (click)="pedirClick(libro)" *ngIf="libro.disponible">Pedir</button></div>
 
         </div>
 

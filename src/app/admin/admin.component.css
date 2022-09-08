@@ -35,6 +35,12 @@ button:enabled:hover {
     border-color: #0d89ec;
 }
 
+button:disabled{
+    background: #dddddd;
+    color: #ffffff;
+    border-color: #dddddd;
+}
+
 #drop{
     display: flex;
     align-items: center;
