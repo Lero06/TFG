@@ -5,15 +5,32 @@
   </div>
 
   <div id="divDetalles">
-      <p>{{libroSeleccionado.titulo}}</p>
+      <p><span>Titulo:</span> {{aplicarEsteticos(libroSeleccionado.titulo)}}</p>
+      <p><span>Autor: </span>{{aplicarEsteticos(libroSeleccionado.autor)}}</p>
+      <p><span>ISBN: </span>{{aplicarEsteticos(libroSeleccionado.isbn)}}</p>
+      <p *ngIf="libroSeleccionado.editorial"><span>Editorial: </span>{{aplicarEsteticos(libroSeleccionado.editorial)}}</p>
+      <p *ngIf="libroSeleccionado.paginas"><span>Nº.Páginas: </span>{{aplicarEsteticos(libroSeleccionado.paginas.toString())}}</p>
+      <p><span>Categoria: </span>{{aplicarEsteticos(quitarNumsYGuion(libroSeleccionado.categoria))}}</p>
+      <p><span>Tipo: </span>{{aplicarEsteticos(quitarNumsYGuion(libroSeleccionado.tipo))}}</p>
+
+      <button *ngIf="libroSeleccionado.disponible" (click)="clickPedir()">Pedir</button>
+
+      <div class="libroNoDisponible" *ngIf="!libroSeleccionado.disponible">
+        <div class="divNoDisponible">
+          <mat-icon> warning </mat-icon>
+          <p class="noMarginBottom noDisponP">Libro no disponible</p>
+        </div>
+        <div class="divBotonReservar"><button class="botonReservar">Reservar</button></div>
+      </div>
+
   </div>
 
 </div>
 
 <div id="error" *ngIf="!libroSeleccionado">
   <img src="../assets/images/principales/aliens.png">
-  <p id="tituloErr">Oh no! Parece que los aliens han abducido el libro que querias mirar</p>
-  <p>Debes volver atrás y seleccionarlo otra vez. Espero que ya se hayan ido cuando vuelvas...</p>
+  <p id="tituloErr">¡Oh no! Parece que los aliens han abducido el libro que querias</p>
+  <p>Debes volver atrás y seleccionarlo otra vez. Esperamos que ya se hayan ido cuando vuelvas...</p>
   <button>Volver atrás</button>
 </div>
 

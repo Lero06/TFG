@@ -11,6 +11,7 @@ import { AutenticacionService } from '../services/autenticacion.service';
 import { User } from 'firebase/auth';
 import { Admin } from '../object/Admin';
 import { ReservasService } from '../services/reservas.service';
+import { TitulosService } from '../services/titulos.service';
 
 @Component({
   selector: 'app-home',
@@ -52,7 +53,8 @@ export class HomeComponent implements OnInit {
   libroSeleccionado:Libro;
 
   constructor(private libroService: LibrosService, private eventoService:EventosService, private router: Router, private zone: NgZone,
-     public dialog: MatDialog, private autorizacionService:AutenticacionService, private reservasService:ReservasService) { 
+     public dialog: MatDialog, private autorizacionService:AutenticacionService, private reservasService:ReservasService,
+     private tituloService:TitulosService) { 
 
     this.lista = this.libroService.getLibros();
     this.listaEventos = this.eventoService.getEventos();
@@ -216,34 +218,11 @@ export class HomeComponent implements OnInit {
 
   // Esteticos 
   aplicarNombreEstetico(s:string){
-    let res:string;
-    res = s;
-    // Poner ... si el nombre es muy largo
-    if(s.length > 23){
-      res = s.slice(0,23).concat('...');
-    }
-
-    // Hacer las primeras letras MAYUS
-    var splitStr = res.toLowerCase().split(' ');
-    for (var i = 0; i < splitStr.length; i++) {
-        // You do not need to check if i is larger than splitStr length, as your for does that for you
-        // Assign it back to the array
-        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
-    }
-    // Directly return the joined string
-    return splitStr.join(' '); 
+    return this.tituloService.aplicarNombreEstetico(s);
   }
 
   aplicarNombreEsteticoSimplificado(s:string){
-    // Hacer las primeras letras MAYUS
-    var splitStr = s.toLowerCase().split(' ');
-    for (var i = 0; i < splitStr.length; i++) {
-        // You do not need to check if i is larger than splitStr length, as your for does that for you
-        // Assign it back to the array
-        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
-    }
-    // Directly return the joined string
-    return splitStr.join(' '); 
+    return this.tituloService.aplicarNombreEsteticoSimplificado(s);
   }
 
 }

@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Libro } from '../object/Libro';
 import { Reserva } from '../object/Reserva';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
+import { Database, push, ref } from '@angular/fire/database';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Libro } from '../object/Libro';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservasService {
 
-  /* En este servicio todas las llamadas se hacen con HTTP Client */
+  private reservasDB: AngularFireList<Reserva>;
 
-  constructor(private httpClient:HttpClient) {}
+  /* En este servicio todas las llamadas se hacen con HTTP Client, excepto GET Reservas (por el snapshotChanges())*/
+
+  constructor(private httpClient:HttpClient, private db: AngularFireDatabase) {}
 
   addNuevaReserva(id:string, lector:string){
     const now = new Date();
@@ -30,6 +36,24 @@ export class ReservasService {
     // Posteamos la reserva en /reservas
     this.httpClient.post<any>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/reservas/'+lector+'.json',reserva)
     .subscribe((r) => {console.log(r)});
+  }
+
+  getReservas(userID:string): Observable<Reserva[]>{
+    this.reservasDB = this.db.list('/reservas/'+userID, (ref) =>
+    ref.orderByChild('id'));
+
+    return this.reservasDB.snapshotChanges().pipe(
+      map((changes) =>
+        changes.map((c) => this.getUserFromPayload(c.payload))
+      )
+    );
+  }
+
+  getUserFromPayload(payload: any): Reserva{
+    return {
+      $key: payload.key,
+      ...payload.val(),
+    };
   }
 
   /* --------------------------------------------------------------------------------- */

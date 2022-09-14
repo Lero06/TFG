@@ -1,0 +1,22 @@
+#mat-table{
+    width: 80%;
+}
+
+#divPrincipal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.filaSeleccionada{
+    margin-top: 10px;
+    background-color: #FEB8B4;
+}

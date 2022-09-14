@@ -1,14 +1,62 @@
+.noMarginBottom{
+    margin-bottom: 0px;
+}
+
+p{
+    margin-bottom: 8px;
+}
+
 #main{
     display: flex;
 }
 
 #divImagen{
-    flex: 50%;
+    flex: 40%;
+    justify-content: right;
+}
+
+#divImagen > img{
     padding: 20px;
+    width: 60%;
+    float:right;
 }
 
 #divDetalles{
     flex: 50%;
+}
+
+#divDetalles > p{
+    padding: 20px;
+    font-size: 22px;
+}
+
+#divDetalles > p > span{
+    font-weight: 600;
+}
+
+#divDetalles > button{
+    margin-left: 20px;
+}
+
+.divNoDisponible{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.divNoDisponible > mat-icon{
+    color: #d90429;
+    margin-right: 5px;
+    margin-left: 20px;
+}
+
+.noDisponP{
+    font-size: 18px;
+}
+
+.divBotonPedir, .divBotonReservar{
+    margin-left: 20px;
 }
 
 /* ---------------------------------- */
