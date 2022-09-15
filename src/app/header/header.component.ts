@@ -57,4 +57,10 @@ export class HeaderComponent implements OnInit {
     window.location.hash = "#fooder";
   }
 
+  clickReportes(){
+    this.zone.run(() => {
+      this.router.navigate(['/reportes']);
+    });
+  }
+
 }

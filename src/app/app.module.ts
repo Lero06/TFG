@@ -38,6 +38,7 @@ import { HeaderComponent } from './header/header.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatListModule} from '@angular/material/list';
+import { ReportesComponent } from './reportes/reportes.component';
 
 
 
@@ -52,6 +53,7 @@ import {MatListModule} from '@angular/material/list';
     DialogoComponent,
     MisReservasComponent,
     HeaderComponent,
+    ReportesComponent,
   ],
   imports: [
     BrowserModule,
