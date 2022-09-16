@@ -20,6 +20,11 @@
 </div>
 
 <!-- ------ SUBIR LIBRO ------ -->
+<div *ngIf="subirLibroActivado">
+  <app-admin-subir-libro></app-admin-subir-libro>
+</div>
+
+<!--
 <div *ngIf="subirLibroActivado" id="subirLibro">
 
     <div id="imgSubirLibro">
@@ -36,7 +41,7 @@
         <input matInput id="inputAutor">
       </mat-form-field>
 
-      <!-- REVISAR -->
+      <-- REVISAR 
       <mat-form-field appearance="fill">
         <mat-label>ISBN</mat-label>
         <input matInput id="inputISBN" type="number" maxLength="13" minLength="10"> 
@@ -82,7 +87,7 @@
         <input matInput type="number" id="inputPaginas"> 
       </mat-form-field>
 
-      <!-- <input type="file" (change)="fileCambiado($event)" aria-label="Inserte Imagen Portada" id="inputFile"> -->
+      <-- <input type="file" (change)="fileCambiado($event)" aria-label="Inserte Imagen Portada" id="inputFile"> 
 
       <div class="center" id="drop">
         <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
@@ -105,6 +110,7 @@
 
       <button id="botonSubir" pButton pRipple type="button" label="Subir Libro" (click)="clickSubirLibro()"></button>
 </div>
+-->
 
 <!-- ------ BORRAR LIBRO ------ -->
 <div *ngIf="borrarLibroActivado" id="borrarLibro">

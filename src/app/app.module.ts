@@ -39,6 +39,7 @@ import { MatTableModule } from '@angular/material/table';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatListModule} from '@angular/material/list';
 import { ReportesComponent } from './reportes/reportes.component';
+import { AdminSubirLibroComponent } from './admin-subir-libro/admin-subir-libro.component';
 
 
 
@@ -54,6 +55,7 @@ import { ReportesComponent } from './reportes/reportes.component';
     MisReservasComponent,
     HeaderComponent,
     ReportesComponent,
+    AdminSubirLibroComponent,
   ],
   imports: [
     BrowserModule,

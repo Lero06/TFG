@@ -1,0 +1,109 @@
+<div id="main">
+    <div id="imgSubirLibro">
+      <button (click)="atrasDesdeSubir()">Atrás</button>
+    </div>
+
+      <form class="example-form">
+        <mat-form-field appearance="fill">
+          <mat-label>Título del libro</mat-label>
+          <input type="text" id="inputTitulo" matInput [formControl]="textFormControl" [(ngModel)]="titulo" placeholder="Ej. Don Quijote">
+          <mat-error *ngIf="textFormControl.hasError('required')">
+            El titulo es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+      </form>
+
+      <form class="example-form">
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre del autor</mat-label>
+          <input type="text" id="inputAutor" matInput [formControl]="textFormControl2" [(ngModel)]="autor" placeholder="Ej. Cervantes">
+          <mat-error *ngIf="textFormControl2.hasError('required')">
+            El nombre del autor es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+      </form>
+
+      <form class="example-form">
+        <mat-form-field appearance="fill">
+          <mat-label>ISBN</mat-label>
+          <input type="text" id="inputISBN" matInput [formControl]="isbnFormControl" [(ngModel)]="isbn" placeholder="Ej. 9788408061052" type="number">
+          <mat-error *ngIf="isbnFormControl.hasError('required')">
+            El ISBN es <strong>obligatorio</strong>
+          </mat-error>
+          <mat-error *ngIf="isbnFormControl.hasError('max')">
+            El ISBN debe tener 13 dígitos como máximo
+          </mat-error>
+          <mat-error *ngIf="isbnFormControl.hasError('min')">
+            El ISBN debe tener 9 dígitos como mínimo
+          </mat-error>
+        </mat-form-field>
+      </form>
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>Editorial</mat-label>
+        <mat-hint align="start">(Editorial opcional) </mat-hint>
+        <input matInput id="inputEditorial" [(ngModel)]="editorial" placeholder="Ej. Librería de Garnier Hermanos">
+      </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Selecciona Categoria</mat-label>
+            <mat-select [(ngModel)]="categoriaSeleccionada">
+                <mat-option *ngFor="let cat of categorias" [value]="cat.value">
+                    {{cat.viewValue}}
+                </mat-option>
+            </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+        <mat-label>Selecciona Tipo</mat-label>
+            <mat-select [(ngModel)]="tipoSeleccionado">
+                <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">
+                    {{tipo.viewValue}}
+                </mat-option>
+            </mat-select>
+    </mat-form-field>
+
+    <mat-form-field id="matIdioma" appearance="fill">
+        <mat-label>Selecciona Idioma</mat-label>
+            <mat-select [(ngModel)]="idiomaSeleccionado">
+                <mat-option *ngFor="let idioma of idiomas" [value]="idioma.value">
+                    {{idioma.viewValue}}
+                </mat-option>
+            </mat-select>
+    </mat-form-field>
+
+    <form class="example-form">
+        <mat-form-field appearance="fill">
+            <mat-label>Nº Páginas</mat-label>
+            <mat-hint align="start">(nº páginas opcional) </mat-hint>
+            <input matInput type="number" id="inputPaginas" [(ngModel)]="paginas" [formControl]="paginasFormControl"> 
+            <mat-error *ngIf="paginasFormControl.hasError('min')">
+                El libro debe tener un número positivo de páginas
+            </mat-error>
+        </mat-form-field>
+    </form>
+
+
+
+      <div class="center" id="drop">
+        <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+        (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+            <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+              Arrastra aquí la imagen de la portada o 
+              <button type="button" (click)="openFileSelector()">Selecciona desde Archivos</button>
+            </ng-template>
+        </ngx-file-drop>
+        <div class="upload-table">
+            <table class="table">
+                <tbody class="upload-name-style">
+                    <tr *ngFor="let item of files; let i=index">
+                        <td><strong>{{ item.relativePath }}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+      <button id="botonSubir" pButton pRipple type="button" label="Subir Libro" (click)="clickSubirLibro()"></button>
+</div>
