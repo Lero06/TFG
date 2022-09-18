@@ -40,6 +40,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatListModule} from '@angular/material/list';
 import { ReportesComponent } from './reportes/reportes.component';
 import { AdminSubirLibroComponent } from './admin-subir-libro/admin-subir-libro.component';
+import { AdminBorrarLibroComponent } from './admin-borrar-libro/admin-borrar-libro.component';
+import { AdminSubirEventoComponent } from './admin-subir-evento/admin-subir-evento.component';
+import { AdminBajarEventoComponent } from './admin-bajar-evento/admin-bajar-evento.component';
 
 
 
@@ -56,6 +59,9 @@ import { AdminSubirLibroComponent } from './admin-subir-libro/admin-subir-libro.
     HeaderComponent,
     ReportesComponent,
     AdminSubirLibroComponent,
+    AdminBorrarLibroComponent,
+    AdminSubirEventoComponent,
+    AdminBajarEventoComponent,
   ],
   imports: [
     BrowserModule,

@@ -117,6 +117,21 @@ button:disabled{
     background-color: white;
 }
 
+#botoSubirPers{
+    background: url('src\assets\images\button\subirPers.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: white;
+}
+
+
+#botoBajarPers{
+    background: url('src\assets\images\button\bajarPers.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: white;
+}
+
 #botoGestion{
     background: url('src\assets\images\button\reservasalt.png');
     background-repeat: no-repeat;
@@ -154,39 +169,6 @@ button:disabled{
 }
 
 /* PORTADAS */
-#imgSubirLibro{
-    margin-bottom: 10px;
-    width: 100%;
-    height: 225px;
-    background-image: url('src\assets\images\portadas\subirlibrocen.png');
-    background-position: 100% 40%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-
-#imgSubirLibro > button{
-    margin-left: 10px;
-    margin-top: 10px;
-}
-
-#imgBajarLibro{
-    margin-bottom: 10px;
-    width: 100%;
-    height: 225px;
-    background-image: url('src\assets\images\portadas\darbaja.png');
-    background-position: 100% 40%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-
-
-#imgBajarLibro > button{
-    margin-left: 10px;
-    margin-top: 10px;
-}
-
 #imgBajarEv{
     margin-bottom: 10px;
     width: 100%;

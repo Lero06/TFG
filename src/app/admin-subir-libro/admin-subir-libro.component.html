@@ -6,7 +6,7 @@
       <form class="example-form">
         <mat-form-field appearance="fill">
           <mat-label>Título del libro</mat-label>
-          <input type="text" id="inputTitulo" matInput [formControl]="textFormControl" [(ngModel)]="titulo" placeholder="Ej. Don Quijote">
+          <input type="text" id="inputTitulo" matInput [formControl]="textFormControl" [(ngModel)]="titulo" (ngModelChange)="checkearTodosLosValoresLlenos()" placeholder="Ej. Don Quijote">
           <mat-error *ngIf="textFormControl.hasError('required')">
             El titulo es <strong>obligatorio</strong>
           </mat-error>
@@ -16,7 +16,7 @@
       <form class="example-form">
         <mat-form-field appearance="fill">
           <mat-label>Nombre del autor</mat-label>
-          <input type="text" id="inputAutor" matInput [formControl]="textFormControl2" [(ngModel)]="autor" placeholder="Ej. Cervantes">
+          <input type="text" id="inputAutor" matInput [formControl]="textFormControl2" [(ngModel)]="autor" (ngModelChange)="checkearTodosLosValoresLlenos()" placeholder="Ej. Cervantes">
           <mat-error *ngIf="textFormControl2.hasError('required')">
             El nombre del autor es <strong>obligatorio</strong>
           </mat-error>
@@ -26,7 +26,7 @@
       <form class="example-form">
         <mat-form-field appearance="fill">
           <mat-label>ISBN</mat-label>
-          <input type="text" id="inputISBN" matInput [formControl]="isbnFormControl" [(ngModel)]="isbn" placeholder="Ej. 9788408061052" type="number">
+          <input type="text" id="inputISBN" matInput [formControl]="isbnFormControl" [(ngModel)]="isbn" (ngModelChange)="checkearTodosLosValoresLlenos()" placeholder="Ej. 9788408061052" type="number">
           <mat-error *ngIf="isbnFormControl.hasError('required')">
             El ISBN es <strong>obligatorio</strong>
           </mat-error>
@@ -49,7 +49,7 @@
     <mat-form-field appearance="fill">
         <mat-label>Selecciona Categoria</mat-label>
             <mat-select [(ngModel)]="categoriaSeleccionada">
-                <mat-option *ngFor="let cat of categorias" [value]="cat.value">
+                <mat-option *ngFor="let cat of categorias" [value]="cat.value" [(ngModel)]="categoriaSeleccionada" name="fieldName" ngDefaultControl (onSelectionChange)="checkearTodosLosValoresLlenos()">
                     {{cat.viewValue}}
                 </mat-option>
             </mat-select>
@@ -58,7 +58,7 @@
     <mat-form-field appearance="fill">
         <mat-label>Selecciona Tipo</mat-label>
             <mat-select [(ngModel)]="tipoSeleccionado">
-                <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">
+                <mat-option *ngFor="let tipo of tipos" [value]="tipo.value" [(ngModel)]="tipoSeleccionado" name="fieldName" ngDefaultControl (onSelectionChange)="checkearTodosLosValoresLlenos()">
                     {{tipo.viewValue}}
                 </mat-option>
             </mat-select>
@@ -67,7 +67,7 @@
     <mat-form-field id="matIdioma" appearance="fill">
         <mat-label>Selecciona Idioma</mat-label>
             <mat-select [(ngModel)]="idiomaSeleccionado">
-                <mat-option *ngFor="let idioma of idiomas" [value]="idioma.value">
+                <mat-option *ngFor="let idioma of idiomas" [value]="idioma.value" [(ngModel)]="idiomaSeleccionado" name="fieldName" ngDefaultControl  (ngModelChange)="checkearTodosLosValoresLlenos()">
                     {{idioma.viewValue}}
                 </mat-option>
             </mat-select>
@@ -105,5 +105,5 @@
         </div>
     </div>
 
-      <button id="botonSubir" pButton pRipple type="button" label="Subir Libro" (click)="clickSubirLibro()"></button>
+      <button id="botonSubir" pButton pRipple type="button" [disabled]="!botonActivo" label="Subir Libro" (click)="clickSubirLibro()"></button>
 </div>

@@ -1,0 +1,48 @@
+<div id="main">
+
+    <div id="imgSubirEv">
+        <button (click)="atrasDesdeSubirEv()">Atrás</button>
+    </div>
+  
+        <form class="example-form">
+          <mat-form-field appearance="fill">
+            <mat-label>Título del evento</mat-label>
+            <input matInput id="inputTituloEv" [formControl]="textFormControl">
+            <mat-error *ngIf="textFormControl.hasError('required')">
+              El titulo es <strong>obligatorio</strong>
+            </mat-error>
+            </mat-form-field>
+        </form>    
+  
+        <form class="example-form">
+          <mat-form-field appearance="fill">
+            <mat-label>Descripción del evento</mat-label>
+            <input matInput id="inputDescrip" [formControl]="textFormControl2">
+            <mat-error *ngIf="textFormControl.hasError('required')">
+              La descripción es <strong>obligatoria</strong>
+            </mat-error>
+          </mat-form-field>
+        </form>
+  
+        <div class="center" id="drop">
+          <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+          (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+              <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                Arrastra aquí la imagen del evento o 
+                <button type="button" (click)="openFileSelector()">Selecciona desde Archivos</button>
+              </ng-template>
+          </ngx-file-drop>
+          <div class="upload-table">
+              <table class="table">
+                  <tbody class="upload-name-style">
+                      <tr *ngFor="let item of files; let i=index">
+                          <td><strong>{{ item.relativePath }}</strong></td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+         </div>
+  
+          <button id="botonSubirEv" pButton pRipple type="button" label="Subir Evento" [disabled]="textFormControl.errors || textFormControl2.errors" (click)="clickSubirEvento()"></button>
+  </div>
+  

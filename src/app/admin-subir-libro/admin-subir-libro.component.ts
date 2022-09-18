@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, NgZone, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { NgxFileDropEntry } from 'ngx-file-drop';
+import { AdminComponent } from '../admin/admin.component';
 import { Libro } from '../object/Libro';
 import { LibrosService } from '../services/libros.service';
 import { ReservasService } from '../services/reservas.service';
@@ -31,6 +32,8 @@ export class AdminSubirLibroComponent implements OnInit {
   fileSeleccionado:any;
 
   public files: NgxFileDropEntry[] = [];
+
+  botonActivo:boolean;
 
     // Material dropdown
     categorias: any[] = [
@@ -74,7 +77,7 @@ export class AdminSubirLibroComponent implements OnInit {
     ];
     
 
-  constructor(private libroService: LibrosService, private reservasService:ReservasService) { }
+  constructor(private libroService: LibrosService, private reservasService:ReservasService, public adminComponent: AdminComponent) { }
 
   ngOnInit(): void {}
 
@@ -168,7 +171,24 @@ export class AdminSubirLibroComponent implements OnInit {
   }
 
   atrasDesdeSubir(){
-    //this.subirLibroActivado = false;
+    this.adminComponent.subirLibroActivado = false;
+  }
+
+  checkearTodosLosValoresLlenos(){
+    if(!this.textFormControl.errors && !this.textFormControl2.errors 
+      && !this.isbnFormControl.errors && !this.paginasFormControl.errors){
+        // Si hay 2 inputs rellenados y se cambia el valor de otro, el boton está activo
+        // Aqui hay un bug -> si se selecciona el mismo input, se desbloquea el boton
+      if(this.categoriaSeleccionada && this.idiomaSeleccionado){
+        this.botonActivo = true;
+      }else if(this.categoriaSeleccionada && this.tipoSeleccionado){
+        this.botonActivo = true;
+      }else if(this.idiomaSeleccionado && this.tipoSeleccionado){
+        this.botonActivo = true;
+      }
+    }else{
+      this.botonActivo = false;
+    }
   }
 
 }

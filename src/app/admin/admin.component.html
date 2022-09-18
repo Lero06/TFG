@@ -11,10 +11,15 @@
         <button id="botoBajarLibro" title="Dar de Baja Libro" class="botoIconos" (click)="activarBorrarLibro()"></button>
 
         <button id="botoSubirEvento" title="Subir Evento" class="botoIconos" (click)="activarSubirEvento()"></button>
-        <button id="botoBajarEvento" title="Borrar Evento" class="botoIconos"  (click)="activarBorrarEvento()"></button>
+        <button id="botoBajarEvento" title="Dar de Baja Evento" class="botoIconos"  (click)="activarBorrarEvento()"></button>
+
+        <button id="botoSubirPers" title="Subir Lector" class="botoIconos" (click)="activarSubirPers()"></button>
+        <button id="botoBajarPers" title="Dar de Baja Lector" class="botoIconos"  (click)="activarBorrarPers()"></button>
 
         <button id="botoErrores" title="Gestión Errores" class="botoIconos" (click)="activarGestionErrores()"></button>
         <button id="botoGestion" title="Gestión Reservas" class="botoIconos" (click)="activarGestion()"></button>
+
+
     </div>
 
 </div>
@@ -24,96 +29,12 @@
   <app-admin-subir-libro></app-admin-subir-libro>
 </div>
 
-<!--
-<div *ngIf="subirLibroActivado" id="subirLibro">
-
-    <div id="imgSubirLibro">
-      <button (click)="atrasDesdeSubir()">Atrás</button>
-    </div>
-
-    <mat-form-field appearance="fill">
-        <mat-label>Título del libro</mat-label>
-        <input matInput id="inputTitulo">
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Nombre del autor</mat-label>
-        <input matInput id="inputAutor">
-      </mat-form-field>
-
-      <-- REVISAR 
-      <mat-form-field appearance="fill">
-        <mat-label>ISBN</mat-label>
-        <input matInput id="inputISBN" type="number" maxLength="13" minLength="10"> 
-      </mat-form-field>
-
-
-      <mat-form-field appearance="fill">
-        <mat-label>Editorial</mat-label>
-        <mat-hint align="start">(Editorial opcional) </mat-hint>
-        <input matInput id="inputEditorial">
-      </mat-form-field>
-
-    <mat-form-field appearance="fill">
-        <mat-label>Selecciona Categoria</mat-label>
-            <mat-select (selectionChange)="categoriaCambiada($event.value)">
-                <mat-option *ngFor="let cat of categorias" [value]="cat.value">
-                    {{cat.viewValue}}
-                </mat-option>
-            </mat-select>
-    </mat-form-field>
-    
-    <mat-form-field appearance="fill">
-        <mat-label>Selecciona Tipo</mat-label>
-            <mat-select (selectionChange)="tipoCambiado($event.value)">
-                <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">
-                    {{tipo.viewValue}}
-                </mat-option>
-            </mat-select>
-    </mat-form-field>
-
-    <mat-form-field id="matIdioma" appearance="fill">
-        <mat-label>Selecciona Idioma</mat-label>
-            <mat-select (selectionChange)="idiomaCambiado($event.value)">
-                <mat-option *ngFor="let idioma of idiomas" [value]="idioma.value">
-                    {{idioma.viewValue}}
-                </mat-option>
-            </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-        <mat-label>Nº Páginas</mat-label>
-        <mat-hint align="start">(nº páginas opcional) </mat-hint>
-        <input matInput type="number" id="inputPaginas"> 
-      </mat-form-field>
-
-      <-- <input type="file" (change)="fileCambiado($event)" aria-label="Inserte Imagen Portada" id="inputFile"> 
-
-      <div class="center" id="drop">
-        <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
-        (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
-            <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-              Arrastra aquí la imagen de la portada o 
-              <button type="button" (click)="openFileSelector()">Selecciona desde Archivos</button>
-            </ng-template>
-        </ngx-file-drop>
-        <div class="upload-table">
-            <table class="table">
-                <tbody class="upload-name-style">
-                    <tr *ngFor="let item of files; let i=index">
-                        <td><strong>{{ item.relativePath }}</strong></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-      <button id="botonSubir" pButton pRipple type="button" label="Subir Libro" (click)="clickSubirLibro()"></button>
-</div>
--->
-
 <!-- ------ BORRAR LIBRO ------ -->
-<div *ngIf="borrarLibroActivado" id="borrarLibro">
+<div *ngIf="borrarLibroActivado">
+  <app-admin-borrar-libro></app-admin-borrar-libro>
+</div>
+
+<!-- div *ngIf="borrarLibroActivado" id="borrarLibro">
     <div id="imgBajarLibro">
       <button (click)="atrasDesdeBorrar()">Atrás</button>
     </div>
@@ -129,28 +50,28 @@
 
     <table mat-table id="mat-table" [dataSource]="libros" class="mat-elevation-z8">
 
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
+        <--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" 
       
-        <!-- Position Column -->
+        <-- Position Column 
         <ng-container matColumnDef="título">
           <th mat-header-cell *matHeaderCellDef> No. </th>
           <td mat-cell *matCellDef="let element"> {{nombreAMayus(element.titulo)}} </td>
         </ng-container>
       
-        <!-- Name Column -->
+        <-- Name Column 
         <ng-container matColumnDef="autor">
           <th mat-header-cell *matHeaderCellDef> Autor </th>
           <td mat-cell *matCellDef="let element"> {{nombreAMayus(element.autor)}} </td>
         </ng-container>
       
-        <!-- Weight Column -->
+        <-- Weight Column 
         <ng-container matColumnDef="isbn">
           <th mat-header-cell *matHeaderCellDef> ISBN </th>
           <td mat-cell *matCellDef="let element"> {{nombreAMayus(element.isbn)}} </td>
         </ng-container>
       
-        <!-- Symbol Column -->
+        <-- Symbol Column 
         <ng-container matColumnDef="editorial">
           <th mat-header-cell *matHeaderCellDef> Editorial </th>
           <td mat-cell *matCellDef="let element"> {{nombreAMayus(element.editorial)}} </td>
@@ -159,11 +80,15 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row (click)="filaClick(row)" [ngClass]="{'filaSeleccionada': filaABorrar == row}" *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-</div>
+</div>-->
 
 
 <!-- ------ SUBIR EVENTO ------ -->
-<div *ngIf="subirEventoActivado" id="subirEvento">
+<div *ngIf="subirEventoActivado">
+  <app-admin-subir-evento></app-admin-subir-evento>
+</div>
+
+<!--<div *ngIf="subirEventoActivado" id="subirEvento">
 
   <div id="imgSubirEv">
       <button (click)="atrasDesdeSubirEv()">Atrás</button>
@@ -199,7 +124,7 @@
        </div>
 
         <button id="botonSubirEv" pButton pRipple type="button" label="Subir Evento" (click)="clickSubirEvento()"></button>
-</div>
+</div>-->
 
 <!-- ------ BORRAR EVENTO ------ -->
 <div *ngIf="borrarEventoActivado" id="borrarEvento">

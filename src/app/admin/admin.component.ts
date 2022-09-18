@@ -24,22 +24,25 @@ export class AdminComponent implements OnInit {
   borrarLibroActivado:boolean;
   subirEventoActivado:boolean;
   borrarEventoActivado:boolean;
+  subirPersActivado:boolean;
+  bajarPersActivado:boolean;
   gestionActivado:boolean;
   erroresActivado:boolean;
 
   // Subir Libro
-  categoriaSeleccionada:any;
-  tipoSeleccionado:any;
-  idiomaSeleccionado:any;
-  fileSeleccionado:any;
+  //categoriaSeleccionada:any;
+  //tipoSeleccionado:any;
+  //idiomaSeleccionado:any;
+
+  fileSeleccionado:any; // Se usa en otra (Subir ev.)
 
   // Borrar Libro
-  libros:Observable<Libro[]>;
+  /*libros:Observable<Libro[]>;
   librosAUX:Observable<Libro[]>;
   displayedColumns: string[] = ['título', 'autor', 'isbn', 'editorial'];
   cargado:boolean;
   filaABorrar:any;
-  isbnABorrar:any;
+  isbnABorrar:any;*/
 
   // Borrar Evento
   eventos:Observable<Evento[]>;
@@ -60,44 +63,6 @@ export class AdminComponent implements OnInit {
 
   public files: NgxFileDropEntry[] = [];
 
-  // Material dropdown
-  categorias: any[] = [
-    {value: 'acción-0', viewValue: 'Acción'},
-    {value: 'autobiográficos-1', viewValue: 'Autobiográficos'},
-    {value: 'autoayuda-2', viewValue: 'Autoayuda'},
-    {value: 'científicos-3', viewValue: 'Científicos'},
-    {value: 'ciencia-ficción-4', viewValue: 'Ciencia Ficción'},
-    {value: 'comic-5', viewValue: 'Comic'},
-    {value: 'cuento-6', viewValue: 'Cuento'},
-    {value: 'de-viaje-7', viewValue: 'De Viaje'},
-    {value: 'deporte-8', viewValue: 'Deporte'},
-    {value: 'erótico-9', viewValue: 'Erótico'},
-    {value: 'ficción-10', viewValue: 'Ficción'},
-    {value: 'historia-11', viewValue: 'Historia'},
-    {value: 'humor-12', viewValue: 'Humor'},
-    {value: 'juveniles-13', viewValue: 'Juveniles'},
-    {value: 'literatura-14', viewValue: 'Literatura'},
-    {value: 'nuevo-15', viewValue: 'Nuevo'},
-    {value: 'poéticos-16', viewValue: 'Poéticos'},
-    {value: 'religión-17', viewValue: 'Religión'},
-    {value: 'romance-18', viewValue: 'Romance'},
-    {value: 'suspense-19', viewValue: 'Suspense'},
-  ];
-
-  idiomas: any[] = [
-    {value: 'espanol-0', viewValue: 'Castellano'},
-    {value: 'valencia-1', viewValue: 'Valencià'},
-    {value: 'english-2', viewValue: 'English'},
-    {value: 'otro-3', viewValue: 'Otro*'}
-  ];
-
-  tipos: any[] = [
-    {value: 'libro-0', viewValue: 'Libro'},
-    {value: 'revista-1', viewValue: 'Revista'},
-    {value: 'periodico-2', viewValue: 'Periódico'},
-    {value: 'ebook-3', viewValue: 'Ebook'},
-    {value: 'cd-4', viewValue: 'CD/DVD'}
-  ];
   
 
   constructor(private libroService: LibrosService, private eventoServicio: EventosService,
@@ -105,6 +70,8 @@ export class AdminComponent implements OnInit {
     this.subirLibroActivado = false;
     this.borrarLibroActivado = false;
     this.subirEventoActivado = false;
+    this.subirPersActivado = false;
+    this.bajarPersActivado = false;
     this.borrarEventoActivado = false;
     this.gestionActivado = false;
     this.erroresActivado = false;
@@ -112,12 +79,12 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     // Instanciar tabla libros
-    this.libros = this.libroService.getLibros();
+    /*this.libros = this.libroService.getLibros();
     if(this.libros){
       this.cargado = true;
     }
     // Guardamos la lista en AUX
-    this.librosAUX = this.libros;
+    this.librosAUX = this.libros;*/
 
      // Instanciar tabla eventos
      this.eventos = this.eventoServicio.getEventos();
@@ -148,8 +115,16 @@ export class AdminComponent implements OnInit {
     this.erroresActivado = true;
   }
 
+  activarSubirPers(){
+    this.subirPersActivado = true;
+  }
+
+  activarBorrarPers(){
+    this.bajarPersActivado = true;
+  }
+
   /* --------------- SUBIR LIBRO ---------------*/
-  async clickSubirLibro(){
+  /*async clickSubirLibro(){
     const titulo = (<HTMLInputElement>document.getElementById("inputTitulo")).value.toLowerCase();
 
     const autor = (<HTMLInputElement>document.getElementById("inputAutor")).value.toLowerCase();
@@ -232,10 +207,10 @@ export class AdminComponent implements OnInit {
 
   idiomaCambiado(idioma:any){
     this.idiomaSeleccionado = idioma;
-  }
+  }*/
    
 
-  public dropped(files: NgxFileDropEntry[]) {
+  /*public dropped(files: NgxFileDropEntry[]) {
     this.files = files;
     for (const droppedFile of files) {
 
@@ -262,15 +237,15 @@ export class AdminComponent implements OnInit {
 
   public fileLeave(event: any){
     console.log(event);
-  }
+  }*/
 
-  atrasDesdeSubir(){
+  /* atrasDesdeSubir(){
     this.subirLibroActivado = false;
-  }
+  }*/
 
 
   /* --------------- BORRAR LIBRO ---------------*/
-  async clickBorrarLibro(){
+  /*async clickBorrarLibro(){
     // TODO BORRARLO DE LA BD
     this.libros = this.libros.pipe(map(
       libros => libros.filter(libro => libro.isbn != (this.isbnABorrar)
@@ -296,16 +271,16 @@ export class AdminComponent implements OnInit {
       libros => libros.filter(libro => libro.isbn.includes(filterValue)
     ))); //= filterValue.trim().toLowerCase();
     }
-  }
+  }*/
 
-  filaClick(row:any){
+  /*filaClick(row:any){
     console.log(row.isbn);
     this.filaABorrar = row;
     this.isbnABorrar = row.isbn;
     //this.libros = this.libros.pipe(map(
       //libros => libros.filter(libro => libro.isbn.includes(filterValue)
     //)));
-  }
+  }*/
 
 
   /* --------------- SUBIR EVENTO ---------------*/
