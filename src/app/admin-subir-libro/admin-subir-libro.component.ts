@@ -17,7 +17,7 @@ export class AdminSubirLibroComponent implements OnInit {
   // Controlar que haya texto 
   textFormControl = new FormControl('', [Validators.required]);
   textFormControl2 = new FormControl('', [Validators.required]);
-  isbnFormControl = new FormControl('', [Validators.required, Validators.max(9999999999999), Validators.min(999999999)]);
+  isbnFormControl = new FormControl('', [Validators.required, Validators.max(9999999999999), Validators.min(99999999)]);
   paginasFormControl = new FormControl('', [Validators.min(1)]);
 
   titulo:string;
@@ -87,36 +87,58 @@ export class AdminSubirLibroComponent implements OnInit {
     const categoria = this.categoriaSeleccionada;
     const tipo = this.tipoSeleccionado;
     const idioma = this.idiomaSeleccionado;
-
-    // Imagen
-    const input = (<HTMLInputElement>document.getElementById("inputFile"));
-
-    // Referencias a storage
-    const storage = getStorage();
-    const storageRef = ref(storage, 'images/'+this.titulo);
-
-    // Esperamos a obtener respuesta
-    const res = await uploadBytes(storageRef, this.fileSeleccionado).then(() => {
-      console.log('Uploaded a fileee!');
-    });
-
     const date = new Date();
+    let libro:Libro;
 
-    let portadaImgPath = await getDownloadURL(storageRef);
-
-    const libro : Libro = {
-      id:date.toISOString(),
-      titulo:this.titulo.toLocaleLowerCase(),
-      autor:this.autor.toLocaleLowerCase(),
-      isbn:this.isbn.toLocaleLowerCase(),
-      editorial:this.editorial.toLocaleLowerCase(),
-      paginas:paginasNum,
-      categoria:categoria,
-      tipo:tipo,
-      idioma:idioma,
-      disponible:true,
-      portadaImgPath:portadaImgPath
+    if(!this.editorial){
+      this.editorial = '';
+      console.log('No hay editorial');
     }
+    // Imagen
+    if(this.fileSeleccionado){
+
+       // Referencias a storage
+      const storage = getStorage();
+      const storageRef = ref(storage, 'images/'+this.titulo);
+
+      // Esperamos a obtener respuesta
+      const res = await uploadBytes(storageRef, this.fileSeleccionado).then(() => {
+        console.log('Imagen Subida');
+      });
+      let portadaImgPath = await getDownloadURL(storageRef);
+
+      // Subir libro con imagen
+      libro = {
+        id:date.toISOString(),
+        titulo:this.titulo.toLocaleLowerCase(),
+        autor:this.autor.toLocaleLowerCase(),
+        isbn:this.isbn.toLocaleLowerCase(),
+        editorial:this.editorial.toLocaleLowerCase(),
+        paginas:paginasNum,
+        categoria:categoria,
+        tipo:tipo,
+        idioma:idioma,
+        disponible:true,
+        portadaImgPath:portadaImgPath
+      }
+
+    }else{
+      // Subir libro sin imagen
+      libro = {
+        id:date.toISOString(),
+        titulo:this.titulo.toLocaleLowerCase(),
+        autor:this.autor.toLocaleLowerCase(),
+        isbn:this.isbn.toLocaleLowerCase(),
+        editorial:this.editorial.toLocaleLowerCase(),
+        paginas:paginasNum,
+        categoria:categoria,
+        tipo:tipo,
+        idioma:idioma,
+        disponible:true
+      }
+    }
+
+    
 
     this.libroService.addLibroHTTP(libro);
 

@@ -42,7 +42,10 @@ import { ReportesComponent } from './reportes/reportes.component';
 import { AdminSubirLibroComponent } from './admin-subir-libro/admin-subir-libro.component';
 import { AdminBorrarLibroComponent } from './admin-borrar-libro/admin-borrar-libro.component';
 import { AdminSubirEventoComponent } from './admin-subir-evento/admin-subir-evento.component';
-import { AdminBajarEventoComponent } from './admin-bajar-evento/admin-bajar-evento.component';
+import { AdminBorrarEventoComponent } from './admin-borrar-evento/admin-borrar-evento.component';
+import { AdminGestionReservasComponent } from './admin-gestion-reservas/admin-gestion-reservas.component';
+import { AdminGestionErroresComponent } from './admin-gestion-errores/admin-gestion-errores.component';
+import { AdminClientesComponent } from './admin-clientes/admin-clientes.component';
 
 
 
@@ -61,7 +64,10 @@ import { AdminBajarEventoComponent } from './admin-bajar-evento/admin-bajar-even
     AdminSubirLibroComponent,
     AdminBorrarLibroComponent,
     AdminSubirEventoComponent,
-    AdminBajarEventoComponent,
+    AdminBorrarEventoComponent,
+    AdminGestionReservasComponent,
+    AdminGestionErroresComponent,
+    AdminClientesComponent,
   ],
   imports: [
     BrowserModule,

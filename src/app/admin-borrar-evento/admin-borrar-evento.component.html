@@ -1,0 +1,30 @@
+<div id="main">
+
+    <div id="imgBajarEv">
+      <button (click)="atrasDesdeBorrarEv()">Atrás</button>
+    </div>
+
+    <button (click)="clickBorrarEvento()" [disabled]="!filaEvABorrar">Borrar {{aplicarNombreEstetico(idABorrar)}}</button>
+
+    <table mat-table id="mat-table2" [dataSource]="eventos" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{nombreAMayus(element.nombre)}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+          <td mat-cell *matCellDef="let element"> {{nombreAMayus(element.descripcion)}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsEv"></tr>
+        <tr mat-row (click)="filaEvClick(row)" [ngClass]="{'filaEvSeleccionada': filaEvABorrar == row}" *matRowDef="let row; columns: displayedColumnsEv;"></tr>
+      </table>
+    
+</div>

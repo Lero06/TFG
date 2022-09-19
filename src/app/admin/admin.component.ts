@@ -28,13 +28,14 @@ export class AdminComponent implements OnInit {
   bajarPersActivado:boolean;
   gestionActivado:boolean;
   erroresActivado:boolean;
+  clientesActivado:number;
 
   // Subir Libro
   //categoriaSeleccionada:any;
   //tipoSeleccionado:any;
   //idiomaSeleccionado:any;
 
-  fileSeleccionado:any; // Se usa en otra (Subir ev.)
+  //fileSeleccionado:any; // Se usa en otra (Subir ev.)
 
   // Borrar Libro
   /*libros:Observable<Libro[]>;
@@ -45,23 +46,23 @@ export class AdminComponent implements OnInit {
   isbnABorrar:any;*/
 
   // Borrar Evento
-  eventos:Observable<Evento[]>;
-  displayedColumnsEv: string[] = ['nombre', 'descripcion'];
-  filaEvABorrar:any;
-  idABorrar:string;
+  //eventos:Observable<Evento[]>;
+  //displayedColumnsEv: string[] = ['nombre', 'descripcion'];
+  //filaEvABorrar:any;
+  //idABorrar:string;
 
 
   // Gestión de Reservas
-  subirReservaActivo:boolean;
+  /*subirReservaActivo:boolean;
   reservas:Observable<Reserva[]>;
   valorInputGR:string;
   valorInputUser:string;
   existeLibro:boolean;
   resDisponibilidad:any;
   usuarioEncontrado:boolean;
-  resUsuario:any;
+  resUsuario:any;*/
 
-  public files: NgxFileDropEntry[] = [];
+  //public files: NgxFileDropEntry[] = [];
 
   
 
@@ -75,6 +76,7 @@ export class AdminComponent implements OnInit {
     this.borrarEventoActivado = false;
     this.gestionActivado = false;
     this.erroresActivado = false;
+    this.clientesActivado = 0;
   }
 
   ngOnInit(): void {
@@ -87,7 +89,7 @@ export class AdminComponent implements OnInit {
     this.librosAUX = this.libros;*/
 
      // Instanciar tabla eventos
-     this.eventos = this.eventoServicio.getEventos();
+     //this.eventos = this.eventoServicio.getEventos();
   }
 
   /* --------------- GENERAL ---------------*/
@@ -284,7 +286,7 @@ export class AdminComponent implements OnInit {
 
 
   /* --------------- SUBIR EVENTO ---------------*/
-  async clickSubirEvento(){
+  /*async clickSubirEvento(){
 
     const titulo = (<HTMLInputElement>document.getElementById("inputTituloEv")).value.toLowerCase();
     const descripcion = (<HTMLInputElement>document.getElementById("inputDescrip")).value;
@@ -327,12 +329,12 @@ export class AdminComponent implements OnInit {
 
   atrasDesdeSubirEv(){
     this.subirEventoActivado = false;
-  }
+  }*/
 
   /* --------------- BORRAR EVENTO ---------------*/
 
 
-  async clickBorrarEvento(){
+  /*async clickBorrarEvento(){
     this.eventoServicio.borrarEvento(this.idABorrar);
 
     alert('Se ha borrado el evento con éxito');
@@ -348,7 +350,7 @@ export class AdminComponent implements OnInit {
   filaEvClick(row:any){
     this.filaEvABorrar = row;
     this.idABorrar = row.nombre;
-  }
+  }*/
 
    /* --------------- GESTION ERRORES ---------------*/
    
@@ -358,7 +360,7 @@ export class AdminComponent implements OnInit {
 
 
   /* --------------- GESTION DE RESERVAS---------------*/
-  atrasDesdeGestion(){
+  /*atrasDesdeGestion(){
     this.gestionActivado = false;
   }
 
@@ -401,11 +403,11 @@ export class AdminComponent implements OnInit {
   seHaDevuelto(isbnADevolver:string){
     this.reservasService.cambiarEstadoaD(isbnADevolver);
     this.resDisponibilidad.estado = 'Disponible';
-  }
+  }*/
 
   /* OTROS */
     // la casa de maria -> La Casa De Maria
-    nombreAMayus(s:string){
+    /*nombreAMayus(s:string){
       // Hacer las primeras letras MAYUS
       var splitStr = s.toLowerCase().split(' ');
       for (var i = 0; i < splitStr.length; i++) {
@@ -435,5 +437,5 @@ export class AdminComponent implements OnInit {
       }
       // Directly return the joined string
       return splitStr.join(' '); 
-    }
+    }*/
 }

@@ -1,7 +1,7 @@
 <!-- ------ GENERAL ------ -->
 <div *ngIf="!subirLibroActivado && !borrarLibroActivado &&
             !subirEventoActivado && !borrarEventoActivado
-            && !gestionActivado && !erroresActivado"
+            && !gestionActivado && !erroresActivado && clientesActivado == 0"
              id="main">
 
     <p>ADMINISTRACIÓN</p>         
@@ -33,54 +33,6 @@
 <div *ngIf="borrarLibroActivado">
   <app-admin-borrar-libro></app-admin-borrar-libro>
 </div>
-
-<!-- div *ngIf="borrarLibroActivado" id="borrarLibro">
-    <div id="imgBajarLibro">
-      <button (click)="atrasDesdeBorrar()">Atrás</button>
-    </div>
-
-    <mat-spinner *ngIf="!cargado"></mat-spinner>
-
-    <mat-form-field appearance="standard">
-      <mat-label>Filtrar por ISBN</mat-label>
-      <input matInput type="number" (keyup)="applyFilter($event)" placeholder="Ex. 9788408061052" #input>
-    </mat-form-field>
-
-    <button (click)="clickBorrarLibro()">Borrar {{aplicarNombreEstetico(filaABorrar?.titulo)}}</button>
-
-    <table mat-table id="mat-table" [dataSource]="libros" class="mat-elevation-z8">
-
-        <--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" 
-      
-        <-- Position Column 
-        <ng-container matColumnDef="título">
-          <th mat-header-cell *matHeaderCellDef> No. </th>
-          <td mat-cell *matCellDef="let element"> {{nombreAMayus(element.titulo)}} </td>
-        </ng-container>
-      
-        <-- Name Column 
-        <ng-container matColumnDef="autor">
-          <th mat-header-cell *matHeaderCellDef> Autor </th>
-          <td mat-cell *matCellDef="let element"> {{nombreAMayus(element.autor)}} </td>
-        </ng-container>
-      
-        <-- Weight Column 
-        <ng-container matColumnDef="isbn">
-          <th mat-header-cell *matHeaderCellDef> ISBN </th>
-          <td mat-cell *matCellDef="let element"> {{nombreAMayus(element.isbn)}} </td>
-        </ng-container>
-      
-        <-- Symbol Column 
-        <ng-container matColumnDef="editorial">
-          <th mat-header-cell *matHeaderCellDef> Editorial </th>
-          <td mat-cell *matCellDef="let element"> {{nombreAMayus(element.editorial)}} </td>
-        </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row (click)="filaClick(row)" [ngClass]="{'filaSeleccionada': filaABorrar == row}" *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-</div>-->
 
 
 <!-- ------ SUBIR EVENTO ------ -->
@@ -127,7 +79,11 @@
 </div>-->
 
 <!-- ------ BORRAR EVENTO ------ -->
-<div *ngIf="borrarEventoActivado" id="borrarEvento">
+<div *ngIf="borrarEventoActivado">
+  <app-admin-borrar-evento></app-admin-borrar-evento>
+</div>
+
+<!--div *ngIf="borrarEventoActivado" id="borrarEvento">
 
     <div id="imgBajarEv">
       <button (click)="atrasDesdeBorrarEv()">Atrás</button>
@@ -137,16 +93,16 @@
 
     <table mat-table id="mat-table2" [dataSource]="eventos" class="mat-elevation-z8">
 
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
+        <--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" --
       
-        <!-- Position Column -->
+        <-- Position Column --
         <ng-container matColumnDef="nombre">
           <th mat-header-cell *matHeaderCellDef> Nombre </th>
           <td mat-cell *matCellDef="let element"> {{nombreAMayus(element.nombre)}} </td>
         </ng-container>
       
-        <!-- Name Column -->
+        <-- Name Column --
         <ng-container matColumnDef="descripcion">
           <th mat-header-cell *matHeaderCellDef> Descripcion </th>
           <td mat-cell *matCellDef="let element"> {{nombreAMayus(element.descripcion)}} </td>
@@ -156,10 +112,15 @@
         <tr mat-row (click)="filaEvClick(row)" [ngClass]="{'filaEvSeleccionada': filaEvABorrar == row}" *matRowDef="let row; columns: displayedColumnsEv;"></tr>
       </table>
     
-</div>
+</div>-->
 
 <!-- ------ GESTION RESERVAS------ -->
-<div *ngIf="gestionActivado" id="gestion">
+
+<div *ngIf="gestionActivado">
+  <app-admin-gestion-reservas></app-admin-gestion-reservas>
+</div>
+
+<!--div *ngIf="gestionActivado" id="gestion">
 
     <div id="imgGestionRes">
       <button (click)="atrasDesdeGestion()">Atrás</button>
@@ -196,8 +157,8 @@
     </div>
 
     <div id="hayResDisponibilidad" *ngIf="resDisponibilidad"> 
-      <!-- Disponibilidad -->
-      <!-- PEDIR LIBRO -->
+      <-- Disponibilidad --
+      <-- PEDIR LIBRO --
       <button *ngIf="resDisponibilidad.estado == 'Disponible' && resDisponibilidad.localizacion == 'En Biblioteca' "
               (click)="pedirLibro(valorInputGR)" [disabled]="valorInputUser === '' || !valorInputUser
                                                               && valorInputGR === '' || !valorInputGR">
@@ -209,15 +170,18 @@
         Se ha Devuelto
       </button>
 
-      <!-- RESERVAR LIBRO -->
+      <-- RESERVAR LIBRO --
 
-      <!-- PEDIR TRANSPORTE LIBRO -->
+      <-- PEDIR TRANSPORTE LIBRO --
     <div>
 
-</div>
+</div>-->
 
 <!-- ------ GESTION ERRORES ------ -->
-<div *ngIf="erroresActivado" id="gestionErrores">
-    <button (click)="atrasDesdeErrores()">Atrás</button>
-    <p>GESTION ERRORES</p>
+<div *ngIf="erroresActivado">
+  <app-admin-gestion-errores></app-admin-gestion-errores>
+</div>
+
+<div *ngIf="clientesActivado">
+  <app-admin-clientes></app-admin-clientes>
 </div>

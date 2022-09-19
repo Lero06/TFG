@@ -1,0 +1,56 @@
+<div id="main">
+
+    <div id="imgGestionRes">
+      <button (click)="atrasDesdeGestion()">Atrás</button>
+    </div>
+
+    <div id="inputNewUser">
+      <mat-form-field appearance="fill">
+        <mat-label>ID del usuario</mat-label>
+        <input matInput [(ngModel)]="valorInputUser" id="inputNombreUser">
+      </mat-form-field>
+      <button ngDefaultControl  (click)="buscarUsuario()" [disabled]="!valorInputUser">Buscar</button>
+    </div>
+
+    <p *ngIf="usuarioEncontrado == false">Usuario no encontrado</p>
+    <p *ngIf="usuarioEncontrado == true" >Usuario encontrado ({{resUsuario.email}}) </p>
+
+    <p>Consultar Disponibilidad:</p>
+
+    <div id="inputNewReserva">
+      <mat-form-field appearance="fill">
+        <mat-label>ISBN del libro</mat-label>
+        <input matInput type="nunmber" [(ngModel)]="valorInputGR" id="inputISBNReserva">
+      </mat-form-field>
+      <button (click)="buscarDisponibilidadLibro()" [disabled]="!valorInputGR || !valorInputUser">Buscar</button>
+    </div>
+
+    <div *ngIf="existeLibro == false">
+      <p>No está disponible</p>
+    </div>
+
+    <div *ngIf="existeLibro == true">
+      <p>{{resDisponibilidad.estado}}</p>
+      <p>{{resDisponibilidad.localizacion}}</p>
+    </div>
+
+    <div id="hayResDisponibilidad" *ngIf="resDisponibilidad"> 
+      <!-- Disponibilidad -->
+      <!-- PEDIR LIBRO -->
+      <button *ngIf="resDisponibilidad.estado == 'Disponible' && resDisponibilidad.localizacion == 'En Biblioteca' "
+              (click)="pedirLibro(valorInputGR)" [disabled]="valorInputUser === '' || !valorInputUser
+                                                              && valorInputGR === '' || !valorInputGR">
+        Pedir
+      </button>
+
+      <button *ngIf="resDisponibilidad.estado == 'No Disponible' && resDisponibilidad.localizacion == 'En Biblioteca' "
+              (click)="seHaDevuelto(valorInputGR)">
+        Se ha Devuelto
+      </button>
+
+      <!-- RESERVAR LIBRO -->
+
+      <!-- PEDIR TRANSPORTE LIBRO -->
+    <div>
+
+</div>

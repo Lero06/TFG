@@ -169,37 +169,6 @@ button:disabled{
 }
 
 /* PORTADAS */
-#imgBajarEv{
-    margin-bottom: 10px;
-    width: 100%;
-    height: 225px;
-    background-image: url('src\assets\images\portadas\darbajaev.png');
-    background-position: 100% 40%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-
-#imgBajarEv > button{
-    margin-left: 10px;
-    margin-top: 10px;
-}
-
-#imgGestionRes{
-    margin-bottom: 10px;
-    width: 100%;
-    height: 225px;
-    background-image: url('src\assets\images\portadas\gestionres.png');
-    background-position: 100% 40%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-
-#imgGestionRes > button{
-    margin-left: 10px;
-    margin-top: 10px;
-}
 
 #imgSubirEv{
     margin-bottom: 10px;

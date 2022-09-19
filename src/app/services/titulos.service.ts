@@ -9,6 +9,9 @@ export class TitulosService {
 
   // la casa de pepe el de los palotes -> La Casa De Pepe El...
   aplicarNombreEstetico(s:string){
+    if(s==''){return '';}
+    else if(!s){return ''}
+
     let res:string;
     res = s;
     // Poner ... si el nombre es muy largo
@@ -29,6 +32,9 @@ export class TitulosService {
 
    // la casa de pepe -> La Casa De Pepe
   aplicarNombreEsteticoSimplificado(s:string){
+    if(s==''){return '';}
+    else if(!s){return ''}
+    
     // Hacer las primeras letras MAYUS
     var splitStr = s.toLowerCase().split(' ');
     for (var i = 0; i < splitStr.length; i++) {

@@ -1,7 +1,8 @@
 <app-header></app-header>
 <div id="main" *ngIf="libroSeleccionado">
   <div id="divImagen">
-      <img src="{{libroSeleccionado.portadaImgPath}}">
+      <img *ngIf="libroSeleccionado.portadaImgPath" src="{{libroSeleccionado.portadaImgPath}}">
+      <img *ngIf="!libroSeleccionado.portadaImgPath" src="../assets/images/principales/portadanodisp.png">
   </div>
 
   <div id="divDetalles">
