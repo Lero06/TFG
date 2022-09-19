@@ -28,32 +28,39 @@ export class AdminSubirEventoComponent implements OnInit {
 
     const titulo = (<HTMLInputElement>document.getElementById("inputTituloEv")).value.toLowerCase();
     const descripcion = (<HTMLInputElement>document.getElementById("inputDescrip")).value;
-
-    // Imagen
-    const input = (<HTMLInputElement>document.getElementById("inputFile"));
-
-    // Referencias a storage
-    const storage = getStorage();
-    const storageRef = ref(storage, 'images/'+titulo);
-
-    // Esperamos a obtener respuesta
-    const res = await uploadBytes(storageRef, this.fileSeleccionado).then(() => {
-      console.log('Uploaded a fileee!');
-    });
-
     const date = new Date();
 
-    let portadaImgPath = await getDownloadURL(storageRef);
+    // Imagen
+    // Referencias a storage
+    let evento:Evento;
+    if(this.fileSeleccionado){
+      const storage = getStorage();
+      const storageRef = ref(storage, 'images/'+titulo);
 
-    const evento : Evento = {
-      id:date.toISOString(),
-      nombre:titulo,
-      descripcion:descripcion,
-      fecha:date,
-      portadaImgPath:portadaImgPath
+      // Esperamos a obtener respuesta
+      const res = await uploadBytes(storageRef, this.fileSeleccionado).then(() => {
+        console.log('Imagen de evento subida');
+      });
+
+      let portadaImgPath = await getDownloadURL(storageRef);
+
+      evento = {
+        id:date.toISOString(),
+        nombre:titulo,
+        descripcion:descripcion,
+        fecha:date,
+        portadaImgPath:portadaImgPath
+      }
+    }else{
+      evento = {
+        id:date.toISOString(),
+        nombre:titulo,
+        descripcion:descripcion,
+        fecha:date,
+      }
     }
 
-    this.eventoServicio.addEvento(evento);
+    this.eventoServicio.addEventoHTTP(evento);
 
     // Libro Subido
     alert('Se ha subido el evento con éxito');

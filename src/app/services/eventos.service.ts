@@ -24,9 +24,9 @@ export class EventosService {
 
   addEventoHTTP(evento: Evento){
     // Hacemos un post y un put para eliminar la key por defecto
-    this.httpClient.post('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/eventos/'+evento.id+'.json', evento)
+    this.httpClient.post('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/eventos/'+evento.nombre+'.json', evento)
       .subscribe(() => {
-        this.httpClient.put('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/libros/'+evento.id+'.json', evento)
+        this.httpClient.put('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/eventos/'+evento.nombre+'.json', evento)
         .subscribe((r) => console.log(r));
       });
   }

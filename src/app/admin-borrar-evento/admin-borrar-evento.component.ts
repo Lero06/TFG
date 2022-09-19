@@ -31,6 +31,7 @@ export class AdminBorrarEventoComponent implements OnInit {
 
     // Borrar Valor Boton
     this.filaEvABorrar = '';
+    this.idABorrar = '';
   }
 
   atrasDesdeBorrarEv(){

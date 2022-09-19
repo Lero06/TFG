@@ -30,28 +30,6 @@ export class AdminComponent implements OnInit {
   erroresActivado:boolean;
   clientesActivado:number;
 
-  // Subir Libro
-  //categoriaSeleccionada:any;
-  //tipoSeleccionado:any;
-  //idiomaSeleccionado:any;
-
-  //fileSeleccionado:any; // Se usa en otra (Subir ev.)
-
-  // Borrar Libro
-  /*libros:Observable<Libro[]>;
-  librosAUX:Observable<Libro[]>;
-  displayedColumns: string[] = ['título', 'autor', 'isbn', 'editorial'];
-  cargado:boolean;
-  filaABorrar:any;
-  isbnABorrar:any;*/
-
-  // Borrar Evento
-  //eventos:Observable<Evento[]>;
-  //displayedColumnsEv: string[] = ['nombre', 'descripcion'];
-  //filaEvABorrar:any;
-  //idABorrar:string;
-
-
   // Gestión de Reservas
   /*subirReservaActivo:boolean;
   reservas:Observable<Reserva[]>;
@@ -62,12 +40,10 @@ export class AdminComponent implements OnInit {
   usuarioEncontrado:boolean;
   resUsuario:any;*/
 
-  //public files: NgxFileDropEntry[] = [];
 
   
 
-  constructor(private libroService: LibrosService, private eventoServicio: EventosService,
-     private reservasService:ReservasService, private autenticacionService:AutenticacionService) { 
+  constructor() { 
     this.subirLibroActivado = false;
     this.borrarLibroActivado = false;
     this.subirEventoActivado = false;
@@ -79,18 +55,7 @@ export class AdminComponent implements OnInit {
     this.clientesActivado = 0;
   }
 
-  ngOnInit(): void {
-    // Instanciar tabla libros
-    /*this.libros = this.libroService.getLibros();
-    if(this.libros){
-      this.cargado = true;
-    }
-    // Guardamos la lista en AUX
-    this.librosAUX = this.libros;*/
-
-     // Instanciar tabla eventos
-     //this.eventos = this.eventoServicio.getEventos();
-  }
+  ngOnInit(): void {}
 
   /* --------------- GENERAL ---------------*/
   activarSubirLibro(){
@@ -124,240 +89,6 @@ export class AdminComponent implements OnInit {
   activarBorrarPers(){
     this.bajarPersActivado = true;
   }
-
-  /* --------------- SUBIR LIBRO ---------------*/
-  /*async clickSubirLibro(){
-    const titulo = (<HTMLInputElement>document.getElementById("inputTitulo")).value.toLowerCase();
-
-    const autor = (<HTMLInputElement>document.getElementById("inputAutor")).value.toLowerCase();
-
-    const isbn = (<HTMLInputElement>document.getElementById("inputISBN")).value;
-
-    const editorial = (<HTMLInputElement>document.getElementById("inputEditorial")).value.toLowerCase();
-
-    const paginas = (<HTMLInputElement>document.getElementById("inputPaginas")).value;
-    // Conversion a number
-    const paginasNum : number = +paginas;
-
-    const categoria = this.categoriaSeleccionada;
-
-    const tipo = this.tipoSeleccionado;
-
-    const idioma = this.idiomaSeleccionado;
-
-    // Imagen
-    const input = (<HTMLInputElement>document.getElementById("inputFile"));
-
-    // Referencias a storage
-    const storage = getStorage();
-    const storageRef = ref(storage, 'images/'+titulo);
-
-    // Esperamos a obtener respuesta
-    const res = await uploadBytes(storageRef, this.fileSeleccionado).then(() => {
-      console.log('Uploaded a fileee!');
-    });
-
-    const date = new Date();
-
-    let portadaImgPath = await getDownloadURL(storageRef);
-
-    const libro : Libro = {
-      id:date.toISOString(),
-      titulo:titulo,
-      autor:autor,
-      isbn:isbn,
-      editorial:editorial,
-      paginas:paginasNum,
-      categoria:categoria,
-      tipo:tipo,
-      idioma:idioma,
-      disponible:true,
-      portadaImgPath:portadaImgPath
-    }
-
-    this.libroService.addLibroHTTP(libro);
-
-    // Cambiar añadir estado de libro nuevo a disponibilidad
-    this.reservasService.addNuevaDisponibilidad(libro);
-
-
-    // Libro Subido
-    alert('Se ha subido el libro con éxito');
-
-    // Borrar inputs
-    (<HTMLInputElement>document.getElementById("inputTitulo")).value = '';
-    (<HTMLInputElement>document.getElementById("inputAutor")).value = '';
-    (<HTMLInputElement>document.getElementById("inputISBN")).value = '';
-    (<HTMLInputElement>document.getElementById("inputEditorial")).value = '';
-    (<HTMLInputElement>document.getElementById("inputPaginas")).value = '';
-
-    this.categoriaSeleccionada = '';
-    this.tipoSeleccionado = '';
-    this.idiomaSeleccionado= '';
-    this.fileSeleccionado= '';
-
-    this.files = [];
-  }
-
-  categoriaCambiada(categoria:any){
-    this.categoriaSeleccionada = categoria;
-  }
-
-  tipoCambiado(tipo:any){
-    this.tipoSeleccionado = tipo;
-  }
-
-  idiomaCambiado(idioma:any){
-    this.idiomaSeleccionado = idioma;
-  }*/
-   
-
-  /*public dropped(files: NgxFileDropEntry[]) {
-    this.files = files;
-    for (const droppedFile of files) {
-
-      // Is it a file?
-      if (droppedFile.fileEntry.isFile) {
-        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-        fileEntry.file((file: File) => {
-
-          this.fileSeleccionado = file;
-
-        });
-      } else {
-        // It was a directory (empty directories are added, otherwise only files)
-        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-
-        this.fileSeleccionado = fileEntry;
-      }
-    }
-  }
-
-  public fileOver(event: any){
-    console.log(event);
-  }
-
-  public fileLeave(event: any){
-    console.log(event);
-  }*/
-
-  /* atrasDesdeSubir(){
-    this.subirLibroActivado = false;
-  }*/
-
-
-  /* --------------- BORRAR LIBRO ---------------*/
-  /*async clickBorrarLibro(){
-    // TODO BORRARLO DE LA BD
-    this.libros = this.libros.pipe(map(
-      libros => libros.filter(libro => libro.isbn != (this.isbnABorrar)
-    )));
-    this.libroService.borrarLibro(this.isbnABorrar);
-
-    alert('Se ha borrado el libro con éxito');
-
-    // Borrar Valor Boton
-    this.filaABorrar = '';
-  }
-
-  atrasDesdeBorrar(){
-    this.borrarLibroActivado = false;
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    if(filterValue == ''){
-      this.libros = this.librosAUX;
-    }else{
-    this.libros = this.libros.pipe(map(
-      libros => libros.filter(libro => libro.isbn.includes(filterValue)
-    ))); //= filterValue.trim().toLowerCase();
-    }
-  }*/
-
-  /*filaClick(row:any){
-    console.log(row.isbn);
-    this.filaABorrar = row;
-    this.isbnABorrar = row.isbn;
-    //this.libros = this.libros.pipe(map(
-      //libros => libros.filter(libro => libro.isbn.includes(filterValue)
-    //)));
-  }*/
-
-
-  /* --------------- SUBIR EVENTO ---------------*/
-  /*async clickSubirEvento(){
-
-    const titulo = (<HTMLInputElement>document.getElementById("inputTituloEv")).value.toLowerCase();
-    const descripcion = (<HTMLInputElement>document.getElementById("inputDescrip")).value;
-
-    // Imagen
-    const input = (<HTMLInputElement>document.getElementById("inputFile"));
-
-    // Referencias a storage
-    const storage = getStorage();
-    const storageRef = ref(storage, 'images/'+titulo);
-
-    // Esperamos a obtener respuesta
-    const res = await uploadBytes(storageRef, this.fileSeleccionado).then(() => {
-      console.log('Uploaded a fileee!');
-    });
-
-    const date = new Date();
-
-    let portadaImgPath = await getDownloadURL(storageRef);
-
-    const evento : Evento = {
-      id:date.toISOString(),
-      nombre:titulo,
-      descripcion:descripcion,
-      fecha:date,
-      portadaImgPath:portadaImgPath
-    }
-
-    this.eventoServicio.addEvento(evento);
-
-    // Libro Subido
-    alert('Se ha subido el evento con éxito');
-
-     // Borrar inputs
-     (<HTMLInputElement>document.getElementById("inputTituloEv")).value = '';
-     (<HTMLInputElement>document.getElementById("inputDescrip")).value = '';
-     this.fileSeleccionado= '';
-     this.files = [];
-  }
-
-  atrasDesdeSubirEv(){
-    this.subirEventoActivado = false;
-  }*/
-
-  /* --------------- BORRAR EVENTO ---------------*/
-
-
-  /*async clickBorrarEvento(){
-    this.eventoServicio.borrarEvento(this.idABorrar);
-
-    alert('Se ha borrado el evento con éxito');
-
-    // Borrar Valor Boton
-    this.filaEvABorrar = '';
-  }
-
-  atrasDesdeBorrarEv(){
-    this.borrarEventoActivado = false;
-  }
-
-  filaEvClick(row:any){
-    this.filaEvABorrar = row;
-    this.idABorrar = row.nombre;
-  }*/
-
-   /* --------------- GESTION ERRORES ---------------*/
-   
-  atrasDesdeErrores(){
-    this.erroresActivado = false;
-  }
-
 
   /* --------------- GESTION DE RESERVAS---------------*/
   /*atrasDesdeGestion(){
