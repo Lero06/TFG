@@ -1,7 +1,7 @@
 <!-- ------ GENERAL ------ -->
 <div *ngIf="!subirLibroActivado && !borrarLibroActivado &&
             !subirEventoActivado && !borrarEventoActivado
-            && !gestionActivado && !erroresActivado && clientesActivado == 0"
+            && !gestionActivado && !erroresActivado"
              id="main">
 
     <p>ADMINISTRACIÓN</p>         
@@ -12,9 +12,6 @@
 
         <button id="botoSubirEvento" title="Subir Evento" class="botoIconos" (click)="activarSubirEvento()"></button>
         <button id="botoBajarEvento" title="Dar de Baja Evento" class="botoIconos"  (click)="activarBorrarEvento()"></button>
-
-        <button id="botoSubirPers" title="Subir Lector" class="botoIconos" (click)="activarSubirPers()"></button>
-        <button id="botoBajarPers" title="Dar de Baja Lector" class="botoIconos"  (click)="activarBorrarPers()"></button>
 
         <button id="botoErrores" title="Gestión Errores" class="botoIconos" (click)="activarGestionErrores()"></button>
         <button id="botoGestion" title="Gestión Reservas" class="botoIconos" (click)="activarGestion()"></button>
@@ -180,8 +177,4 @@
 <!-- ------ GESTION ERRORES ------ -->
 <div *ngIf="erroresActivado">
   <app-admin-gestion-errores></app-admin-gestion-errores>
-</div>
-
-<div *ngIf="clientesActivado">
-  <app-admin-clientes></app-admin-clientes>
 </div>

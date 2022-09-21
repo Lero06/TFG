@@ -22,7 +22,7 @@
         <mat-label>ISBN del libro</mat-label>
         <input matInput type="nunmber" [(ngModel)]="valorInputGR" id="inputISBNReserva">
       </mat-form-field>
-      <button (click)="buscarDisponibilidadLibro()" [disabled]="!valorInputGR || !valorInputUser">Buscar</button>
+      <button (click)="buscarDisponibilidadLibro()" [disabled]="!valorInputGR">Buscar</button>
     </div>
 
     <div *ngIf="existeLibro == false">
@@ -38,8 +38,7 @@
       <!-- Disponibilidad -->
       <!-- PEDIR LIBRO -->
       <button *ngIf="resDisponibilidad.estado == 'Disponible' && resDisponibilidad.localizacion == 'En Biblioteca' "
-              (click)="pedirLibro(valorInputGR)" [disabled]="valorInputUser === '' || !valorInputUser
-                                                              && valorInputGR === '' || !valorInputGR">
+              (click)="pedirLibro(valorInputGR)" [disabled]=" !valorInputUser || !valorInputGR">
         Pedir
       </button>
 

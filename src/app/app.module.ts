@@ -45,8 +45,6 @@ import { AdminSubirEventoComponent } from './admin-subir-evento/admin-subir-even
 import { AdminBorrarEventoComponent } from './admin-borrar-evento/admin-borrar-evento.component';
 import { AdminGestionReservasComponent } from './admin-gestion-reservas/admin-gestion-reservas.component';
 import { AdminGestionErroresComponent } from './admin-gestion-errores/admin-gestion-errores.component';
-import { AdminClientesComponent } from './admin-clientes/admin-clientes.component';
-
 
 
 
@@ -67,7 +65,6 @@ import { AdminClientesComponent } from './admin-clientes/admin-clientes.componen
     AdminBorrarEventoComponent,
     AdminGestionReservasComponent,
     AdminGestionErroresComponent,
-    AdminClientesComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,7 +83,8 @@ import { AdminClientesComponent } from './admin-clientes/admin-clientes.componen
     NgxFileDropModule,
     MatCardModule,
     MatDialogModule,
-    MatTableModule, MatProgressSpinnerModule, MatListModule
+    MatTableModule, MatProgressSpinnerModule, MatListModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

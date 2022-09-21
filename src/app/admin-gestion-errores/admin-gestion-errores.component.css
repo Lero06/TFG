@@ -58,3 +58,34 @@ button:disabled{
     margin-top: 10px;
 }
 
+#lista{
+    background-color: lightgrey;
+}
+
+
+.item{
+    display: flex;
+    align-items: center;
+}
+
+mat-list-item:hover{
+    background-color: yellow;
+}
+
+mat-list{
+    border:solid thin #000;
+    cursor: pointer;
+}
+
+.item > p{
+    margin:0px;
+}
+
+.mat-list-base {
+    padding-top: 0px;
+}
+
+.titulo{
+    font-size: 16px;
+    font-weight: 600;
+}

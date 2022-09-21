@@ -94,6 +94,12 @@ export class PerfilComponent implements OnInit {
     }
   }
 
+  clickMisReservas(){
+    this.zone.run(() => {
+      this.router.navigate(['/mis-reservas']);
+    });
+  }
+
   cerrarSesion(){
     if(this.currentUser){
       this.autenticacionService.hacerSignOut();
@@ -114,8 +120,6 @@ export class PerfilComponent implements OnInit {
       localStorage.setItem('userBiblioFav','null');
 
     }
-
-    // Ir a home
   }
 
 }

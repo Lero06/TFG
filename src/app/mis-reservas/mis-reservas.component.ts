@@ -48,13 +48,19 @@ export class MisReservasComponent implements OnInit {
     let fechaActualArray = fechaActual.split("/");
     let fechaFinArray = row.fechaFin.split("/");
 
+    console.log('Fecha Actual = '+fechaActual);
+    console.log('Fecha Fin = '+ row.fechaFin);
+
     if(fechaActualArray[2] > fechaFinArray[2]){
       // El año actual es mayor que el año de devolución
       this.reservasPasadas.push(row);
       return true;
     }else if(fechaActualArray[2] == fechaFinArray[2]){
         // Mismo año
-        if(fechaActualArray[0] > fechaFinArray[0]){
+        // Ojo en JS 9 > 10 si trabajamos con strings -> hay q pasarlo a number
+        let mesActual = Number(fechaActualArray[2]);
+        let mesFinal = Number(fechaActualArray[2]);
+        if(mesActual > mesFinal){
           // El mes actual es mayor que el mes de devolución
           this.reservasPasadas.push(row);
           return true;
@@ -69,4 +75,6 @@ export class MisReservasComponent implements OnInit {
     }
     return false;
   }
+
+  editarPerfil(){}
 }

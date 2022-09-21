@@ -28,7 +28,6 @@ export class AdminComponent implements OnInit {
   bajarPersActivado:boolean;
   gestionActivado:boolean;
   erroresActivado:boolean;
-  clientesActivado:number;
 
   // Gestión de Reservas
   /*subirReservaActivo:boolean;
@@ -52,7 +51,6 @@ export class AdminComponent implements OnInit {
     this.borrarEventoActivado = false;
     this.gestionActivado = false;
     this.erroresActivado = false;
-    this.clientesActivado = 0;
   }
 
   ngOnInit(): void {}
@@ -82,13 +80,6 @@ export class AdminComponent implements OnInit {
     this.erroresActivado = true;
   }
 
-  activarSubirPers(){
-    this.subirPersActivado = true;
-  }
-
-  activarBorrarPers(){
-    this.bajarPersActivado = true;
-  }
 
   /* --------------- GESTION DE RESERVAS---------------*/
   /*atrasDesdeGestion(){

@@ -2,4 +2,19 @@
     <div id="imgGestion">
       <button (click)="atrasDesdeGestion()">Atrás</button>
     </div>
+
+    <p class="titulo">Estos son los errores reportados por los usuarios:</p>
+
+    <div id="lista">
+      <mat-list>
+        <mat-list-item *ngFor="let error of errores | async; index as indexOfelement" (click)="itemClick(error, indexOfelement)"> 
+          <div class="item">
+            <mat-icon>error</mat-icon>
+            <p>{{error.msg}}</p>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+    <button [disabled]="!errorSeleccionado" (click)="borrar(errorSeleccionado)">Borrar {{index}} {{aplicarNombreEstetico(errorSeleccionado)}}</button>
 </div>

@@ -27,12 +27,11 @@
 
           <p><span>Biblioteca Fav.: </span>{{obtenerBibliotecaFav()}}</p>
           <p><span>Segunda Biblioteca Fav.: </span>?</p>
-          <p><span>Caducidad Carnet: </span>?</p>
 
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>MIS RESERVAS</button>
-          <button mat-button>RENOVAR CARNET</button>
+            <button mat-button >EDITAR PERFIL</button>
+          <button mat-button (click)="clickMisReservas()">MIS RESERVAS</button>
           <button mat-button (click)="cerrarSesion()">CERRAR SESIÓN</button>
         </mat-card-actions>
       </mat-card>
