@@ -36,12 +36,21 @@ div{
 }
 
 #registrado{
-    background-color: darkseagreen;
+    background-color: #399aa3;
     padding: 10px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 mat-card-content > p > span{
     font-weight: 600;
 }
+
+#cartaPrincipal{
+    width: 50%;
+    background-color: orange;
+}
+

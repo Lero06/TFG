@@ -122,4 +122,6 @@ export class AutenticacionService {
     return this.httpClient.get<any>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/users/'+id+'.json');
   }
 
+    /* -----------------------  Más información de usuarios  ---------------------------------- */
+
 }
