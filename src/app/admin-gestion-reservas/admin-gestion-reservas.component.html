@@ -46,6 +46,10 @@
               (click)="seHaDevuelto(valorInputGR)">
         Se ha Devuelto
       </button>
+      <button id="reservas" *ngIf="resDisponibilidad.estado == 'No Disponible' && resDisponibilidad.localizacion == 'En Biblioteca' "
+              (click)="reservarLibro(valorInputGR)" [disabled]=" !valorInputUser || !valorInputGR">
+        Reservar Libro
+      </button>
 
       <!-- RESERVAR LIBRO -->
 

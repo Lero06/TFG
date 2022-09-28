@@ -73,3 +73,14 @@ button:disabled{
 #inputNewReserva > mat-form-field, #inputNewUser > mat-form-field{
     margin-left: 20%;
 }
+
+#reservas{
+    background-color: #006d77;
+    margin-left: 10px;
+}
+
+#reservas:disabled{
+    background: #dddddd;
+    color: #ffffff;
+    border-color: #dddddd;
+}
