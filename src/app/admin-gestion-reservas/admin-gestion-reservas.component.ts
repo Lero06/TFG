@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { filter, map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AdminComponent } from '../admin/admin.component';
-import { Cola } from '../object/Cola';
 import { Reserva } from '../object/Reserva';
 import { AutenticacionService } from '../services/autenticacion.service';
 import { ColaReservasService } from '../services/cola-reservas.service';
@@ -23,15 +22,14 @@ export class AdminGestionReservasComponent implements OnInit {
   usuarioEncontrado:boolean;
   resUsuario:any;
 
-  // Colas de reservas
-  resCola:Cola[];
+
 
   constructor(private autenticacionService:AutenticacionService, private reservasService:ReservasService,
               private adminComponent:AdminComponent, private colaService:ColaReservasService) { }
 
   ngOnInit(): void {
-    // Obtener todas las colas
-    this.colaService.getColaHTTP().subscribe((r) => {this.resCola = r, console.log(r)});
+    // Obtenemos todas las colas de los libros que luego filtraremos
+    this.colaService.inicializarCola();
   }
 
   atrasDesdeGestion(){
@@ -93,25 +91,12 @@ export class AdminGestionReservasComponent implements OnInit {
   }
 
   hayCola(isbn:string){
-    // Metodo para comprobar si hay una lista de espera agunardando la reserva del libro
-    // ** const colaFiltrada = this.resCola.filter( ** no se puede hacer directamente pq es un objeto no un array
-    const colaFiltrada = Object.values(this.resCola).filter(  
-      reserva => reserva.id == isbn
-    );
-    
-    if(!colaFiltrada){
-      console.log('No hay cola');
-      console.log(colaFiltrada);
-      return false;
-    }else{
-      console.log('Hay cola');
-      console.log(colaFiltrada);
-      return true;
-    }
+    return this.colaService.hayCola(isbn);
   }
 
   reservarLibro(isbnADevolver:string){
     this.colaService.addReservaCola(isbnADevolver, this.valorInputUser);
+    this.atrasDesdeGestion();
   }
 
 }
