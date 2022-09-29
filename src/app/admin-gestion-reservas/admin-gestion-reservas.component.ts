@@ -73,21 +73,26 @@ export class AdminGestionReservasComponent implements OnInit {
   }
 
   seHaDevuelto(isbnADevolver:string){
-    if(this.hayCola(isbnADevolver)){
-      // Hay cola
-      // Eliminar cola reservas
-      this.colaService.eliminarElementoColaReservas(isbnADevolver);
-      // Crear nueva reserva
-      //this.reservasService.cambiarEstadoaND(isbnADevolver, this.valorInputUser);
-      //this.resDisponibilidad.estado = 'No Disponible';
-      //this.reservasService.addNuevaReserva(isbnADevolver, this.valorInputUser);
+    try{
+      if(this.hayCola(isbnADevolver)){
+        // Hay cola
+        // Eliminar cola reservas
+        this.colaService.eliminarElementoColaReservas(isbnADevolver);
+        // Crear nueva reserva
+        this.reservasService.cambiarEstadoaND(isbnADevolver, this.valorInputUser);
+        this.resDisponibilidad.estado = 'No Disponible';
+        this.reservasService.addNuevaReserva(isbnADevolver, this.valorInputUser);
 
-    }else{
-      // No hay cola
-      // Volver a ponerlo disponible
-      //this.reservasService.cambiarEstadoaD(isbnADevolver);
-      //this.resDisponibilidad.estado = 'Disponible';
-  }
+      }else{
+        // No hay cola
+        // Volver a ponerlo disponible
+        this.reservasService.cambiarEstadoaD(isbnADevolver);
+        this.resDisponibilidad.estado = 'Disponible';
+      }
+      alert('Se ha devuelto el libro con éxito')
+    }catch(Exception){
+      alert('Ha habido un error en la devolución del libro')
+    }
   }
 
   hayCola(isbn:string){

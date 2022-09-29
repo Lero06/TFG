@@ -86,22 +86,28 @@ export class ColaReservasService {
   eliminarElementoColaReservas(isbn:string){
     const res = this.httpClient.get('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/colareservas/'+isbn+'/idUser.json');
     res.subscribe(r => {
-      if(typeof r == 'string'){
-        console.log('es string');
-        // Si es un string, se debe eliminar el id de ese libro y su cola de idsUsuarios en este caso 1
-      }else if(typeof r != 'string'){
-        console.log(typeof r);
-        // Es un array 
-        console.log('es un array');
-        // Si es un array, se debe desapilar un elemento de la cola de idsUsuarios
-        this.desapilarElementoDeArray(r);
+      let arrayRes = r.toString().split(',');
+      console.log(arrayRes.length);
+      if(arrayRes.length == 1){
+        // Se debe eliminar el id de ese libro y su cola de idsUsuarios en este caso 1
+        this.httpClient.delete('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/colareservas/'+isbn+'.json');
+      }else if(arrayRes.length > 1){;
+        // Se debe desapilar un elemento de la cola de idsUsuarios
+        let s = this.desapilarElementoDeArray(arrayRes);
         // Y subir cambios a la BD
+        let estruct = {
+          id:isbn,
+          idUser : s
+        }
+
+        this.httpClient.put('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/colareservas/'+isbn+'.json',estruct)
+          .subscribe(() => alert('Se ha devuelto el libro con éxito'));
       }
     });
   }
 
-  desapilarElementoDeArray(r:any){
-
+  desapilarElementoDeArray(arrayRes: string[]){
+    return arrayRes.shift();
   }
 
 
