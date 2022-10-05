@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AdminComponent } from '../admin/admin.component';
+import { Cola } from '../object/Cola';
 import { Reserva } from '../object/Reserva';
 import { AutenticacionService } from '../services/autenticacion.service';
 import { ColaReservasService } from '../services/cola-reservas.service';
@@ -22,15 +23,28 @@ export class AdminGestionReservasComponent implements OnInit {
   usuarioEncontrado:boolean;
   resUsuario:any;
 
-
+  // Obtener la cola de reservas
+  obsCola?:Observable<Cola[]>;
+  // Se debe ir actualizando su valor
+  // ColaAUX = cola con todo
+  colaAux:Cola[];
 
   constructor(private autenticacionService:AutenticacionService, private reservasService:ReservasService,
-              private adminComponent:AdminComponent, private colaService:ColaReservasService) { }
+              private adminComponent:AdminComponent, private colaService:ColaReservasService) {
+               }
 
   ngOnInit(): void {
-    // Obtenemos todas las colas de los libros que luego filtraremos
-    this.colaService.inicializarCola();
+    this.actualizarCola();
   }
+
+  actualizarCola(){
+    // Obtenemos todas las colas de los libros que luego filtraremos
+    delete this.obsCola;
+    this.obsCola = this.colaService.getColaHTTP();
+    this.obsCola.subscribe(r => {console.log(r);this.colaAux = r});
+  }
+
+  // -------------------------------------------------------------------------------
 
   atrasDesdeGestion(){
     this.adminComponent.gestionActivado = false;
@@ -67,6 +81,8 @@ export class AdminGestionReservasComponent implements OnInit {
   } 
 
   pedirLibro(isbnAPedir:string){
+    // Pides un libro segun los valores del input
+    // Pides un libro cuando está disponible
     this.reservasService.cambiarEstadoaND(isbnAPedir, this.valorInputUser);
     this.resDisponibilidad.estado = 'No Disponible';
     this.reservasService.addNuevaReserva(isbnAPedir, this.valorInputUser);
@@ -74,34 +90,56 @@ export class AdminGestionReservasComponent implements OnInit {
 
   seHaDevuelto(isbnADevolver:string){
     try{
-      if(this.hayCola(isbnADevolver)){
+      if(this.colaService.hayColaEnBD(this.colaAux)){
         // Hay cola
-        // Eliminar cola reservas
-        this.colaService.eliminarElementoColaReservas(isbnADevolver);
-        // Crear nueva reserva
-        this.reservasService.cambiarEstadoaND(isbnADevolver, this.valorInputUser);
-        this.resDisponibilidad.estado = 'No Disponible';
-        this.reservasService.addNuevaReserva(isbnADevolver, this.valorInputUser);
-
+        console.log('Hay cola');
+        if(this.colaService.hayColaParaElLibro(isbnADevolver, this.colaAux)){
+          // Eliminar cola reservas
+          this.colaService.eliminarElementoColaReservas(isbnADevolver);
+          // Crear nueva reserva
+          if(!this.colaService.noQuedanUsuarios){
+            // Si (no*no) quedan usuarios, hay que desplazar el usuario y crear nueva reserva
+            // OJOOO RE HACER // TODO
+            this.reservasService.cambiarEstadoaND(isbnADevolver, this.valorInputUser);
+            this.resDisponibilidad.estado = 'No Disponible';
+            //this.reservasService.addNuevaReserva(isbnADevolver, this.valorInputUser);
+          }else{
+            this.reservasService.cambiarEstadoaD(isbnADevolver);
+            this.resDisponibilidad.estado = 'Disponible';
+          }
+        }else{
+          // No hay cola para ese libro
+          // Volver a ponerlo disponible
+          // Se deja la reserva
+          this.reservasService.cambiarEstadoaD(isbnADevolver);
+          this.resDisponibilidad.estado = 'Disponible';
+        }
       }else{
         // No hay cola
+        console.log('No hay cola filtrada');
         // Volver a ponerlo disponible
+        // Se deja la reserva
         this.reservasService.cambiarEstadoaD(isbnADevolver);
         this.resDisponibilidad.estado = 'Disponible';
       }
-      alert('Se ha devuelto el libro con éxito')
-    }catch(Exception){
-      alert('Ha habido un error en la devolución del libro')
+      alert('Se ha devuelto el libro con éxito');
+    }catch(exception){
+      alert('Ha habido un error en la devolución del libro -> '+exception);
+    }finally{
+      this.actualizarCola();
     }
   }
 
-  hayCola(isbn:string){
-    return this.colaService.hayCola(isbn);
-  }
-
   reservarLibro(isbnADevolver:string){
-    this.colaService.addReservaCola(isbnADevolver, this.valorInputUser);
-    this.atrasDesdeGestion();
+    // Añadimos la reserva y actualizamos el valor de colaAUX
+    console.log('Cola aux da');
+    console.log(this.colaAux);
+    try{
+      this.colaService.addReservaCola(isbnADevolver, this.valorInputUser, this.colaAux);
+    }catch(e){console.log(e); console.log('No se ha podido actualizar aux');
+    }finally{
+      this.actualizarCola();
+    }
   }
 
 }

@@ -16,5 +16,6 @@ export interface Reserva {
     fechaIni:string;
     fechaFin:string;
     lector:string;
+    devuelto?:boolean;
 
 }
