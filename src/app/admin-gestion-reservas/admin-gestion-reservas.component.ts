@@ -98,38 +98,59 @@ export class AdminGestionReservasComponent implements OnInit {
       let res = this.obtenerCola();
       res.subscribe(r => {
         if(this.colaService.hayColaEnBD(r)){
-          // Hay cola
-          console.log('Hay cola');
-          if(this.colaService.hayColaParaElLibro(isbnADevolver, r)){
-            // Eliminar cola reservas
-            this.colaService.eliminarElementoColaReservas(isbnADevolver);
-            // Crear nueva reserva
-            if(!this.colaService.noQuedanUsuarios){
-              // Si (no*no) quedan usuarios, hay que desplazar el usuario y crear nueva reserva
-              // OJOOO RE HACER // TODO
-              this.reservasService.cambiarEstadoaND(isbnADevolver, this.valorInputUser);
-              this.resDisponibilidad.estado = 'No Disponible';
-              //this.reservasService.addNuevaReserva(isbnADevolver, this.valorInputUser);
+
+            // Hay cola
+            console.log('Hay cola');
+            if(this.colaService.hayColaParaElLibro(isbnADevolver, r)){
+
+              // Obtener los elementos de la cola de reservas filtrados por el isbn
+              let elementos = this.colaService.obtenerElementosColaReservas(isbnADevolver);
+              elementos.subscribe(r => {
+                
+                let arrayRes = r.toString().split(',');
+                // Comprobar cuantos elementos quedan en la cola de reservas
+                // Si es el ultimo
+                let esLast = this.colaService.esElUltimoElem(arrayRes);
+                // Eliminar cola reservas
+                this.colaService.eliminarElementoColaReservas(isbnADevolver, arrayRes);
+
+                // Crear nueva reserva
+                if(!esLast){
+                  // Si quedan usuarios, hay que desplazar el usuario y crear nueva reserva
+                  // OJOOO RE HACER // TODO
+                  this.reservasService.cambiarEstadoaND(isbnADevolver, this.valorInputUser);
+                  this.resDisponibilidad.estado = 'No Disponible';
+                  //this.reservasService.addNuevaReserva(isbnADevolver, this.valorInputUser);
+                }else{
+                  // No quedan usuarios en la Cola
+                  // Ojo revisar
+                  this.reservasService.cambiarEstadoaD(isbnADevolver);
+                  this.resDisponibilidad.estado = 'Disponible';
+                }
+
+              });
+
             }else{
+              // No hay cola para ese libro
+              // Volver a ponerlo disponible
+              // Se deja la reserva
               this.reservasService.cambiarEstadoaD(isbnADevolver);
               this.resDisponibilidad.estado = 'Disponible';
             }
-          }else{
-            // No hay cola para ese libro
-            // Volver a ponerlo disponible
-            // Se deja la reserva
-            this.reservasService.cambiarEstadoaD(isbnADevolver);
-            this.resDisponibilidad.estado = 'Disponible';
-          }
+
         }else{
+
           // No hay cola
           console.log('No hay cola filtrada');
           // Volver a ponerlo disponible
           // Se deja la reserva
           this.reservasService.cambiarEstadoaD(isbnADevolver);
           this.resDisponibilidad.estado = 'Disponible';
+
         }
+
         alert('Se ha devuelto el libro con éxito');
+
       });
     }catch(exception){
       alert('Ha habido un error en la devolución del libro -> '+exception);

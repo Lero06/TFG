@@ -95,13 +95,12 @@ export class ColaReservasService {
 
   /* -------------------------------------------------------------------------------------------------------- */
 
-  eliminarElementoColaReservas(isbn:string){
-    // Obtenemos el id del usuario
-    const idUserBD = this.httpClient.get('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/colareservas/'+isbn+'/idUser.json');
-    idUserBD.subscribe(r => {
-      // Lo mostramos por pantalla
-      console.log(r);
-      let arrayRes = r.toString().split(',');
+  obtenerElementosColaReservas(isbn:string){
+    // Obtenemos el id del usuario = elementos de la cola de reservas
+    return this.httpClient.get('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/colareservas/'+isbn+'/idUser.json');
+  }
+
+  eliminarElementoColaReservas(isbn:string, arrayRes:string[]){
       if(arrayRes.length == 1){
         console.log('Entra por 1 --');
         // Se debe eliminar el id de ese libro y su cola de idsUsuarios en este caso 1 (Es decir, todo)
@@ -118,11 +117,25 @@ export class ColaReservasService {
           idUser : s
         }
 
+        // Se suben los cambios a la BD
         this.httpClient.put('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/colareservas/'+isbn+'.json',estruct)
           .subscribe(() => alert('Se ha devuelto el libro con éxito'));
       }
-    });
   }
+
+  /**
+   * @summary Comprueba si es el ultimo elemento en la cola de reservas
+   * @return true = ultimo, false = quedan más
+   */
+  esElUltimoElem(arrayRes:string[]){
+    if(arrayRes.length == 1){
+        // Queda 1 elemento, tras la eliminacion no quedará nada
+        return true;
+    }else{
+        return false;
+    }
+  }
+
 
   desapilarElementoDeArray(arrayRes: string[]){
     return arrayRes.shift();
