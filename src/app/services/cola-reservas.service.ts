@@ -38,6 +38,7 @@ export class ColaReservasService {
   addReservaCola(isbn:string, idUser:string, colaAux:Cola[]){
     // Añade una reserva en la cola, si no hay cola la crea
     // Si la hay, la añade asi -> id User = [..., ..., ..., new]
+    // cambio
     let estruct : Cola;
 
     if(this.hayColaEnBD(colaAux)){
