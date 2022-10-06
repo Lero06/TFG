@@ -117,15 +117,15 @@ export class AdminGestionReservasComponent implements OnInit {
                 // Crear nueva reserva
                 if(!esLast){
                   // Si quedan usuarios, hay que desplazar el usuario y crear nueva reserva
-                  // OJOOO RE HACER // TODO
                   this.reservasService.cambiarEstadoaND(isbnADevolver, this.valorInputUser);
                   this.resDisponibilidad.estado = 'No Disponible';
-                  //this.reservasService.addNuevaReserva(isbnADevolver, this.valorInputUser);
+                  this.reservasService.addNuevaReserva(isbnADevolver, this.valorInputUser);
                 }else{
                   // No quedan usuarios en la Cola
                   // Ojo revisar
-                  this.reservasService.cambiarEstadoaD(isbnADevolver);
-                  this.resDisponibilidad.estado = 'Disponible';
+                  this.reservasService.cambiarEstadoaND(isbnADevolver, this.valorInputUser);
+                  this.resDisponibilidad.estado = 'No Disponible';
+                  this.reservasService.addNuevaReserva(isbnADevolver, this.valorInputUser);
                 }
 
               });

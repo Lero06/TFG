@@ -106,7 +106,6 @@ export class ColaReservasService {
         // Se debe eliminar el id de ese libro y su cola de idsUsuarios en este caso 1 (Es decir, todo)
         this.httpClient.delete('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/colareservas/'+isbn+'.json')
         .subscribe(r => console.log(r));
-        this.noQuedanUsuarios = true;
       }else if(arrayRes.length > 1){
         console.log('Entra por 2 --');
         // Se debe desapilar un elemento de la cola de idsUsuarios
@@ -147,7 +146,8 @@ export class ColaReservasService {
     else{return true;}
   }
 
-  hayColaParaElLibro(isbn:string, colaAux:Cola[]):boolean{
+  hayColaParaElLibro(isbn:string, cola:Cola[]):boolean{
+    let colaAux = this.filtrarCola(isbn, cola);
     // Obtenemos si hay cola filtrada, y de paso Set cola filtrada global
     if(Object.entries(colaAux).length > 0){
       return true;
