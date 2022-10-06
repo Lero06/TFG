@@ -48,7 +48,9 @@ export class ColaReservasService {
         console.log(colaFiltrada);
         let array:string[] = [];
         colaFiltrada.forEach(e => array.push(e.idUser)); 
+        console.log('Array es');
         console.log(array.toString());
+        console.log(array);
         let res = this.quitarComa(array.toString());
         let s;
         if(!res){
@@ -56,6 +58,7 @@ export class ColaReservasService {
         }else{
           s = res + ',' + idUser;
         }
+        console.log(s);
         estruct = {
           idUser : s,
           id:isbn
@@ -63,6 +66,7 @@ export class ColaReservasService {
       }else{
           // No hay cola filtrada
         console.log('No hay cola filtrada');
+        console.log(idUser);
         estruct = {
           idUser : idUser,
           id:isbn
@@ -87,10 +91,6 @@ export class ColaReservasService {
   
   getColaHTTP(): Observable<Cola[]>{
     return this.httpClient.get<Cola[]>('https://bibliotecapp-4cf6b-default-rtdb.europe-west1.firebasedatabase.app/colareservas.json');
-  }
-
-  getColaInicializada(){
-    return this.resCola;
   }
 
   /* -------------------------------------------------------------------------------------------------------- */
