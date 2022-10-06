@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
-import { map, Observable } from 'rxjs';
-import { AdminGestionReservasComponent } from '../admin-gestion-reservas/admin-gestion-reservas.component';
+import { Observable } from 'rxjs';
 import { Cola } from '../object/Cola';
 
 @Injectable({
@@ -108,12 +107,14 @@ export class ColaReservasService {
         .subscribe(r => console.log(r));
       }else if(arrayRes.length > 1){
         console.log('Entra por 2 --');
-        // Se debe desapilar un elemento de la cola de idsUsuarios
-        let s = this.desapilarElementoDeArray(arrayRes);
+        // Se debe desapilar un elemento de la cola de idsUsuarios, se elimina el ultimo elemento
+        arrayRes.pop();
+        console.log('Se ha eliminado?');
+        console.log(arrayRes);
         // Y subir cambios a la BD
         let estruct = {
           id:isbn,
-          idUser : s
+          idUser : arrayRes.toString()
         }
 
         // Se suben los cambios a la BD
@@ -133,11 +134,6 @@ export class ColaReservasService {
     }else{
         return false;
     }
-  }
-
-
-  desapilarElementoDeArray(arrayRes: string[]){
-    return arrayRes.shift();
   }
 
   hayColaEnBD(colaAux:Cola[]):boolean{
