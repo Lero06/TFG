@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { AdminComponent } from '../admin/admin.component';
-import { Libro } from '../object/Libro';
-import { LibrosService } from '../services/libros.service';
-import { TitulosService } from '../services/titulos.service';
+import { Libro } from '../../interfaces/Libro';
+import { LibrosService } from '../../services/libros.service';
+import { TitulosService } from '../../services/titulos.service';
 
 @Component({
   selector: 'app-admin-borrar-libro',

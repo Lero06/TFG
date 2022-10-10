@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
 import { MatIconModule } from '@angular/material/icon';
-import { AdminComponent } from './admin/admin.component'
+import { AdminComponent } from './pages/admin/admin.component'
 import { HttpClientModule } from '@angular/common/http';
 
 import { environment } from '../environments/environment';
@@ -20,9 +20,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PerfilComponent } from './perfil/perfil.component';
-import { InfoLibroComponent } from './info-libro/info-libro.component';
-import { DialogoComponent } from './dialogo/dialogo.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
+import { InfoLibroComponent } from './pages/info-libro/info-libro.component';
+import { DialogoComponent } from './pages/dialogo/dialogo.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -33,18 +33,19 @@ import { RippleModule } from 'primeng/ripple';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
-import { MisReservasComponent } from './mis-reservas/mis-reservas.component';
-import { HeaderComponent } from './header/header.component';
+import { MisReservasComponent } from './pages/mis-reservas/mis-reservas.component';
+import { HeaderComponent } from './components/header/header.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatListModule} from '@angular/material/list';
-import { ReportesComponent } from './reportes/reportes.component';
-import { AdminSubirLibroComponent } from './admin-subir-libro/admin-subir-libro.component';
-import { AdminBorrarLibroComponent } from './admin-borrar-libro/admin-borrar-libro.component';
-import { AdminSubirEventoComponent } from './admin-subir-evento/admin-subir-evento.component';
-import { AdminBorrarEventoComponent } from './admin-borrar-evento/admin-borrar-evento.component';
-import { AdminGestionReservasComponent } from './admin-gestion-reservas/admin-gestion-reservas.component';
-import { AdminGestionErroresComponent } from './admin-gestion-errores/admin-gestion-errores.component';
+import { ReportesComponent } from './pages/reportes/reportes.component';
+import { AdminSubirLibroComponent } from './pages/admin-subir-libro/admin-subir-libro.component';
+import { AdminBorrarLibroComponent } from './pages/admin-borrar-libro/admin-borrar-libro.component';
+import { AdminSubirEventoComponent } from './pages/admin-subir-evento/admin-subir-evento.component';
+import { AdminBorrarEventoComponent } from './pages/admin-borrar-evento/admin-borrar-evento.component';
+import { AdminGestionReservasComponent } from './pages/admin-gestion-reservas/admin-gestion-reservas.component';
+import { AdminGestionErroresComponent } from './pages/admin-gestion-errores/admin-gestion-errores.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 
 
@@ -65,6 +66,7 @@ import { AdminGestionErroresComponent } from './admin-gestion-errores/admin-gest
     AdminBorrarEventoComponent,
     AdminGestionReservasComponent,
     AdminGestionErroresComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

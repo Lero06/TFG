@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Libro } from '../object/Libro';
+import { Libro } from '../interfaces/Libro';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { Database, push, ref } from '@angular/fire/database';
 import { Observable } from 'rxjs';

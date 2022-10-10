@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { Database, push, ref } from '@angular/fire/database';
 import { map, Observable } from 'rxjs';
-import { Evento } from '../object/Evento';
+import { Evento } from '../interfaces/Evento';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

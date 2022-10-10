@@ -1,6 +1,6 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AutenticacionService } from '../services/autenticacion.service';
+import { AutenticacionService } from '../../services/autenticacion.service';
 
 @Component({
   selector: 'app-header',
@@ -50,11 +50,29 @@ export class HeaderComponent implements OnInit {
   }
 
   clickEventos(){
-    window.location.hash = "#divEventos";
+    if(this.esHome()){
+      window.location.hash = "#divEventos";
+    }else{
+      this.zone.run(() => {
+        this.router.navigate(['/home#divEventos']);
+      });
+    }
   }
 
   clickConocenos(){
-    window.location.hash = "#fooder";
+    if(this.esHome()){
+      window.location.hash = "#fooder";
+    }else{
+      this.router.navigate(['/home#fooder']);
+    }
+  }
+
+  esHome():boolean{
+    if(this.router.url === ('/home')){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   clickReportes(){

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Libro } from '../object/Libro';
-import { LibrosService } from '../services/libros.service';
+import { Libro } from '../../interfaces/Libro';
+import { LibrosService } from '../../services/libros.service';
 import { getDownloadURL, getStorage, ref, uploadBytes, uploadString } from "firebase/storage";
 import { NgxFileDropEntry } from 'ngx-file-drop';
-import { Evento } from '../object/Evento';
-import { EventosService } from '../services/eventos.service';
+import { Evento } from '../../interfaces/Evento';
+import { EventosService } from '../../services/eventos.service';
 import { map, Observable } from 'rxjs';
 import { _isNumberValue } from '@angular/cdk/coercion';
-import { Reserva } from '../object/Reserva';
-import { ReservasService } from '../services/reservas.service';
-import { AutenticacionService } from '../services/autenticacion.service';
+import { Reserva } from '../../interfaces/Reserva';
+import { ReservasService } from '../../services/reservas.service';
+import { AutenticacionService } from '../../services/autenticacion.service';
 
 @Component({
   selector: 'app-admin',

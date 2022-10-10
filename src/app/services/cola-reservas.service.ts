@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { Observable } from 'rxjs';
-import { Cola } from '../object/Cola';
+import { Cola } from '../interfaces/Cola';
 
 @Injectable({
   providedIn: 'root'

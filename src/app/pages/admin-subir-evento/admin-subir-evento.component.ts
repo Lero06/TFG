@@ -3,8 +3,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { NgxFileDropEntry } from 'ngx-file-drop';
 import { AdminComponent } from '../admin/admin.component';
-import { Evento } from '../object/Evento';
-import { EventosService } from '../services/eventos.service';
+import { Evento } from '../../interfaces/Evento';
+import { EventosService } from '../../services/eventos.service';
 
 @Component({
   selector: 'app-admin-subir-evento',

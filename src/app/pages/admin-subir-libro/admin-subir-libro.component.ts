@@ -3,9 +3,9 @@ import { FormControl, Validators } from '@angular/forms';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { NgxFileDropEntry } from 'ngx-file-drop';
 import { AdminComponent } from '../admin/admin.component';
-import { Libro } from '../object/Libro';
-import { LibrosService } from '../services/libros.service';
-import { ReservasService } from '../services/reservas.service';
+import { Libro } from '../../interfaces/Libro';
+import { LibrosService } from '../../services/libros.service';
+import { ReservasService } from '../../services/reservas.service';
 
 @Component({
   selector: 'app-admin-subir-libro',

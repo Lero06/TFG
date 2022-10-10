@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 
 import { FacebookAuthProvider } from "firebase/auth";
 import { HttpClient } from '@angular/common/http';
-import { Admin } from '../object/Admin';
+import { Admin } from '../interfaces/Admin';
 
 
 @Injectable({
@@ -20,6 +20,7 @@ export class AutenticacionService {
 
   constructor(private httpClient: HttpClient) { }
 
+  // No funcoina porque no son persistentes los servicios
   getUser(){
     return this.userData;
   }

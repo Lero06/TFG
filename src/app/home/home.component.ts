@@ -2,14 +2,14 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Evento } from '../object/Evento';
-import { Libro } from '../object/Libro';
+import { Evento } from '../interfaces/Evento';
+import { Libro } from '../interfaces/Libro';
 import { EventosService } from '../services/eventos.service';
 import { LibrosService } from '../services/libros.service';
-import { DialogoComponent } from '../dialogo/dialogo.component';
+import { DialogoComponent } from '../pages/dialogo/dialogo.component';
 import { AutenticacionService } from '../services/autenticacion.service';
 import { User } from 'firebase/auth';
-import { Admin } from '../object/Admin';
+import { Admin } from '../interfaces/Admin';
 import { ReservasService } from '../services/reservas.service';
 import { TitulosService } from '../services/titulos.service';
 

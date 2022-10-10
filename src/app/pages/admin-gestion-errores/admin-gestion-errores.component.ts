@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AdminComponent } from '../admin/admin.component';
-import { Problema } from '../object/Problema';
-import { ErroresService } from '../services/errores.service';
-import { TitulosService } from '../services/titulos.service';
+import { Problema } from '../../interfaces/Problema';
+import { ErroresService } from '../../services/errores.service';
+import { TitulosService } from '../../services/titulos.service';
 
 @Component({
   selector: 'app-admin-gestion-errores',

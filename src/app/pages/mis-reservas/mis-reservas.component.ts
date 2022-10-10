@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'firebase/auth';
 import { map, Observable } from 'rxjs';
-import { Reserva } from '../object/Reserva';
-import { AutenticacionService } from '../services/autenticacion.service';
-import { ReservasService } from '../services/reservas.service';
+import { Reserva } from '../../interfaces/Reserva';
+import { AutenticacionService } from '../../services/autenticacion.service';
+import { ReservasService } from '../../services/reservas.service';
 
 @Component({
   selector: 'app-mis-reservas',

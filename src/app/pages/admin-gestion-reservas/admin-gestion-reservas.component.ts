@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AdminComponent } from '../admin/admin.component';
-import { Cola } from '../object/Cola';
-import { Reserva } from '../object/Reserva';
-import { AutenticacionService } from '../services/autenticacion.service';
-import { ColaReservasService } from '../services/cola-reservas.service';
-import { ReservasService } from '../services/reservas.service';
+import { Cola } from '../../interfaces/Cola';
+import { Reserva } from '../../interfaces/Reserva';
+import { AutenticacionService } from '../../services/autenticacion.service';
+import { ColaReservasService } from '../../services/cola-reservas.service';
+import { ReservasService } from '../../services/reservas.service';
 
 @Component({
   selector: 'app-admin-gestion-reservas',

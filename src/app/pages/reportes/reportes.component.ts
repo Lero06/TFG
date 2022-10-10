@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ErroresService } from '../services/errores.service';
+import { ErroresService } from '../../services/errores.service';
 
 @Component({
   selector: 'app-reportes',

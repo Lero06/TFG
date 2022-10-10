@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'firebase/auth';
-import { Libro } from '../object/Libro';
-import { AutenticacionService } from '../services/autenticacion.service';
-import { LibrosService } from '../services/libros.service';
-import { ReservasService } from '../services/reservas.service';
-import { TitulosService } from '../services/titulos.service';
+import { Libro } from '../../interfaces/Libro';
+import { AutenticacionService } from '../../services/autenticacion.service';
+import { LibrosService } from '../../services/libros.service';
+import { ReservasService } from '../../services/reservas.service';
+import { TitulosService } from '../../services/titulos.service';
 
 
 @Component({

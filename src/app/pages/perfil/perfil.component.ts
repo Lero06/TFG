@@ -1,7 +1,7 @@
 import { Component, NgZone, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
-import { AutenticacionService } from '../services/autenticacion.service';
+import { AutenticacionService } from '../../services/autenticacion.service';
 
 @Component({
   selector: 'app-perfil',
@@ -21,6 +21,7 @@ export class PerfilComponent implements OnInit {
   segBibliotecaFav?:string;
 
   constructor(private autenticacionService:AutenticacionService, private router: Router, private zone: NgZone) { 
+    // no va a hacer nada
     this.currentUser = this.autenticacionService.getUser();
 
     // Local Storage

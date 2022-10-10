@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Reserva } from '../object/Reserva';
+import { Reserva } from '../interfaces/Reserva';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { Database, push, ref } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Libro } from '../object/Libro';
+import { Libro } from '../interfaces/Libro';
 
 @Injectable({
   providedIn: 'root'

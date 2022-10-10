@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Evento } from 'src/app/interfaces/Evento';
+import { EventosService } from 'src/app/services/eventos.service';
+import { TitulosService } from 'src/app/services/titulos.service';
 import { AdminComponent } from '../admin/admin.component';
-import { Evento } from '../object/Evento';
-import { EventosService } from '../services/eventos.service';
-import { TitulosService } from '../services/titulos.service';
 
 @Component({
   selector: 'app-admin-borrar-evento',
