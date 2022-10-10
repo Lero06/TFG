@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { AdminComponent } from './pages/admin/admin.component'
@@ -31,13 +31,15 @@ import { MatInputModule } from '@angular/material/input';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { NgxFileDropModule } from 'ngx-file-drop';
-import {MatCardModule} from '@angular/material/card';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatCardModule} from '@angular/material/card';
+import { MatDialogModule} from '@angular/material/dialog';
 import { MisReservasComponent } from './pages/mis-reservas/mis-reservas.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MatTableModule } from '@angular/material/table';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatListModule} from '@angular/material/list';
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatListModule} from '@angular/material/list';
+import { MatNativeDateModule} from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReportesComponent } from './pages/reportes/reportes.component';
 import { AdminSubirLibroComponent } from './pages/admin-subir-libro/admin-subir-libro.component';
 import { AdminBorrarLibroComponent } from './pages/admin-borrar-libro/admin-borrar-libro.component';
@@ -85,7 +87,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     NgxFileDropModule,
     MatCardModule,
     MatDialogModule,
-    MatTableModule, MatProgressSpinnerModule, MatListModule,
+    MatTableModule, MatProgressSpinnerModule, MatListModule, MatNativeDateModule, MatDatepickerModule
     
   ],
   providers: [],

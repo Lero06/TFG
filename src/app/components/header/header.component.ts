@@ -49,24 +49,6 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  clickEventos(){
-    if(this.esHome()){
-      window.location.hash = "#divEventos";
-    }else{
-      this.zone.run(() => {
-        this.router.navigate(['/home#divEventos']);
-      });
-    }
-  }
-
-  clickConocenos(){
-    if(this.esHome()){
-      window.location.hash = "#fooder";
-    }else{
-      this.router.navigate(['/home#fooder']);
-    }
-  }
-
   esHome():boolean{
     if(this.router.url === ('/home')){
       return true;

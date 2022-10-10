@@ -69,13 +69,14 @@ mat-icon{
     justify-content: right;
 }
 
-#navBar > p{
+#navBar > p, #navBar > p > a{
     font-size: 18px;
     cursor: pointer;
     color: aliceblue;
+    text-decoration: none;
 }
 
-#navBar > p:hover{
+#navBar > p:hover, #navBar > p:hover > a{
     font-weight: 600;
     text-decoration: underline;
 }

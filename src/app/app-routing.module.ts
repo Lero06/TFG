@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './pages/admin/admin.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { InfoLibroComponent } from './pages/info-libro/info-libro.component';
 import { MisReservasComponent } from './pages/mis-reservas/mis-reservas.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';

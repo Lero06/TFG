@@ -418,3 +418,8 @@ h2{
 #divAdmin > button{
     padding: 5px;
 }
+
+.mat-calendar-body-cell-content.mat-calendar-body-today{
+    background-color: green !important;
+    color: white !important;
+  }

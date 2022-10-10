@@ -3,14 +3,14 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-  <app-header></app-header>
+<body>
+    <app-header></app-header>
 
-  <div *ngIf="isAdmin == true" id="divAdmin">
-    <p>Visualizando vista del usuario... </p>
-    <button (click)="adminClick()">Acceder a Administración</button>
-  </div>
+    <div *ngIf="isAdmin == true" id="divAdmin">
+      <p>Visualizando vista del usuario... </p>
+      <button (click)="adminClick()">Acceder a Administración</button>
+    </div>
 
-  <body>
     <div id="divPrincipal">
 
         <div id="buscadoryfiltro">
@@ -123,8 +123,9 @@
         </div>
 
         <div id="divCalendario">
-          <p-calendar id="calendario" [(ngModel)]="value" dateFormat="dd.mm.yy" [firstDayOfWeek]="monday" [inline]="true" ></p-calendar>
-          <div></div>
+          <mat-card class="demo-inline-calendar-card">
+            <mat-calendar></mat-calendar>
+          </mat-card>
         </div>
 
       </div>
