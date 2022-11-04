@@ -1,3 +1,5 @@
+Versión Angular del TFG -> se convierte en TFGIon para usar la tecnología ionic. Por tanto este repositorio queda ⛔descontinuado⛔
+
 # Bibliotecapp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.2.
