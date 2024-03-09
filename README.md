@@ -1,6 +1,6 @@
-🇪🇸 Versión Angular del TFG -> se convierte en TFGIon para usar la tecnología ionic. Por tanto este repositorio queda ⛔descontinuado⛔
+🇪🇸 Versión Angular del TFG -> se convierte en TFGIon para usar la tecnología ionic. Por tanto este repositorio queda ⛔descontinuado⛔ Claves de Firebase borradas para que no se puedan usar
 
-🇺🇸 Angular version of TFG -> becomes TFGIon to use ionic technology. Therefore this repository is ⛔discontinued⛔
+🇺🇸 Angular version of TFG -> becomes TFGIon to use ionic technology. Therefore this repository is ⛔discontinued⛔ Firebase keys deleted so they can't be used
 
 # Bibliotecapp
 
