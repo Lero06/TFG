@@ -1,6 +1,6 @@
 🇪🇸 Versión Angular del TFG -> se convierte en TFGIon para usar la tecnología ionic. Por tanto este repositorio queda ⛔descontinuado⛔
 
-🇺🇸 Angular version of TFG -> becomes TFGIon to use ionic technology. Therefore this repository is ⛔discontinued⛔.
+🇺🇸 Angular version of TFG -> becomes TFGIon to use ionic technology. Therefore this repository is ⛔discontinued⛔
 
 # Bibliotecapp
 
